@@ -36,6 +36,12 @@ namespace test
         new System.Windows.Forms.MouseEventHandler
             (MyNotifyIcon_MouseDoubleClick);
             this.StateChanged += Window_StateChanged;
+            JSONData();
+       
+            
+        }
+        void JSONData()
+        {
             var json = "[{\"id\":\"588\",\"value\":false},{\"id\":\"486\",\"value\":false}]";
             var jss = new JavaScriptSerializer();
             var dic = jss.Deserialize<dynamic>(json);
@@ -44,8 +50,6 @@ namespace test
 
             json = jss.Serialize(dic);
             System.Windows.MessageBox.Show(json);
-            
-            
         }
         void MyNotifyIcon_MouseDoubleClick(object sender, 
             System.Windows.Forms.MouseEventArgs e)

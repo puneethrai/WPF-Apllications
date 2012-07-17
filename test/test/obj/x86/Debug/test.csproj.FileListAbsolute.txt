@@ -25,3 +25,17 @@ C:\Documents and Settings\Admin\my documents\visual studio 2010\Projects\test\te
 C:\Documents and Settings\Admin\my documents\visual studio 2010\Projects\test\test\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Documents and Settings\Admin\my documents\visual studio 2010\Projects\test\test\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\test\test\bin\Debug\test.exe.config
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\bin\Debug\test.exe.config
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\test.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\test.pdb
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\bin\Debug\test.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\bin\Debug\test.pdb
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\MainWindow.baml
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\MainWindow.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\App.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\test_MarkupCompile.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\test.g.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\test.Properties.Resources.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\test\test\obj\x86\Debug\GenerateResource.write.1.tlog
