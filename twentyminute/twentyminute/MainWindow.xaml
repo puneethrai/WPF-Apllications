@@ -1,0 +1,8 @@
+﻿<Window x:Class="twentyminute.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Twenty Twenty" Height="350" Width="525" Loaded="Window_Loaded" AllowsTransparency="False" Visibility="Visible" WindowStyle="SingleBorderWindow"  Opacity="0.5">
+    <Grid>
+        <Label Content="Second" Height="28" HorizontalAlignment="Left"  Margin="13,154,0,0" Name="TimeLabel" VerticalAlignment="Top" Width="478" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" />
+    </Grid>
+</Window>
