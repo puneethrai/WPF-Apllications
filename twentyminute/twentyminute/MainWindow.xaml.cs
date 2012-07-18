@@ -27,10 +27,12 @@ namespace twentyminute
         private NotifyIcon MyNotifyIcon;
         private DispatcherTimer TwentyTwentyTimer;
         private DispatcherTimer TwentyTimer;
+        private DispatcherTimer MinuteTimer;
         private int count = 0;
+        private int MinuteCount = 0;
         private const int TWENTY = 20;
         private const int DELAY = 1;
-        
+        private SolidColorBrush mySolidColorBrush;
         #endregion
 
         public MainWindow()
@@ -51,18 +53,30 @@ namespace twentyminute
         /// </summary>
         private void Init()
         {
+            mySolidColorBrush = new SolidColorBrush();
             //  DispatcherTimer setup
             TwentyTwentyTimer = new DispatcherTimer();
             
-            TwentyTwentyTimer.Interval = new TimeSpan(0, 0, TWENTY+DELAY);
+            TwentyTwentyTimer.Interval = new TimeSpan(0, 1, TWENTY+DELAY);
             TwentyTwentyTimer.Start();
             // Updating the Label which displays the countdown 20 second
             TwentyTimer = new DispatcherTimer();
             
             TwentyTimer.Interval = new TimeSpan(0, 0, DELAY);
-            
+
+            MinuteTimer = new DispatcherTimer();
+            MinuteTimer.Interval = new TimeSpan(0, DELAY, 0);
+            MinuteTimer.Start();
+
             MyNotifyIcon = new System.Windows.Forms.NotifyIcon();
             MyNotifyIcon.Icon = new System.Drawing.Icon(@"..\..\autorun.ico");
+            System.Windows.Forms.ContextMenu MenuItems = new System.Windows.Forms.ContextMenu();
+            MenuItems.MenuItems.Add(0,
+                new System.Windows.Forms.MenuItem("Exit", new EventHandler((object sender, EventArgs e) =>
+                    {
+                        System.Windows.Forms.Application.Exit();
+                    })));
+            MyNotifyIcon.ContextMenu = MenuItems;
 
             #region EventHandlers
 
@@ -73,6 +87,11 @@ namespace twentyminute
             this.StateChanged += Window_StateChanged;
             System.Windows.Forms.Application.ApplicationExit += 
                 new EventHandler(Application_ApplicationExit);
+            MinuteTimer.Tick += new EventHandler((object sender, EventArgs e) =>
+            {
+                MinuteCount++;
+                MinuteLabel.Content = "Minutes Left:" + (TWENTY - MinuteCount);
+            });
 
             #endregion
         }
@@ -81,7 +100,9 @@ namespace twentyminute
         /// </summary>
         void Application_ApplicationExit(object sender, EventArgs e)
         {
+            MyNotifyIcon.Visible = false;
             MyNotifyIcon.Dispose();
+            System.Windows.Application.Current.Shutdown();
         }
 
 
@@ -90,7 +111,7 @@ namespace twentyminute
         /// </summary>
         private void TwentyTwentyInvoke(object sender, EventArgs e)
         {
-           
+            Console.Beep(440, 1000);
             TwentyTimer.Start();
             WindowState = WindowState.Maximized;
             this.Topmost = true;
@@ -107,10 +128,18 @@ namespace twentyminute
             if (20 < count)
             {
                 count = 0;
+                MinuteCount = 0;
                 TwentyTimer.Stop();
                 WindowState = WindowState.Minimized;
+                TimeLabel.Content = "Seconds Left:0";
+               
+                Console.Beep(440, 1000);
             }
-            TimeLabel.Content = TWENTY - count;
+
+            mySolidColorBrush.Color = System.Windows.Media.Color.FromRgb((byte)(((count + 1 / 15) * 255) - 1),
+                (byte)(((count + 1 / 10) * 128) - 1), (byte)(((count + 1 / 5) * 64) - 1));
+            TimeLabel.Foreground = mySolidColorBrush;
+            TimeLabel.Content = "Seconds Left:"+(TWENTY - count);
         }
         void MyNotifyIcon_MouseDoubleClick(object sender,
             System.Windows.Forms.MouseEventArgs e)
@@ -122,8 +151,9 @@ namespace twentyminute
             if (this.WindowState == WindowState.Minimized)
             {
                 this.ShowInTaskbar = false;
-                MyNotifyIcon.BalloonTipTitle = "Minimize Sucessful";
-                MyNotifyIcon.BalloonTipText = "Minimized the app ";
+                MyNotifyIcon.BalloonTipTitle = "App still running in background";
+                MyNotifyIcon.BalloonTipText = 
+                    "Application still running in background right click & press exit to exit the app";
                 MyNotifyIcon.ShowBalloonTip(400);
                 MyNotifyIcon.Visible = true;
             }
