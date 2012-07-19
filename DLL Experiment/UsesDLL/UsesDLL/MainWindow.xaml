@@ -10,7 +10,7 @@
         <RadioButton GroupName="CalcOption" Content="Division" Height="14" HorizontalAlignment="Left" Margin="439,12,0,0" Name="DivRB" VerticalAlignment="Top" />
         <Label Content="X:" Height="25" HorizontalAlignment="Left" Margin="32,65,0,0" Name="XLabel" VerticalAlignment="Top" Width="26" />
         <Label Content="Y:" Height="25" HorizontalAlignment="Right" Margin="0,118,456,0" Name="YLabel" VerticalAlignment="Top" Width="26" />
-        <TextBox Height="28" HorizontalAlignment="Left" Margin="56,67,0,0" Name="XTB" VerticalAlignment="Top" Width="310" />
+        <TextBox Height="28" HorizontalAlignment="Left" Margin="56,67,0,0" Name="XTB" VerticalAlignment="Top" Width="310" PreviewKeyUp="XTB_KeyUp"/>
         <TextBox Height="28" HorizontalAlignment="Left" Margin="56,115,0,0" Name="YTB" VerticalAlignment="Top" Width="310" />
         <Label Content="Result:" Height="27" HorizontalAlignment="Left" Margin="0,155,0,0" Name="ResultLabel" VerticalAlignment="Top" Width="46" />
         <TextBox Height="28" HorizontalAlignment="Left" Margin="56,154,0,0" Name="ResultTB" VerticalAlignment="Top" Width="435" />

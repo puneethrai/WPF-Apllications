@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DLL;
+using System.IO;
+//using System.Windows.Forms;
 namespace UsesDLL
 {
     /// <summary>
@@ -34,9 +36,18 @@ namespace UsesDLL
             XTBBorder = XTB.BorderBrush;
             YTBBorder = YTB.BorderBrush;
             CalcOptionBorderBrush = CalcOptionBorder.BorderBrush;
+            
+            XTB.KeyUp += new System.Windows.Input.KeyEventHandler(XTB_KeyUp);
+            
         }
 
-        private void CalcButton_Click(object sender, RoutedEventArgs e)
+        void XTB_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            e.Handled = !Char.IsDigit((char)e.Key);
+            MessageBox.Show(""+e.Key);
+        }
+        
+       private void CalcButton_Click(object sender, RoutedEventArgs e)
         {
             
             try
