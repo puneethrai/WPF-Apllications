@@ -23,19 +23,26 @@ namespace UsesDLL
         private enum CalcOption {ADD,SUB,MUL,DIV,INVALID};
         private string message { get; set; }
         private Calculator Calc;
-
+        private Brush XTBBorder;
+        private Brush YTBBorder;
+        private Brush CalcOptionBorderBrush;
         #endregion
         public MainWindow()
         {
             InitializeComponent();
             Calc = new Calculator();
+            XTBBorder = XTB.BorderBrush;
+            YTBBorder = YTB.BorderBrush;
+            CalcOptionBorderBrush = CalcOptionBorder.BorderBrush;
         }
 
         private void CalcButton_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
-                switch (CheckInputParam())
+                int InputParam = CheckInputParam();
+                switch (InputParam)
                 {
 
                     case (int)CalcOption.ADD:
@@ -61,8 +68,10 @@ namespace UsesDLL
                     case (int)CalcOption.INVALID:
                         ResultTB.Text = message;
                         break;
-
-
+                }
+                if (InputParam != (int)CalcOption.INVALID)
+                {
+                    Restore();
                 }
             }
             catch (DivideByZeroException error)
@@ -75,6 +84,12 @@ namespace UsesDLL
             }
 
             
+        }
+        private void Restore()
+        {
+            XTB.BorderBrush = XTBBorder;
+            YTB.BorderBrush = YTBBorder;
+            CalcOptionBorder.BorderBrush = CalcOptionBorderBrush;
         }
         private int CheckInputParam()
         {
@@ -89,15 +104,23 @@ namespace UsesDLL
                 ReturnVal = (int)CalcOption.DIV;
             if (ReturnVal >= (int)CalcOption.ADD)
             {
+                CalcOptionBorder.BorderBrush = CalcOptionBorderBrush;
                 if (XTB.Text == "" || YTB.Text == "")
                 {
                     ReturnVal = (int)CalcOption.INVALID;
+                    var temp =
+                        (XTB.Text == "") ?
+                        XTB.BorderBrush = Brushes.Red
+                        : YTB.BorderBrush = Brushes.Red;
                     message = (XTB.Text == "") ?
-                        "Please Provide X Value" : "Please Provide Y Value";
+                        "Please Provide X Value" 
+                        : "Please Provide Y Value";
+                    
                 }
             }
             else
             {
+                CalcOptionBorder.BorderBrush = Brushes.Red;
                 ReturnVal = (int)CalcOption.INVALID;
                 message = "Please select one of the above calculation option";
             }
