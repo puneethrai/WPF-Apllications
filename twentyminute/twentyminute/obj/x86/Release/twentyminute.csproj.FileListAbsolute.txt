@@ -1,0 +1,14 @@
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Release\twentyminute.exe.config
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Release\twentyminute.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Release\twentyminute.pdb
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\MainWindow.baml
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\MainWindow.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\App.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute_MarkupCompile.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.g.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.Properties.Resources.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.pdb

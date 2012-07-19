@@ -57,7 +57,7 @@ namespace twentyminute
             //  DispatcherTimer setup
             TwentyTwentyTimer = new DispatcherTimer();
             
-            TwentyTwentyTimer.Interval = new TimeSpan(0, 1, TWENTY+DELAY);
+            TwentyTwentyTimer.Interval = new TimeSpan(0, TWENTY, TWENTY+DELAY);
             TwentyTwentyTimer.Start();
             // Updating the Label which displays the countdown 20 second
             TwentyTimer = new DispatcherTimer();

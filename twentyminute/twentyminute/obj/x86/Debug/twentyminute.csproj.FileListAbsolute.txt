@@ -39,3 +39,17 @@ C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\t
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.Properties.Resources.resources
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Debug\twentyminute.exe.config
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\twentyminute.pdb
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Debug\twentyminute.exe
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\bin\Debug\twentyminute.pdb
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\MainWindow.baml
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\MainWindow.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\App.g.cs
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\twentyminute_MarkupCompile.cache
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\twentyminute.g.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\twentyminute.Properties.Resources.resources
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.write.1.tlog
