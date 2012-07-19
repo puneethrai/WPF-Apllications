@@ -1,0 +1,5 @@
+C:\visual studio 2010\WPF-Apllications\DLL Experiment\UsesDLL\DLL\bin\Debug\DLL.dll
+C:\visual studio 2010\WPF-Apllications\DLL Experiment\UsesDLL\DLL\bin\Debug\DLL.pdb
+C:\visual studio 2010\WPF-Apllications\DLL Experiment\UsesDLL\DLL\obj\Debug\ResolveAssemblyReference.cache
+C:\visual studio 2010\WPF-Apllications\DLL Experiment\UsesDLL\DLL\obj\Debug\DLL.dll
+C:\visual studio 2010\WPF-Apllications\DLL Experiment\UsesDLL\DLL\obj\Debug\DLL.pdb
