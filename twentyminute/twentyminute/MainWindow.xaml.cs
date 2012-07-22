@@ -40,6 +40,7 @@ namespace twentyminute
         {
             InitializeComponent();
             this.ResizeMode=ResizeMode.CanMinimize;
+
  
         }
         /// <summary>
@@ -48,7 +49,6 @@ namespace twentyminute
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
-            
         }
         /// <summary>
         /// Initializing Timer & State change component
@@ -80,6 +80,7 @@ namespace twentyminute
                         System.Windows.Forms.Application.Exit();
                     })));
             MyNotifyIcon.ContextMenu = MenuItems;
+            MyNotifyIcon.Text = "Twenty Twenty eye relaxation app" ;
 
             #region EventHandlers
 
@@ -131,6 +132,10 @@ namespace twentyminute
         /// </summary>
         private void TwentyInvoke(object sendobj, EventArgs eventarg)
         {
+            if(this.WindowState != WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
             count++;
             if (20 < count)
             {
@@ -138,8 +143,8 @@ namespace twentyminute
                 MinuteCount = 0;
                 TwentyTimer.Stop();
                 MinuteTimer.Start();
-                WindowState = WindowState.Normal;
-                WindowState = WindowState.Minimized;
+                this.WindowState = WindowState.Normal;
+                this.WindowState = WindowState.Minimized;
                 this.ResizeMode=ResizeMode.CanMinimize;
                 DisplayLabel.Content = "Continue Working For Another 20 min";
                 TimeLabel.Content = "Seconds Left:0";
@@ -213,6 +218,13 @@ namespace twentyminute
                 DisplayLabel.Content = "Timers Started";
                 this.Background = System.Windows.Media.Brushes.White;
             }
+        }
+        /// <summary>
+        /// Triggered when user presses Help button(F1)
+        /// </summary>
+        private void HelpExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            
         }
 
     }
