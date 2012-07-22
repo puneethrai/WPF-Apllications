@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Twenty Twenty" Height="350" Width="525" Loaded="Window_Loaded" AllowsTransparency="False" Visibility="Visible" WindowStyle="SingleBorderWindow"  Opacity="1">
     <Grid>
-        <Label Content="Seconds Left:0" Height="36" HorizontalAlignment="Left"  Margin="13,127,0,0" Name="TimeLabel" VerticalAlignment="Top" Width="182" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" Foreground="Red" FontSize="20">
+        <Label Content="Seconds Left:0" Height="36" HorizontalAlignment="Left"  Margin="12,153,0,0" Name="TimeLabel" VerticalAlignment="Top" Width="182" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" Foreground="Red" FontSize="20">
             
         </Label>
-        <Label Content="Minutes Left:20" Height="40" HorizontalAlignment="Left" Margin="231,127,0,0" Name="MinuteLabel" VerticalAlignment="Top" Width="259" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" Foreground="Green" FontSize="20" />
+        <Label Content="Minutes Left:20" Height="40" HorizontalAlignment="Left" Margin="270,153,0,0" Name="MinuteLabel" VerticalAlignment="Top" Width="221" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" Foreground="Green" FontSize="20" />
+        <Button Content="STOP" Height="39" HorizontalAlignment="Left" Margin="10,262,0,0" Name="StopBtn" VerticalAlignment="Top" Width="231" Click="StopBtn_Clicked" />
+        <Button Content="START" Height="39" HorizontalAlignment="Left" Margin="260,262,0,0" Name="StartBtn" VerticalAlignment="Top" Width="231" Click="StartBtn_Clicked" />
+        <Label Content="Work For Another 20 min" Height="44" HorizontalAlignment="Left" Margin="8,37,0,0" Name="DisplayLabel" VerticalAlignment="Top" Width="486" FontFamily="Arial" FontSize="24" FontWeight="Bold" />
+        
     </Grid>
 </Window>

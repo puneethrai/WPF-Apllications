@@ -33,12 +33,13 @@ namespace twentyminute
         private const int TWENTY = 20;
         private const int DELAY = 1;
         private SolidColorBrush mySolidColorBrush;
+        private bool StopBtnPressed = false;
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-            
+            this.ResizeMode=ResizeMode.CanMinimize;
  
         }
         /// <summary>
@@ -47,12 +48,14 @@ namespace twentyminute
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
+            
         }
         /// <summary>
         /// Initializing Timer & State change component
         /// </summary>
         private void Init()
         {
+            
             mySolidColorBrush = new SolidColorBrush();
             //  DispatcherTimer setup
             TwentyTwentyTimer = new DispatcherTimer();
@@ -90,6 +93,7 @@ namespace twentyminute
             MinuteTimer.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 MinuteCount++;
+                DisplayLabel.Content = "Continue Working For Another "+ (TWENTY - MinuteCount)+" min";
                 MinuteLabel.Content = "Minutes Left:" + (TWENTY - MinuteCount);
             });
 
@@ -102,6 +106,7 @@ namespace twentyminute
         {
             MyNotifyIcon.Visible = false;
             MyNotifyIcon.Dispose();
+            
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -111,11 +116,13 @@ namespace twentyminute
         /// </summary>
         private void TwentyTwentyInvoke(object sender, EventArgs e)
         {
+
             Console.Beep(440, 1000);
             TwentyTimer.Start();
+            MinuteTimer.Stop();
             WindowState = WindowState.Maximized;
             this.Topmost = true;
-
+            this.ResizeMode=ResizeMode.NoResize;
             // Forcing the CommandManager to raise the RequerySuggested event
             CommandManager.InvalidateRequerySuggested();
         }
@@ -130,22 +137,33 @@ namespace twentyminute
                 count = 0;
                 MinuteCount = 0;
                 TwentyTimer.Stop();
+                MinuteTimer.Start();
+                WindowState = WindowState.Normal;
                 WindowState = WindowState.Minimized;
+                this.ResizeMode=ResizeMode.CanMinimize;
+                DisplayLabel.Content = "Continue Working For Another 20 min";
                 TimeLabel.Content = "Seconds Left:0";
                
                 Console.Beep(440, 1000);
             }
-
+            
             mySolidColorBrush.Color = System.Windows.Media.Color.FromRgb((byte)(((count + 1 / 15) * 255) - 1),
                 (byte)(((count + 1 / 10) * 128) - 1), (byte)(((count + 1 / 5) * 64) - 1));
             TimeLabel.Foreground = mySolidColorBrush;
+            DisplayLabel.Content = "See a 20ft distant object for "+(TWENTY - count) +"s";
             TimeLabel.Content = "Seconds Left:"+(TWENTY - count);
         }
+        /// <summary>
+        /// Triggered when app is double clicked in system tray icon
+        /// </summary>
         void MyNotifyIcon_MouseDoubleClick(object sender,
             System.Windows.Forms.MouseEventArgs e)
         {
             this.WindowState = WindowState.Normal;
         }
+        /// <summary>
+        /// Triggered when Window State has been changed & enables or disables system tray icon based on window state
+        /// </summary>
         private void Window_StateChanged(object sender, EventArgs e)
         {
             if (this.WindowState == WindowState.Minimized)
@@ -153,7 +171,7 @@ namespace twentyminute
                 this.ShowInTaskbar = false;
                 MyNotifyIcon.BalloonTipTitle = "App still running in background";
                 MyNotifyIcon.BalloonTipText = 
-                    "Application still running in background right click & press exit to exit the app";
+                    "Right click & press \"Exit\" to exit the app";
                 MyNotifyIcon.ShowBalloonTip(400);
                 MyNotifyIcon.Visible = true;
             }
@@ -164,5 +182,38 @@ namespace twentyminute
             }
             
         }
+        /// <summary>
+        /// Triggered Stop button is clicked
+        /// </summary>
+        private void StopBtn_Clicked( object sender, RoutedEventArgs e )
+        {
+            if(!StopBtnPressed)
+            {
+                TwentyTwentyTimer.Stop();
+                TwentyTimer.Stop();
+                MinuteTimer.Stop();
+                StopBtnPressed = true;
+                DisplayLabel.Content = "Timers Stoped";
+                this.Background = System.Windows.Media.Brushes.Red;
+                
+            }
+        }
+        /// <summary>
+        /// Triggered Start button is clicked
+        /// </summary>
+        private void StartBtn_Clicked( object sender, RoutedEventArgs e )
+        {
+            if(StopBtnPressed)
+            {
+                TwentyTwentyTimer.Start();
+                MinuteTimer.Start();
+                count = 0;
+                MinuteCount = 0;
+                StopBtnPressed = false;
+                DisplayLabel.Content = "Timers Started";
+                this.Background = System.Windows.Media.Brushes.White;
+            }
+        }
+
     }
 }
