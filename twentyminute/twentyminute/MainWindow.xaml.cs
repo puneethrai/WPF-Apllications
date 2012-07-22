@@ -224,7 +224,8 @@ namespace twentyminute
         /// </summary>
         private void HelpExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            System.Diagnostics.Process.Start(@"help.chm");
+           
         }
 
     }
