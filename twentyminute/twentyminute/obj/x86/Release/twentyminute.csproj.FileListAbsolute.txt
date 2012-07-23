@@ -12,3 +12,6 @@ C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.exe
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Release\twentyminute.pdb
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Release\twentyminute.exe.config
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.exe
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.pdb

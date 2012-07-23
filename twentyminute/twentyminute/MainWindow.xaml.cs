@@ -227,6 +227,18 @@ namespace twentyminute
             System.Diagnostics.Process.Start(@"help.chm");
            
         }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
 
+        }
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+        private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
     }
 }
