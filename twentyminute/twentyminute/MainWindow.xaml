@@ -54,9 +54,9 @@
             </Setter>
         </Style>
         <ControlTemplate x:Key="CloseButton" TargetType="{x:Type Button}">
-            <Border BorderThickness="1,1,1,1" CornerRadius="0,0,4,4" BorderBrush="#C98172" Background="#C98172">
+            <Border BorderThickness="1,1,1,1" CornerRadius="0,0,4,0" BorderBrush="#C98172" Background="#C98172">
                 <Grid>
-                    <Border x:Name="BorderUp" BorderThickness="2,2,2,2"  CornerRadius="0,0,4,4" Background="White">
+                    <Border x:Name="BorderUp" BorderThickness="2,2,2,2"  CornerRadius="0,0,4,0" Background="White">
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
                                 <!--GradientStop Color="White" Offset="0"/>
@@ -69,7 +69,7 @@
                         </Border.BorderBrush>
                     </Border>
                     
-                    <Border x:Name="BorderDown" BorderThickness="2,2,2,2" CornerRadius="0,0,4,4">
+                    <Border x:Name="BorderDown" BorderThickness="2,2,2,2" CornerRadius="0,0,4,0">
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
                                 <!--GradientStop Color="Red" Offset="1"/>
@@ -150,7 +150,7 @@
     </Window.CommandBindings>
     <Grid Height="307" Background="#00000000">
         <Grid.RowDefinitions>
-            <RowDefinition Height="18" />
+            <RowDefinition Height="18*" />
             <RowDefinition Height="283" />
             <RowDefinition Height="6*" />
         </Grid.RowDefinitions>
@@ -161,9 +161,9 @@
         <Button Content="STOP" Height="39" HorizontalAlignment="Left" Margin="10,244,0,0" Name="StopBtn" VerticalAlignment="Top" Width="231" Click="StopBtn_Clicked" Grid.Row="1" />
         <Button Content="START" Height="39" HorizontalAlignment="Left" Margin="260,244,0,0" Name="StartBtn" VerticalAlignment="Top" Width="231" Click="StartBtn_Clicked" Grid.Row="1" />
         <Label Content="Work For Another 20 min" Height="44" HorizontalAlignment="Left" Margin="8,19,0,0" Name="DisplayLabel" VerticalAlignment="Top" Width="486" FontFamily="Arial" FontSize="24" FontWeight="Bold" Grid.Row="1" />
-        <TextBlock Height="18" HorizontalAlignment="Left" Name="AppName" Text="Twenty Twenty" VerticalAlignment="Top" Width="431" Focusable="False" MouseDown="Window_MouseDown"  Background="Transparent" Style="{StaticResource TitleTextStyle}" />
-        <Button Content="X" Height="18" HorizontalAlignment="Left" Margin="477,0,0,0" Name="CloseBtn" VerticalAlignment="Top" Width="26" Template="{DynamicResource CloseButton}" Foreground="Silver" Click="CloseBtn_Click" />
-        <Button Content="-" Foreground="Silver" Height="18" HorizontalAlignment="Left" Margin="453,0,0,0" Name="MinimizeBtn" Template="{DynamicResource MinimizeButton}" VerticalAlignment="Top" Width="26" Click="MinimizeBtn_Click" />
+        <TextBlock Height="22" HorizontalAlignment="Left" Name="AppName" Text="Twenty Twenty" VerticalAlignment="Top" Width="447" Focusable="False" MouseDown="Window_MouseDown"  Background="Transparent" Style="{StaticResource TitleTextStyle}" Margin="0,-4,0,0" />
+        <Button Content="X" Height="18" HorizontalAlignment="Right" Name="CloseBtn" VerticalAlignment="Top" Width="34" Template="{DynamicResource CloseButton}" Foreground="Silver" Click="CloseBtn_Click" Margin="0,-5,0,0" />
+        <Button Content="-" Foreground="Silver" Height="18" HorizontalAlignment="Left" Margin="435,-5,0,0" Name="MinimizeBtn" Template="{DynamicResource MinimizeButton}" VerticalAlignment="Top" Width="34" Click="MinimizeBtn_Click" />
     </Grid>
 
 </Window>
