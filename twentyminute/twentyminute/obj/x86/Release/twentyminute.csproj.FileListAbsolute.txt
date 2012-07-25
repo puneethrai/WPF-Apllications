@@ -15,3 +15,15 @@ C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Release\twentyminute.exe.config
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.exe
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.pdb
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Release\twentyminute.exe
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Release\twentyminute.pdb
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\ResolveAssemblyReference.cache
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\CloseButton.baml
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\MainWindow.baml
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\MainWindow.g.cs
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\App.g.cs
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute_MarkupCompile.cache
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.g.resources
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\twentyminute.Properties.Resources.resources
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\GenerateResource.read.1.tlog
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Release\GenerateResource.write.1.tlog

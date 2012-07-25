@@ -1,7 +1,7 @@
 ﻿<Window x:Class="twentyminute.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Twenty Twenty" Loaded="Window_Loaded" AllowsTransparency="True"  WindowStyle="None"  Opacity="1" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="355" Width="525" >
+        Title="Twenty Twenty" Loaded="Window_Loaded" AllowsTransparency="True"  WindowStyle="None"  Opacity="1" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="355" d:DesignWidth="525" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Style x:Key="OrangeButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -53,94 +53,88 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <ControlTemplate x:Key="CloseButton" TargetType="{x:Type Button}">
-            <Border BorderThickness="1,1,1,1" CornerRadius="0,0,4,0" BorderBrush="#C98172" Background="#C98172">
+        <ControlTemplate x:Key="CloseButton"  TargetType="Button">
+            <Border BorderThickness="1,1,2,2" CornerRadius="0,0,4,0" BorderBrush="#C98172" Background="#C98172">
                 <Grid>
-                    <Border x:Name="BorderUp" BorderThickness="2,2,2,2"  CornerRadius="0,0,4,0" Background="White">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
-                                <!--GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="Red" Offset="1"/-->
+                    <Rectangle Width='34' Height='18' x:Name='MyRectangle' RadiusY="20">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
                                 <GradientStop Offset="0" Color="#F89C8C" />
                                 <GradientStop Offset="0.45" Color="#D47F75" />
                                 <GradientStop Offset="0.45" Color="#C04C3C" />
                                 <GradientStop Offset="1" Color="#C98172" />
                             </LinearGradientBrush>
-                        </Border.BorderBrush>
-                    </Border>
-                    
-                    <Border x:Name="BorderDown" BorderThickness="2,2,2,2" CornerRadius="0,0,4,0">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
-                                <!--GradientStop Color="Red" Offset="1"/>
-                                <GradientStop Color="White" Offset="0"/-->
-                                <GradientStop Offset="1" Color="#F89C8C" />
-                                <GradientStop Offset="0.45" Color="#D47F75" />
-                                <GradientStop Offset="0.45" Color="#C04C3C" />
-                                <GradientStop Offset="0" Color="#C98172" />
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
-                                <!--GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="Red" Offset="1"/-->
-                                <GradientStop Offset="0" Color="#F89C8C" />
-                                <GradientStop Offset="0.45" Color="#D47F75" />
-                                <GradientStop Offset="0.45" Color="#C04C3C" />
-                                <GradientStop Offset="1" Color="#C98172" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                    </Border>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Canvas Width="34" Height="18">
+                        <Line  Canvas.Left="11" Canvas.Bottom="5" Stroke="Silver"
+                          X1="0" X2="10" Y1="10" Y2="0" StrokeThickness="1" >
+                        </Line>
+                        <Line  Canvas.Left="11" Canvas.Bottom="5" Stroke="Silver"
+                          X1="0" X2="10" Y1="00" Y2="10" StrokeThickness="1" >
+                        </Line>
+                    </Canvas>
                     <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
                 </Grid>
-               
+                
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName='MyRectangle' Property="Fill" >
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#F89C8C" />
+                                <GradientStop Offset="0.45" Color="#E36A53" />
+                                <GradientStop Offset="0.45" Color="#C72B0E" />
+                                <GradientStop Offset="0.75" Color="#D44310" />
+                                <GradientStop Offset="1" Color="#F5E478" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="MinimizeButton"  TargetType="Button">
+            <Border BorderThickness="2,1,1,2" CornerRadius="0,0,0,4" BorderBrush="#FF7E7EFC" Background="#FF6D6DF2">
+                <Grid>
+                    
+                        <Rectangle Width='31' Height='18' x:Name='MyRectangle'>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Offset="0" Color="#FFADBAFF" />
+                                    <GradientStop Offset="0.45" Color="#FF8BA1D4" />
+                                    <GradientStop Offset="0.45" Color="#FF1962C1" />
+                                    <GradientStop Offset="1" Color="#FF99ACC4" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+
+                        </Rectangle>
+                    <Canvas Width="34" Height="18">
+                        <Line  Canvas.Left="11" Canvas.Bottom="6" Stroke="Silver"
+                          X1="0" X2="10" Y1="0" Y2="0" StrokeThickness="1" >
+                        </Line>
+                    </Canvas>
+                    <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
+                </Grid>
 
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="BorderDown" Property="Opacity" Value="1"/>
-                    <Setter TargetName="Contents" Property="Margin" Value="4,4,2,2"/>
+                    <Setter TargetName='MyRectangle' Property="Fill" >
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FF7373F8" />
+                                <GradientStop Offset="0.45" Color="#FF3C6DDE" />
+                                <GradientStop Offset="0.45" Color="#FF0C20BE" />
+                                <GradientStop Offset="0.75" Color="#FF5D27D8" />
+                                <GradientStop Offset="1" Color="#FFBCA3F5" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <ControlTemplate x:Key="MinimizeButton" TargetType="{x:Type Button}">
-            <Border BorderThickness="1,1,1,1" CornerRadius="0,0,0,4" BorderBrush="Blue" Background="Blue">
-                <Grid>
-                    <Border x:Name="BorderUp" BorderThickness="2,2,2,2" CornerRadius="0,0,4,4" Background="White">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
-                                <GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="Blue" Offset="1"/>
-                                
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-                    </Border>
-                    
-                    <Border x:Name="BorderDown" BorderThickness="2,2,2,2" CornerRadius="0,0,0,4">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
-                                <GradientStop Color="Blue" Offset="0"/>
-                                <GradientStop Color="White" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
-                                <GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="Blue" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                    </Border>
-                    <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
-                </Grid>
-
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter TargetName="BorderDown" Property="Opacity" Value="1"/>
-                    <Setter TargetName="Contents" Property="Margin" Value="4,4,2,2"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
+        
     </Window.Resources>
         <Window.InputBindings>
         <KeyBinding Command="Help" Key="F1"/>
@@ -148,7 +142,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="HelpExecuted" />
     </Window.CommandBindings>
-    <Grid Height="307" Background="#00000000">
+    <Grid Height="307" Background="#00000000" Width="506">
         <Grid.RowDefinitions>
             <RowDefinition Height="18*" />
             <RowDefinition Height="283" />
@@ -158,12 +152,28 @@
             
         </Label>
         <Label Content="Minutes Left:20" Height="40" HorizontalAlignment="Left" Margin="270,135,0,0" Name="MinuteLabel" VerticalAlignment="Top" Width="221" FontFamily="Comic Sans MS" FontWeight="Bold" FontStretch="Normal" Foreground="Green" FontSize="20" Grid.Row="1" />
-        <Button Content="STOP" Height="39" HorizontalAlignment="Left" Margin="10,244,0,0" Name="StopBtn" VerticalAlignment="Top" Width="231" Click="StopBtn_Clicked" Grid.Row="1" />
-        <Button Content="START" Height="39" HorizontalAlignment="Left" Margin="260,244,0,0" Name="StartBtn" VerticalAlignment="Top" Width="231" Click="StartBtn_Clicked" Grid.Row="1" />
+        <Button Content="STOP" Height="39" HorizontalAlignment="Left" Margin="8,244,0,0" Name="StopBtn" VerticalAlignment="Top" Width="231" Click="StopBtn_Clicked" Grid.Row="1" />
+        <Button Content="START" Height="39" HorizontalAlignment="Left" Margin="263,244,0,0" Name="StartBtn" VerticalAlignment="Top" Width="231" Click="StartBtn_Clicked" Grid.Row="1" />
         <Label Content="Work For Another 20 min" Height="44" HorizontalAlignment="Left" Margin="8,19,0,0" Name="DisplayLabel" VerticalAlignment="Top" Width="486" FontFamily="Arial" FontSize="24" FontWeight="Bold" Grid.Row="1" />
-        <TextBlock Height="22" HorizontalAlignment="Left" Name="AppName" Text="Twenty Twenty" VerticalAlignment="Top" Width="447" Focusable="False" MouseDown="Window_MouseDown"  Background="Transparent" Style="{StaticResource TitleTextStyle}" Margin="0,-4,0,0" />
-        <Button Content="X" Height="18" HorizontalAlignment="Right" Name="CloseBtn" VerticalAlignment="Top" Width="34" Template="{DynamicResource CloseButton}" Foreground="Silver" Click="CloseBtn_Click" Margin="0,-5,0,0" />
-        <Button Content="-" Foreground="Silver" Height="18" HorizontalAlignment="Left" Margin="435,-5,0,0" Name="MinimizeBtn" Template="{DynamicResource MinimizeButton}" VerticalAlignment="Top" Width="34" Click="MinimizeBtn_Click" />
+
+
+        <StackPanel Name="TitleBarSP" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18">
+            <Grid>
+                <Frame Height="18" HorizontalAlignment="Left" Name="TitleFrame" VerticalAlignment="Top" Width="491" MouseDown="Window_MouseDown" Foreground="#00000000" Opacity="1">
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="Blue" Offset="0" />
+                            <GradientStop Color="White" Offset="1" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
+                <TextBlock HorizontalAlignment="Left" Height="18" Name="AppName" Text="Twenty Twenty" Width="417" Focusable="False" MouseDown="Window_MouseDown"  Background="Transparent" Style="{StaticResource TitleTextStyle}"  Foreground="White" Panel.ZIndex="10" Margin="6,-1,0,0" />
+                <Button  Foreground="Silver" Height="18" HorizontalAlignment="Left" Margin="423,0,0,0" Name="MinimizeBtn" Template="{DynamicResource MinimizeButton}" VerticalAlignment="Top" Width="34" Click="MinimizeBtn_Click" Panel.ZIndex="10" />
+                <Button  Height="18" Name="CloseBtn" Width="34"  Foreground="Silver" Click="CloseBtn_Click" Margin="457,0,12,0" Template="{DynamicResource CloseButton}" />
+                </Grid>
+        </StackPanel>
+        <Frame Grid.RowSpan="3" Height="306" HorizontalAlignment="Left" Name="OuterFrame" VerticalAlignment="Top" Width="506" Panel.ZIndex="-1" BorderBrush="#FF4A39F8" BorderThickness="2">
+        </Frame>
     </Grid>
 
 </Window>

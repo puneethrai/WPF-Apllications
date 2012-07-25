@@ -40,7 +40,7 @@ namespace twentyminute
         {
             InitializeComponent();
             this.ResizeMode=ResizeMode.CanMinimize;
-
+            
  
         }
         /// <summary>
@@ -49,6 +49,7 @@ namespace twentyminute
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
+            this.SizeToContent = System.Windows.SizeToContent.Manual;
         }
         /// <summary>
         /// Initializing Timer & State change component
@@ -200,7 +201,7 @@ namespace twentyminute
                 StopBtnPressed = true;
                 DisplayLabel.Content = "Timers Stoped";
                 this.Background = System.Windows.Media.Brushes.Red;
-                
+                ResizeMode = ResizeMode.CanMinimize;
             }
         }
         /// <summary>
