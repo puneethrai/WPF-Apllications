@@ -73,7 +73,7 @@ namespace twentyminute
             MinuteTimer.Start();
 
             MyNotifyIcon = new System.Windows.Forms.NotifyIcon();
-            MyNotifyIcon.Icon = new System.Drawing.Icon(@"..\..\autorun.ico");
+            MyNotifyIcon.Icon = new System.Drawing.Icon(@"autorun.ico");
             System.Windows.Forms.ContextMenu MenuItems = new System.Windows.Forms.ContextMenu();
             MenuItems.MenuItems.Add(0,
                 new System.Windows.Forms.MenuItem("Exit", new EventHandler((object sender, EventArgs e) =>

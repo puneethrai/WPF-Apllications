@@ -54,3 +54,8 @@ C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Documents and Settings\Admin\My Documents\Visual Studio 2010\Projects\Gitrepo\twentyminute\twentyminute\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\CloseButton.baml
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.exe.manifest
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.application
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.TrustInfo.xml
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe.manifest
+C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.application
