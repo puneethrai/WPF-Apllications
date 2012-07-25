@@ -1,0 +1,162 @@
+﻿<Window x:Class="ChokaBara.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chowka Bara " AllowsTransparency="True" WindowStyle="None" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="350" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!--- TITLE TEXTBOX SIZE -->
+        <Style x:Key="TitleTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="FontSize" Value="17"></Setter>
+            <Setter Property="Height"
+                Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF000000" Offset="0"/>
+                        <GradientStop Color="#FF4B2C1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="CloseButton"  TargetType="Button">
+            <Border BorderThickness="1,1,2,2" CornerRadius="0,0,4,0" BorderBrush="#C98172" Background="#C98172">
+                <Grid>
+                    <Rectangle Width='34' Height='18' x:Name='MyRectangle' RadiusY="20">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#F89C8C" />
+                                <GradientStop Offset="0.45" Color="#D47F75" />
+                                <GradientStop Offset="0.45" Color="#C04C3C" />
+                                <GradientStop Offset="1" Color="#C98172" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Canvas Width="34" Height="18">
+                        <Line  Canvas.Left="11" Canvas.Bottom="5" Stroke="Silver"
+                          X1="0" X2="10" Y1="10" Y2="0" StrokeThickness="1" >
+                        </Line>
+                        <Line  Canvas.Left="11" Canvas.Bottom="5" Stroke="Silver"
+                          X1="0" X2="10" Y1="00" Y2="10" StrokeThickness="1" >
+                        </Line>
+                    </Canvas>
+                    <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
+                </Grid>
+
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName='MyRectangle' Property="Fill" >
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#F89C8C" />
+                                <GradientStop Offset="0.45" Color="#E36A53" />
+                                <GradientStop Offset="0.45" Color="#C72B0E" />
+                                <GradientStop Offset="0.75" Color="#D44310" />
+                                <GradientStop Offset="1" Color="#F5E478" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="MinimizeButton"  TargetType="Button">
+            <Border BorderThickness="2,1,1,2" CornerRadius="0,0,0,4" BorderBrush="#FF7E7EFC" Background="#FF6D6DF2">
+                <Grid>
+
+                    <Rectangle Width='31' Height='18' x:Name='MyRectangle'>
+                        <Rectangle.Fill>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FFADBAFF" />
+                                <GradientStop Offset="0.45" Color="#FF8BA1D4" />
+                                <GradientStop Offset="0.45" Color="#FF1962C1" />
+                                <GradientStop Offset="1" Color="#FF99ACC4" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+
+                    </Rectangle>
+                    <Canvas Width="34" Height="18">
+                        <Line  Canvas.Left="11" Canvas.Bottom="6" Stroke="Silver"
+                          X1="0" X2="10" Y1="0" Y2="0" StrokeThickness="1" >
+                        </Line>
+                    </Canvas>
+                    <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
+                </Grid>
+
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName='MyRectangle' Property="Fill" >
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FF7373F8" />
+                                <GradientStop Offset="0.45" Color="#FF3C6DDE" />
+                                <GradientStop Offset="0.45" Color="#FF0C20BE" />
+                                <GradientStop Offset="0.75" Color="#FF5D27D8" />
+                                <GradientStop Offset="1" Color="#FFBCA3F5" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Window.Resources>
+    <Grid Height="318">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="White" Offset="0" />
+                <GradientStop Color="#FFCE3232" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Name="TitleBarSP" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18">
+            <Grid>
+                <Frame Height="18" HorizontalAlignment="Left" Name="TitleFrame" VerticalAlignment="Top" Width="504" MouseDown="Window_MouseDown" Foreground="#00000000" Opacity="1">
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="Blue" Offset="0" />
+                            <GradientStop Color="White" Offset="1" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
+                <TextBlock HorizontalAlignment="Left" Height="18" Name="AppName" Text="Chowka Bara" Width="417" Focusable="False" MouseDown="Window_MouseDown"  Background="Transparent" Style="{StaticResource TitleTextStyle}"  Foreground="White" Panel.ZIndex="10" Margin="6,-1,0,0" />
+                <Button  Foreground="Silver" Height="18" HorizontalAlignment="Left" Margin="423,0,0,0" Name="MinimizeBtn" Template="{DynamicResource MinimizeButton}" VerticalAlignment="Top" Width="34" Click="MinimizeBtn_Click" Panel.ZIndex="10" />
+                <Button  Height="18" Name="CloseBtn" Width="34"  Foreground="Silver" Click="CloseBtn_Click" Margin="457,0,13,0" Template="{DynamicResource CloseButton}" />
+            </Grid>
+        </StackPanel>
+        <Rectangle Name="R11" Width="50" Height="47" Canvas.Left="236" Canvas.Top="33" Fill="#FFEB0000" Margin="246,45,207,226"></Rectangle>
+        <Rectangle Name="R55" Width="50" Height="47" Canvas.Left="440" Canvas.Top="225" Fill="#FFEB0000" Margin="449,238,4,34"></Rectangle>
+        <Rectangle Name="R54"  Width="50" Height="47" Canvas.Left="389" Canvas.Top="225" Fill="#FFEB0000" Margin="398,238,54,34"></Rectangle>
+        <Rectangle Name="R53"  Width="50" Height="47" Canvas.Left="338" Canvas.Top="225" Fill="Orange" Margin="348,238,106,34"></Rectangle>
+        <Rectangle Name="R52"  Width="50" Height="47" Canvas.Left="287" Canvas.Top="225" Fill="#FFEB0000" Margin="296,238,156,34"></Rectangle>
+        <Rectangle Name="R51"  Width="50" Canvas.Left="236" Canvas.Top="225" Fill="#FFEB0000" Margin="246,238,207,34"></Rectangle>
+        <Rectangle Name="R45" Canvas.Left="440" Canvas.Top="177" Fill="#FFEB0000" Margin="450,190,4,82"></Rectangle>
+        <Rectangle Name="R44"  Width="50" Height="47" Canvas.Left="389" Canvas.Top="177" Fill="#FFEB0000" Margin="398,190,54,82"></Rectangle>
+        <Rectangle Name="R43"  Width="50" Height="47" Canvas.Left="338" Canvas.Top="177" Fill="#FFEB0000" Margin="348,190,106,82"></Rectangle>
+        <Rectangle Name="R42"  Width="50" Height="47" Canvas.Left="287" Canvas.Top="177" Fill="#FFEB0000" Margin="296,190,156,82"></Rectangle>
+        <Rectangle Name="R41"  Width="50" Height="47" Canvas.Left="236" Canvas.Top="177" Fill="#FFEB0000" Margin="246,190,207,82"></Rectangle>
+        <Rectangle Name="R35" Height="47" Canvas.Left="440" Canvas.Top="129" Fill="Silver" Margin="450,141,4,130"></Rectangle>
+        <Rectangle Name="R34"  Width="50" Height="47" Canvas.Left="389" Canvas.Top="129" Fill="#FFEB0000" Margin="398,141,54,130"></Rectangle>
+        <Rectangle Name="R33"  Width="50" Height="47" Canvas.Left="338" Canvas.Top="129" Fill="#FF48EB00" Margin="348,141,105,130"></Rectangle>
+        <Rectangle  Name="R32" Width="50" Height="47" Canvas.Left="287" Canvas.Top="129" Fill="#FFEB0000" Margin="296,140,156,130"></Rectangle>
+        <Rectangle  Name="R31" Width="50" Height="47" Canvas.Left="236" Canvas.Top="129" Fill="Black" Margin="246,141,207,130"></Rectangle>
+        <Rectangle Name="R25" Canvas.Left="440" Canvas.Top="81" Fill="#FFEB0000" Margin="450,94,4,178"></Rectangle>
+        <Rectangle  Name="R24"  Width="50" Height="47" Canvas.Left="389" Canvas.Top="81" Fill="#FFEB0000" Margin="398,94,54,178"></Rectangle>
+        <Rectangle  Name="R23"  Width="50" Height="47" Canvas.Left="338" Canvas.Top="81" Fill="#FFEB0000" Margin="348,93,105,178"></Rectangle>
+        <Rectangle Name="R22" Width="50" Height="47" Canvas.Left="287" Canvas.Top="81" Fill="#FFEB0000" Margin="297,0,156,178" VerticalAlignment="Bottom"></Rectangle>
+        <Rectangle Name="R21" Width="50" Height="47" Canvas.Left="236" Canvas.Top="81" Fill="#FFEB0000" Margin="246,93,207,178"></Rectangle>
+        <Rectangle Name="R15" Width="50" Height="47" Canvas.Left="440" Canvas.Top="33" Fill="#FFEB0000" Margin="450,45,4,226"></Rectangle>
+        <Rectangle Name="R14" Width="50" Height="47"  Fill="#FFEB0000" Margin="399,45,54,226"></Rectangle>
+        <Rectangle Name="R13" Width="50" Height="47" Canvas.Left="338" Canvas.Top="33" Fill="Blue" Margin="348,45,0,226" HorizontalAlignment="Left"></Rectangle>
+        <Rectangle Name="R12" Width="50" Height="47" Canvas.Left="287" Canvas.Top="33" Fill="#FFEB0000" Margin="297,45,156,226"></Rectangle>
+        <Label Canvas.Left="0" Canvas.Top="32" Content="Turn:" Height="48" Name="TurnLabel" Width="230" FontSize="24" Opacity="1" Margin="0,24,273,246" />
+        <Button Canvas.Left="6" Canvas.Top="249" Content="Dice" Height="23" Name="DiceBtn" Width="75" Margin="12,223,416,72"  Click="DiceBtn_Click"/>
+        <Label Canvas.Left="85" Canvas.Top="250" Content="Number:" Height="25" Name="DiceValue" Width="149" Margin="91,221,263,71" />
+        <RadioButton Content="Kayi 1" Height="16" HorizontalAlignment="Left" Margin="15,76,0,0" Name="radioButton1" VerticalAlignment="Top" />
+        <RadioButton Content="Kayi 2" Height="16" HorizontalAlignment="Left" Margin="15,107,0,0" Name="radioButton2" VerticalAlignment="Top" />
+        <RadioButton Content="Kayi 3" Height="16" HorizontalAlignment="Left" Margin="16,141,0,0" Name="radioButton3" VerticalAlignment="Top" />
+        <RadioButton Content="kayi 4" Height="16" HorizontalAlignment="Left" Margin="15,172,0,0" Name="radioButton4" VerticalAlignment="Top" />
+    </Grid>
+</Window>

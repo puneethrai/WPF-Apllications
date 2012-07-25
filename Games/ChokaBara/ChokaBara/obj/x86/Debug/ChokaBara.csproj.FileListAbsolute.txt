@@ -1,0 +1,13 @@
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\bin\Debug\ChokaBara.exe
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\bin\Debug\ChokaBara.pdb
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\MainWindow.baml
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\MainWindow.g.cs
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\App.g.cs
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara_MarkupCompile.cache
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.g.resources
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.Properties.Resources.resources
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.exe
+C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.pdb
