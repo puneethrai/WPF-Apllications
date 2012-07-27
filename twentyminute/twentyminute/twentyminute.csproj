@@ -84,7 +84,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>twentyminute_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -151,7 +152,6 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="twentyminute_1_TemporaryKey.pfx" />
-    <None Include="twentyminute_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="autorun.ico" />

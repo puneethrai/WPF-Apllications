@@ -61,7 +61,7 @@ namespace twentyminute
             //  DispatcherTimer setup
             TwentyTwentyTimer = new DispatcherTimer();
             
-            TwentyTwentyTimer.Interval = new TimeSpan(0, TWENTY, TWENTY+DELAY);
+            TwentyTwentyTimer.Interval = new TimeSpan(0, TWENTY, DELAY);
             TwentyTwentyTimer.Start();
             // Updating the Label which displays the countdown 20 second
             TwentyTimer = new DispatcherTimer();
@@ -122,9 +122,11 @@ namespace twentyminute
             Console.Beep(440, 1000);
             TwentyTimer.Start();
             MinuteTimer.Stop();
+            TwentyTwentyTimer.Stop();
             WindowState = WindowState.Maximized;
             this.Topmost = true;
             this.ResizeMode=ResizeMode.NoResize;
+            MinimizeBtn.IsEnabled = false;
             // Forcing the CommandManager to raise the RequerySuggested event
             CommandManager.InvalidateRequerySuggested();
         }
@@ -144,9 +146,11 @@ namespace twentyminute
                 MinuteCount = 0;
                 TwentyTimer.Stop();
                 MinuteTimer.Start();
+                TwentyTwentyTimer.Start();
                 this.WindowState = WindowState.Normal;
                 this.WindowState = WindowState.Minimized;
                 this.ResizeMode=ResizeMode.CanMinimize;
+                MinimizeBtn.IsEnabled = true;
                 DisplayLabel.Content = "Continue Working For Another 20 min";
                 TimeLabel.Content = "Seconds Left:0";
                
@@ -195,6 +199,7 @@ namespace twentyminute
         {
             if(!StopBtnPressed)
             {
+                MinimizeBtn.IsEnabled = true;
                 TwentyTwentyTimer.Stop();
                 TwentyTimer.Stop();
                 MinuteTimer.Stop();
@@ -228,15 +233,24 @@ namespace twentyminute
             System.Diagnostics.Process.Start(@"help.chm");
            
         }
+        /// <summary>
+        /// Used for dragging the window
+        /// </summary>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
 
         }
+        /// <summary>
+        /// CLoses the application when close button is pressed
+        /// </summary>
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
         }
+        /// <summary>
+        /// Minimizes the application when minimize button is pressed
+        /// </summary>
         private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = System.Windows.WindowState.Minimized;

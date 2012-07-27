@@ -59,3 +59,22 @@ C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twent
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.TrustInfo.xml
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe.manifest
 C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.exe.config
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.csprojResolveAssemblyReference.cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\CloseButton.baml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\MainWindow.baml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\MainWindow.g.cs
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\App.g.cs
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute_MarkupCompile.cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.g.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.csproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.exe.manifest
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.TrustInfo.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe.manifest
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.pdb
