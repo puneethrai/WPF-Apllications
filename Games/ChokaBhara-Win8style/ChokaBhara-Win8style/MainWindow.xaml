@@ -3,17 +3,17 @@
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Choka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="350" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+        Title="Choka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="350" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" >
     <Grid Name="MainGrid" Panel.ZIndex="-4">
         <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
             <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
             <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
             <!--MediaElement Source="animated_loader.gif" Margin="122,6,46,18" /-->
-            <Grid Name="m_grid" Panel.ZIndex="10"/>
             <!--wfi:WindowsFormsHost Margin="122,6,0,6" Panel.ZIndex="10">
                 <winForms:PictureBox x:Name="pictureBoxLoading">
                 </winForms:PictureBox>
             </wfi:WindowsFormsHost-->
+            <Grid Name="m_grid" Panel.ZIndex="10"  />
         </Grid>
         <Grid Name="ControlBar" Panel.ZIndex="-3">
             <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown"></Rectangle>
@@ -23,18 +23,22 @@
             <Line Name="CloseLine2" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="484,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" />
             <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" />
         </Grid>
-        <Grid Name="BodyFirstHalf" Margin="0,41,230,0" Panel.ZIndex="-2">
-            <Rectangle Margin="0,0,0,230" Name="TurnDisplayRect">
+        <Grid Name="BodyFirstHalf" Margin="0,41,229,0" Panel.ZIndex="-2">
+            <Rectangle Width="201" Margin="0,0,72,230" Name="TurnDisplayRect" Fill="#FFFC0000">
             </Rectangle>
             <!--60,40"0,40 10,50 20,40 0,40"-->
-            <Polygon Points="0,40 10,50 20,40 0,40" Stroke="Black" Fill="Black" 
-                     Name="TurnDisplayTri" Panel.ZIndex="2" >
-            </Polygon>
-            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="110,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" />
-            <Rectangle Width="20" Height="20" Margin="0,0,250,194" Fill="Black" VerticalAlignment="Bottom" />
-            <Rectangle Fill="Black" Height="20" Margin="182,56,70,194" Width="20" />
-            <Rectangle Fill="Black" Height="20" Margin="122,56,131,194" Width="20" />
-            <Rectangle Fill="Black" Height="20" Margin="62,56,190,194" Width="20" />
+            <Polygon Points="0,40 10,50 20,40 0,40"  Fill="#FFFC0000" 
+                     Name="TurnDisplayTri" Panel.ZIndex="2" />
+            
+            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" />
+            <Rectangle HorizontalAlignment="Left" Width="20" Height="20" Margin="0,0,250,194" VerticalAlignment="Bottom" Fill="#FFFC0000" Name="Turn1"></Rectangle>
+            <Rectangle HorizontalAlignment="Left" Fill="Magenta" Height="20" Margin="182,56,70,194" Width="20" Name="turn4" />
+            <Rectangle HorizontalAlignment="Left" Fill="#FF0D7EFF" Height="20" Margin="122,56,131,194" Width="20" Name="turn3" />
+            <Rectangle HorizontalAlignment="Left" Fill="#FF22F510" Height="20" Margin="62,56,190,194" Width="20" Name="turn2" />
+            <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="215,17,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" />
+            <Button Content="Dice" Height="24" HorizontalAlignment="Left" Margin="4,107,0,0" Name="DiceBtn" VerticalAlignment="Top" Width="69" Background="#FFFF9393" BorderBrush="Transparent"  />
+            <Label Content="Label" Height="25" HorizontalAlignment="Left" Margin="84,106,0,0" Name="label2" VerticalAlignment="Top" Width="89" />
         </Grid>
+        
     </Grid>
 </Window>

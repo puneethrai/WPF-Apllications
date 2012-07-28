@@ -128,52 +128,7 @@ namespace ChokaBhara_Win8style
         {
             Console.WriteLine("Loaded");
             //this.pictureBoxLoading.Image = System.Drawing.Image.FromFile(@"C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\animated_loader.gif");
-            // Create a collection of points for a polygon
-             System.Windows.Point Point1 = new System.Windows.Point(60,40);
-             System.Windows.Point Point2 = new System.Windows.Point(70,50);
-             System.Windows.Point Point3 = new System.Windows.Point(80,40);
-             System.Windows.Point Point4 = new System.Windows.Point(60,40);
-             PointCollection polygonPoints = new PointCollection();
-             polygonPoints.Add(Point1);
-             polygonPoints.Add(Point2);
-             polygonPoints.Add(Point3);
-             polygonPoints.Add(Point4);
-
-             TurnDisplayTri.Points = polygonPoints;
             
-             for (long i = 0; i < 999999999; i++) ;
-             Point1 = new System.Windows.Point(120, 40);
-             Point2 = new System.Windows.Point(130, 50);
-             Point3 = new System.Windows.Point(140, 40);
-             Point4 = new System.Windows.Point(120, 40);
-             polygonPoints = new PointCollection();
-             polygonPoints.Add(Point1);
-             polygonPoints.Add(Point2);
-             polygonPoints.Add(Point3);
-             polygonPoints.Add(Point4);
-             TurnDisplayTri.Points = polygonPoints;
-             for (long i = 0; i < 999999999; i++) ;
-             Point1 = new System.Windows.Point(180, 40);
-             Point2 = new System.Windows.Point(190, 50);
-             Point3 = new System.Windows.Point(200, 40);
-             Point4 = new System.Windows.Point(180, 40);
-             polygonPoints = new PointCollection();
-             polygonPoints.Add(Point1);
-             polygonPoints.Add(Point2);
-             polygonPoints.Add(Point3);
-             polygonPoints.Add(Point4);
-             TurnDisplayTri.Points = polygonPoints;
-             for (long i = 0; i < 999999999; i++) ;
-             Point1 = new System.Windows.Point(0, 40);
-             Point2 = new System.Windows.Point(10, 50);
-             Point3 = new System.Windows.Point(20, 40);
-             Point4 = new System.Windows.Point(0, 40);
-             polygonPoints = new PointCollection();
-             polygonPoints.Add(Point1);
-             polygonPoints.Add(Point2);
-             polygonPoints.Add(Point3);
-             polygonPoints.Add(Point4);
-             TurnDisplayTri.Points = polygonPoints;
              Console.WriteLine("DOne");
              System.Windows.Media.Brush brush = Background;
              if (m_grid.Background != System.Windows.Media.Brushes.Transparent && m_grid.Background != null)
@@ -194,6 +149,76 @@ namespace ChokaBhara_Win8style
              m_grid.VerticalAlignment = VerticalAlignment.Top;
              animatedImageControl.Margin = new Thickness(30, 10, 30, 10);
         }
+        private int TurnState;
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a collection of points for a polygon
+            switch (TurnState)
+            {
+                case 0:
+                    System.Windows.Point Point1 = new System.Windows.Point(60, 40);
+                    System.Windows.Point Point2 = new System.Windows.Point(70, 50);
+                    System.Windows.Point Point3 = new System.Windows.Point(80, 40);
+                    System.Windows.Point Point4 = new System.Windows.Point(60, 40);
+                    PointCollection polygonPoints = new PointCollection();
+                    polygonPoints.Add(Point1);
+                    polygonPoints.Add(Point2);
+                    polygonPoints.Add(Point3);
+                    polygonPoints.Add(Point4);
+
+                    TurnDisplayTri.Points = polygonPoints;
+                    TurnDisplayRect.Fill = turn2.Fill;
+                    TurnDisplayTri.Fill = turn2.Fill;
+                    TurnState++;
+                    break;
+                case 1:
+                    Point1 = new System.Windows.Point(120, 40);
+                    Point2 = new System.Windows.Point(130, 50);
+                    Point3 = new System.Windows.Point(140, 40);
+                    Point4 = new System.Windows.Point(120, 40);
+                    polygonPoints = new PointCollection();
+                    polygonPoints.Add(Point1);
+                    polygonPoints.Add(Point2);
+                    polygonPoints.Add(Point3);
+                    polygonPoints.Add(Point4);
+                    TurnDisplayTri.Points = polygonPoints;
+                    TurnDisplayRect.Fill = turn3.Fill;
+                    TurnDisplayTri.Fill = turn3.Fill;
+                    TurnState++;
+                    break;
+                case 2:
+                    Point1 = new System.Windows.Point(180, 40);
+                    Point2 = new System.Windows.Point(190, 50);
+                    Point3 = new System.Windows.Point(200, 40);
+                    Point4 = new System.Windows.Point(180, 40);
+                    polygonPoints = new PointCollection();
+                    polygonPoints.Add(Point1);
+                    polygonPoints.Add(Point2);
+                    polygonPoints.Add(Point3);
+                    polygonPoints.Add(Point4);
+                    TurnDisplayTri.Points = polygonPoints;
+                    TurnDisplayRect.Fill = turn4.Fill;
+                    TurnDisplayTri.Fill = turn4.Fill;
+                    TurnState++;
+                    break;
+                case 3:
+                    Point1 = new System.Windows.Point(0, 40);
+                    Point2 = new System.Windows.Point(10, 50);
+                    Point3 = new System.Windows.Point(20, 40);
+                    Point4 = new System.Windows.Point(0, 40);
+                    polygonPoints = new PointCollection();
+                    polygonPoints.Add(Point1);
+                    polygonPoints.Add(Point2);
+                    polygonPoints.Add(Point3);
+                    polygonPoints.Add(Point4);
+                    TurnDisplayTri.Points = polygonPoints;
+                    TurnDisplayRect.Fill = Turn1.Fill;
+                    TurnDisplayTri.Fill = Turn1.Fill;
+                    TurnState = 0;
+                    break;
+            }
+        }
+
 
 
     }
