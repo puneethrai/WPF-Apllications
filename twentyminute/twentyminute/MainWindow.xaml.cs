@@ -207,6 +207,11 @@ namespace twentyminute
                 DisplayLabel.Content = "Timers Stoped";
                 this.Background = System.Windows.Media.Brushes.Red;
                 ResizeMode = ResizeMode.CanMinimize;
+                this.Topmost = false;
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                }
             }
         }
         /// <summary>
