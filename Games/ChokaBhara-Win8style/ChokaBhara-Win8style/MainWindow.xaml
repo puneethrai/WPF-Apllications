@@ -1,19 +1,40 @@
 ﻿<Window x:Class="ChokaBhara_Win8style.MainWindow"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" 
+        xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Choka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="350" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" Panel.ZIndex="-4">
         <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
-            <Image Height="32" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
-            <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="24" />
+            <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
+            <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
+            <!--MediaElement Source="animated_loader.gif" Margin="122,6,46,18" /-->
+            <Grid Name="m_grid" Panel.ZIndex="10"/>
+            <!--wfi:WindowsFormsHost Margin="122,6,0,6" Panel.ZIndex="10">
+                <winForms:PictureBox x:Name="pictureBoxLoading">
+                </winForms:PictureBox>
+            </wfi:WindowsFormsHost-->
         </Grid>
-        <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,291"></Rectangle>
-        <Rectangle Name="CloseRect" Height="20" Width="20" Margin="483,0,0,291">
-        </Rectangle>
-        <Line Name="CloseLine1" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="0" X2="15" Y2="15" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="484,5,4,291"  />
-        <Line Name="CloseLine2" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="484,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" />
-        <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" />
-        
-
+        <Grid Name="ControlBar" Panel.ZIndex="-3">
+            <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown"></Rectangle>
+            <Rectangle Name="CloseRect" Height="20" Width="20" Margin="483,0,0,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown">
+            </Rectangle>
+            <Line Name="CloseLine1" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="0" X2="15" Y2="15" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="484,5,4,291"   />
+            <Line Name="CloseLine2" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="484,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" />
+            <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" />
+        </Grid>
+        <Grid Name="BodyFirstHalf" Margin="0,41,230,0" Panel.ZIndex="-2">
+            <Rectangle Margin="0,0,0,230" Name="TurnDisplayRect">
+            </Rectangle>
+            <!--60,40"0,40 10,50 20,40 0,40"-->
+            <Polygon Points="0,40 10,50 20,40 0,40" Stroke="Black" Fill="Black" 
+                     Name="TurnDisplayTri" Panel.ZIndex="2" >
+            </Polygon>
+            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="110,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" />
+            <Rectangle Width="20" Height="20" Margin="0,0,250,194" Fill="Black" VerticalAlignment="Bottom" />
+            <Rectangle Fill="Black" Height="20" Margin="182,56,70,194" Width="20" />
+            <Rectangle Fill="Black" Height="20" Margin="122,56,131,194" Width="20" />
+            <Rectangle Fill="Black" Height="20" Margin="62,56,190,194" Width="20" />
+        </Grid>
     </Grid>
 </Window>
