@@ -1,0 +1,7 @@
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\obj\x86\Debug\TestGifanimae.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\obj\x86\Debug\TestGifanimae.csproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\bin\Debug\TestGifanimae.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\bin\Debug\TestGifanimae.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\obj\x86\Debug\TestGifanimae.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\obj\x86\Debug\TestGifanimae.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\TestGifanimae\TestGifanimae\obj\x86\Debug\TestGifanimae.Form1.resources

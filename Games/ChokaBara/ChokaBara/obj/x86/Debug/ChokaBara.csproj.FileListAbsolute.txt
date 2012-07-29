@@ -11,3 +11,5 @@ C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\G
 C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.exe
 C:\visual studio 2010\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBara\ChokaBara\obj\x86\Debug\ChokaBara.pdb
