@@ -1,0 +1,9 @@
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\WebBrowserEmulator.Properties.Resources.resources
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\bin\Debug\WebBrowserEmulator.exe
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\bin\Debug\WebBrowserEmulator.pdb
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\WebBrowserEmulator.exe
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\WebBrowserEmulator.pdb
+c:\documents and settings\manojkatarip\my documents\visual studio 2010\Projects\WebBrowserEmulator\WebBrowserEmulator\obj\x86\Debug\WebBrowserEmulator.ProgressBarEx.resources

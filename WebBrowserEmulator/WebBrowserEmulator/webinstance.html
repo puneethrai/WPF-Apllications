@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title >NodeJS Test</title>
+<script type="text/javascript" src="http://10.75.15.119/dist/socket.io.js"></script>
+<script type="text/javascript">
+	var roomid;
+	var userid;
+	var socket;
+	window.onload = function () {
+	    socket = io.connect('10.75.15.119:8080');
+	    socket.on('connect', function () {
+	        socket.on('getRoom', function (data) {
+	            roomid = data.roomID;
+	            userid = data.userID;
+	            document.write("RoomID:" + roomid + ",userID:" + userid);
+	            socket.emit('test', { roomID: roomid, msg: "Message from " + userid + " Conf:" + roomid });
+	        });
+	        socket.on('test', function (data) {
+	            document.write("Message" + data);
+	        });
+	        socket.emit('getRoom', 12);
+	        socket.emit('test', { roomID: roomid, msg: "Message from " + userid + " Conf:" + roomid });
+	        setInterval(send, 1000);
+	        function send() {
+	            alert("Sending");
+	            socket.emit('test', { roomID: roomid, msg: "Message from " + userid + " Conf:" + roomid });
+
+	        }
+	    });
+	}
+	
+</script>
+</head>
+<body>
+</body>
+</html>
