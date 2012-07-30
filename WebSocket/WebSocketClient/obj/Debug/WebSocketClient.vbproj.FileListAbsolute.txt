@@ -1,0 +1,10 @@
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\bin\WebSocketClient.dll
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\bin\WebSocketClient.pdb
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\bin\WebSocketClient.xml
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.Resources.resources
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.dll
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.xml
+C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.pdb

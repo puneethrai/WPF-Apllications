@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Web Socket</title>
+    <script type="text/javascript">
+        var soc;
+        window.onload = function () {
+
+            Connect();
+
+        }
+        function Connect() {
+            soc = new WebSocket("ws://localhost:8080/");
+            soc.onmessage = function (e) {
+                alert("Received message");
+            };
+            soc.onopen = function () {
+                soc.send("Hey buddy");
+            };
+        }
+       
+    </script>
+</head>
+<body>
+
+</body>
+</html>

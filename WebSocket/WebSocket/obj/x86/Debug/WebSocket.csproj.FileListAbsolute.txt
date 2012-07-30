@@ -1,0 +1,18 @@
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\bin\Debug\WebSocket.exe
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\bin\Debug\WebSocket.pdb
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\WebSocket.WebSocketApp.resources
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\WebSocket.Properties.Resources.resources
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\WebSocket.exe
+c:\users\gangathara rai\documents\visual studio 2010\Projects\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\WebSocket.exe
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\WebSocket.pdb
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\WebSocket.WebSocketApp.resources
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\WebSocket.Properties.Resources.resources
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.exe
+C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.pdb
