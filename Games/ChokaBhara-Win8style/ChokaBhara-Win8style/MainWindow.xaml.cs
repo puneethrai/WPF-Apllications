@@ -134,8 +134,27 @@ namespace ChokaBhara_Win8style
         {
             Console.WriteLine("Loaded");
             //this.pictureBoxLoading.Image = System.Drawing.Image.FromFile(@"C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\animated_loader.gif");
-            System.Drawing.Bitmap animatedImage = new System.Drawing.Bitmap("SampleAnimation.gif");
-            System.Drawing.ImageAnimator.Animate(animatedImage, new EventHandler(this.OnFrameChanged))
+            //System.Drawing.Bitmap animatedImage = new System.Drawing.Bitmap("SampleAnimation.gif");
+            //System.Drawing.ImageAnimator.Animate(animatedImage, new EventHandler(this.OnFrameChanged));
+            int i=0;
+            ServerConnect.LoadedBehavior = MediaState.Manual;
+            ServerConnect.Play();
+            Uri Source = ServerConnect.Source;
+            ServerConnect.MediaFailed += new EventHandler<ExceptionRoutedEventArgs>((object ob, ExceptionRoutedEventArgs r) =>
+            {
+                Console.WriteLine("Error");
+            });
+            ServerConnect.MediaEnded += new RoutedEventHandler((object ob, RoutedEventArgs r) =>
+            {
+                //ServerConnect.Source = Source;
+                ServerConnect.LoadedBehavior = MediaState.Manual;
+                ServerConnect.Position = TimeSpan.FromSeconds(0);
+                
+               
+                ServerConnect.Play();
+                Console.WriteLine("Playing Again {0}",i);
+                i++;
+            });
             
         }
         

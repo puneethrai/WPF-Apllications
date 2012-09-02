@@ -27,9 +27,9 @@
         <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
             <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
             <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
-            <!--MediaElement Source="animated_loader.gif" Margin="122,6,46,18" /-->
-            
-            <Grid Name="m_grid" Panel.ZIndex="10"  />
+            <Grid Name="m_grid" Panel.ZIndex="10">
+                <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,100,14" Height="20" Width="220"/>
+            </Grid>
         </Grid>
         <Grid Name="BodyFirstHalf" Margin="0,41,229,0" Panel.ZIndex="-2">
             <Grid.ColumnDefinitions>
@@ -105,10 +105,11 @@
         </Grid>
         <Grid Height="67" HorizontalAlignment="Left" Margin="4,192,0,0" Name="KayiGrid" VerticalAlignment="Top" Width="103"></Grid>
         <Grid Height="43" HorizontalAlignment="Left" Margin="4,263,0,0" Name="grid1" VerticalAlignment="Top" Width="224" >
-            <wfi:WindowsFormsHost Margin="0,0,0,0" Panel.ZIndex="10" Width="220" Height="10">
+            <!--wfi:WindowsFormsHost Margin="0,0,0,0" Panel.ZIndex="10" Width="220" Height="10">
                 <winForms:PictureBox x:Name="pictureBoxLoading">
                 </winForms:PictureBox>
-            </wfi:WindowsFormsHost>
+            </wfi:WindowsFormsHost-->
+            <MediaElement Name="Waiting" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
         </Grid>
     </Grid>
 </Window>

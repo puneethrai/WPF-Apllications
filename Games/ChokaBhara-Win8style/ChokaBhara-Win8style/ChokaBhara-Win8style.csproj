@@ -103,6 +103,12 @@
   <ItemGroup>
     <None Include="bin\Debug\animated_loader.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\serverwait.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
