@@ -109,7 +109,7 @@
                 <winForms:PictureBox x:Name="pictureBoxLoading">
                 </winForms:PictureBox>
             </wfi:WindowsFormsHost-->
-            <MediaElement Name="Waiting" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
+            <MediaElement Name="WaitingGIF" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
         </Grid>
     </Grid>
 </Window>
