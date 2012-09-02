@@ -16,3 +16,5 @@ C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\GenerateR
 C:\Documents and Settings\manojkatarip\Desktop\WebSocket\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.exe
 C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
