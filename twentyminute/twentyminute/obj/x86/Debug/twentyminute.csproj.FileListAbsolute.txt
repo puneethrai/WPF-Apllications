@@ -62,7 +62,6 @@ C:\visual studio 2010\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\t
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\bin\Debug\twentyminute.exe.config
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.pdb
-C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\twentyminute.csprojResolveAssemblyReference.cache
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\CloseButton.baml
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\MainWindow.baml
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\twentyminute\twentyminute\obj\x86\Debug\MainWindow.g.cs

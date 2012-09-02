@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="twentyminute.exe" size="139264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="twentyminute.exe" size="136704">
       <assemblyIdentity name="twentyminute" version="1.0.0.0" publicKeyToken="FF9F5E6410E2C44A" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Hz4DmDh2x/WMZGSXTuEpgqB1HPo=</dsig:DigestValue>
+        <dsig:DigestValue>spLIYcaN7QTNbv9clbbDTTmiCm0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
