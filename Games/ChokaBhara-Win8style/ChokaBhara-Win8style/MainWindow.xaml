@@ -24,29 +24,29 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid Name="MainGrid" Panel.ZIndex="-4">
+        <Grid Name="BodyFirstHalf" Margin="0,41,232,0" Panel.ZIndex="-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="274*" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+            <Polygon Points="0,40 10,50 20,40 0,40" Fill="Black" Name="TurnDisplayTri" Panel.ZIndex="2" Grid.ColumnSpan="2" />
+            <Rectangle Width="201" Margin="0,0,70,230" Name="TurnDisplayRect" Fill="Black"></Rectangle>
+            <!--60,40"0,40 10,50 20,40 0,40"-->
+            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" Foreground="Magenta" />
+            <Rectangle HorizontalAlignment="Left" Width="20" Height="20" Margin="0,0,0,194" VerticalAlignment="Bottom" Fill="Black" Name="Turn1"></Rectangle>
+            <Rectangle HorizontalAlignment="Left" Fill="Blue" Height="20" Margin="182,56,0,194" Width="20" Name="turn4" />
+            <Rectangle HorizontalAlignment="Left" Fill="Silver" Height="20" Margin="122,56,0,194" Width="20" Name="turn3" />
+            <Rectangle HorizontalAlignment="Left" Fill="Orange" Height="20" Margin="62,56,0,194" Width="20" Name="turn2" />
+            <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="122,180,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" />
+            <Button Content="Dice" Height="24" HorizontalAlignment="Left" Margin="4,107,0,0" Name="DiceBtn" VerticalAlignment="Top" Width="69" Background="#FFFF9393" BorderBrush="Transparent" Template="{StaticResource DiceButton}" Click="DiceBtn_Click" />
+            <Label Content="Number:" Height="25" HorizontalAlignment="Left" Margin="70,106,0,0" Name="DiceNoLabel" VerticalAlignment="Top" Width="89" />
+        </Grid>
         <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
             <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
             <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
             <Grid Name="m_grid" Panel.ZIndex="10">
                 <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,100,14" Height="20" Width="220"/>
             </Grid>
-        </Grid>
-        <Grid Name="BodyFirstHalf" Margin="0,41,229,0" Panel.ZIndex="-2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="271*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Width="201" Margin="0,0,70,230" Name="TurnDisplayRect" Fill="#FFFC0000"></Rectangle>
-            <!--60,40"0,40 10,50 20,40 0,40"-->
-            <Polygon Points="0,40 10,50 20,40 0,40" Fill="#FFFC0000" Name="TurnDisplayTri" Panel.ZIndex="2" Grid.ColumnSpan="2" />
-            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" />
-            <Rectangle HorizontalAlignment="Left" Width="20" Height="20" Margin="0,0,0,194" VerticalAlignment="Bottom" Fill="#FFFC0000" Name="Turn1"></Rectangle>
-            <Rectangle HorizontalAlignment="Left" Fill="Magenta" Height="20" Margin="182,56,0,194" Width="20" Name="turn4" />
-            <Rectangle HorizontalAlignment="Left" Fill="#FF0D7EFF" Height="20" Margin="122,56,0,194" Width="20" Name="turn3" />
-            <Rectangle HorizontalAlignment="Left" Fill="#FF22F510" Height="20" Margin="62,56,0,194" Width="20" Name="turn2" />
-            <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="122,180,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" />
-            <Button Content="Dice" Height="24" HorizontalAlignment="Left" Margin="4,107,0,0" Name="DiceBtn" VerticalAlignment="Top" Width="69" Background="#FFFF9393" BorderBrush="Transparent" Template="{StaticResource DiceButton}" Click="DiceBtn_Click" />
-            <Label Content="Number:" Height="25" HorizontalAlignment="Left" Margin="70,106,0,0" Name="DiceNoLabel" VerticalAlignment="Top" Width="89" />
         </Grid>
         <Grid Name="ControlBar" Panel.ZIndex="-3">
             <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown"></Rectangle>
@@ -56,59 +56,54 @@
             <Line Name="CloseLine2" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="484,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" />
             <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,291" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" />
             <Canvas Height="264" HorizontalAlignment="Left" Margin="228,47,0,0" Name="RectCanvas" VerticalAlignment="Top" Width="274" >
-                
-                <Rectangle Name="R55" Width="50" Height="50" Canvas.Left="-235" Canvas.Top="-29" Fill="#FFEB0000" Margin="449,238,4,34"></Rectangle>
-                <Rectangle Name="R54"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-29" Fill="#FFEB0000" Margin="398,238,54,34"></Rectangle>
-                <Rectangle Name="R53"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-29" Fill="Orange" Margin="348,238,106,34"></Rectangle>
-                <Rectangle Name="R52"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-29" Fill="#FFEB0000" Margin="296,238,156,34"></Rectangle>
+
+                <Rectangle Name="R55" Width="50" Height="50" Canvas.Left="214" Canvas.Top="209" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R54"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="209" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R53"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="209" Fill="Orange" Opacity="0.8"></Rectangle>
+                <Rectangle Name="R52"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="209" Fill="#FFEB0000" ></Rectangle>
                 <Rectangle Name="R51" Width="50" Height="50"  Canvas.Left="6" Canvas.Top="209" Fill="#FFEB0000"></Rectangle>
-                <Rectangle Name="R45"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-32" Fill="#FFEB0000" Margin="450,190,4,82"></Rectangle>
-                <Rectangle Name="R44"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-32" Fill="#FFEB0000" Margin="398,190,54,82"></Rectangle>
-                <Rectangle Name="R43"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-32" Fill="#FFEB0000" Margin="348,190,106,82"></Rectangle>
-                <Rectangle Name="R42"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-32" Fill="#FFEB0000" Margin="296,190,156,82"></Rectangle>
-                <Rectangle Name="R41"  Width="50" Height="50" Canvas.Left="-240" Canvas.Top="-32" Fill="#FFEB0000" Margin="246,190,207,82"></Rectangle>
-                <Rectangle Name="R35" Width="50" Height="50" Fill="Silver" Canvas.Left="214" Canvas.Top="107"></Rectangle>
-                <Rectangle Name="R34"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-34" Fill="#FFEB0000" Margin="398,141,54,130"></Rectangle>
-                <Rectangle Name="R33"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-34" Fill="#FF48EB00" Margin="348,141,105,130"></Rectangle>
-                <Rectangle  Name="R32" Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-33" Fill="#FFEB0000" Margin="296,140,156,130"></Rectangle>
-                <Rectangle  Name="R31" Width="50" Height="50" Canvas.Left="-240" Canvas.Top="-34" Fill="Black" Margin="246,141,207,130"></Rectangle>
-                <Rectangle Name="R25"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-38" Fill="#FFEB0000" Margin="450,94,4,178"></Rectangle>
-                <Rectangle  Name="R24"  Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-38" Fill="#FFEB0000" Margin="398,94,54,178"></Rectangle>
-                <Rectangle  Name="R23"  Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-37" Fill="#FFEB0000" Margin="348,93,105,178"></Rectangle>
-                <Rectangle Name="R22" Width="50" Height="50" Canvas.Left="-239" Canvas.Top="56" Fill="#FFEB0000" Margin="297,0,156,178" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle Name="R45"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="158" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R44"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="158" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R43"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="158" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R42"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="158" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R41"  Width="50" Height="50" Canvas.Left="6" Canvas.Top="158" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R35" Width="50" Height="50"  Canvas.Left="214" Canvas.Top="107" Fill="Silver" Opacity="0.8" ></Rectangle>
+                <Rectangle Name="R34"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="107" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R33"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="107" Fill="#FF48EB00" ></Rectangle>
+                <Rectangle  Name="R32" Width="50" Height="50" Canvas.Left="58" Canvas.Top="107" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle  Name="R31" Width="50" Height="50" Canvas.Left="6" Canvas.Top="107" Fill="Black"  Opacity="0.8"></Rectangle>
+                <Rectangle Name="R25"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="56" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle  Name="R24"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="56" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle  Name="R23"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="56" Fill="#FFEB0000" ></Rectangle>
+                <Rectangle Name="R22" Width="50" Height="50" Canvas.Left="58" Canvas.Top="56" Fill="#FFEB0000"  VerticalAlignment="Bottom"></Rectangle>
                 <Rectangle Name="R21" Width="50" Height="50" Canvas.Left="6" Canvas.Top="56" Fill="#FFEB0000" HorizontalAlignment="Right"></Rectangle>
-                <Rectangle Name="R15" Width="50" Height="50" Canvas.Left="-236" Canvas.Top="-40" Fill="#FFEB0000" Margin="450,45,4,226"></Rectangle>
-                <Rectangle Name="R14" Width="50" Height="50" Canvas.Left="-237" Canvas.Top="-40" Fill="#FFEB0000" Margin="399,45,54,226" ></Rectangle>
-                <Rectangle Name="R13" Width="50" Height="50" Canvas.Left="-238" Canvas.Top="-40" Fill="Blue" Margin="348,45,0,226" HorizontalAlignment="Left"></Rectangle>
-                <Rectangle Name="R12" Width="50" Height="50" Canvas.Left="-239" Canvas.Top="-40" Fill="#FFEB0000" Margin="297,45,156,226"></Rectangle>
-                <Rectangle Name="R11" Width="50" Height="50" Canvas.Left="-240" Canvas.Top="-40" Fill="#FFEB0000" Margin="246,45,207,226">
-                </Rectangle>
+                <Rectangle Name="R15" Width="50" Height="50" Canvas.Left="214" Canvas.Top="5" Fill="#FFEB0000"  HorizontalAlignment="Left"></Rectangle>
+                <Rectangle Name="R14" Width="50" Height="50" Canvas.Left="162" Canvas.Top="5" Fill="#FFEB0000"  HorizontalAlignment="Left"></Rectangle>
+                <Rectangle Name="R13" Width="50" Height="50" Canvas.Left="110" Canvas.Top="5" Fill="Blue"  HorizontalAlignment="Left" Opacity="0.8"></Rectangle>
+                <Rectangle Name="R12" Width="50" Height="50" Canvas.Left="58" Canvas.Top="5" Fill="#FFEB0000"  HorizontalAlignment="Left"></Rectangle>
+                <Rectangle Name="R11" Width="50" Height="50" Canvas.Left="6" Canvas.Top="5" Fill="#FFEB0000"  HorizontalAlignment="Left"></Rectangle>
+
+                <Ellipse Canvas.Left="6" Canvas.Top="107" Fill="Black" Height="10" Name="CKayi11" Width="10"></Ellipse>
+                <Ellipse Canvas.Left="46" Canvas.Top="145" Fill="Black" Height="10" Name="CKayi14" Width="10" />
+                <Ellipse Canvas.Left="6" Canvas.Top="145" Fill="Black" Height="10" Name="CKayi13" Width="10" />
+                <Ellipse Canvas.Left="46" Canvas.Top="107" Fill="Black" Height="10" Name="CKayi12" Width="10" />
+                <Ellipse Canvas.Left="110" Canvas.Top="210" Fill="Orange" Height="10" Name="CKayi21" Width="10" />
+                <Ellipse Canvas.Left="150" Canvas.Top="248" Fill="Orange" Height="10" Name="CKayi24" Width="10" />
+                <Ellipse Canvas.Left="110" Canvas.Top="248" Fill="Orange" Height="10" Name="CKayi23" Width="10" />
+                <Ellipse Canvas.Left="150" Canvas.Top="210" Fill="Orange" Height="10" Name="CKayi22" Width="10" />
+                <Ellipse Canvas.Left="214" Canvas.Top="109" Fill="Silver" Height="10" Name="CKayi31" Width="10" />
+                <Ellipse Canvas.Left="254" Canvas.Top="147" Fill="Silver" Height="10" Name="CKayi34" Width="10" />
+                <Ellipse Canvas.Left="214" Canvas.Top="147" Fill="Silver" Height="10" Name="CKayi33" Width="10" />
+                <Ellipse Canvas.Left="254" Canvas.Top="109" Fill="Silver" Height="10" Name="CKayi32" Width="10" />
+                <Ellipse Canvas.Left="110" Canvas.Top="7" Fill="Blue" Height="10" Name="CKayi41" Width="10" />
+                <Ellipse Canvas.Left="150" Canvas.Top="45" Fill="Blue" Height="10" Name="CKayi44" Width="10" />
+                <Ellipse Canvas.Left="110" Canvas.Top="45" Fill="Blue" Height="10" Name="CKayi43" Width="10" />
+                <Ellipse Canvas.Left="150" Canvas.Top="7" Fill="Blue" Height="10" Name="CKayi42" Width="10" />
                 
-                
-                
-            </Canvas>
-            <!--MediaElement Name="yourMediaElement">
-                <MediaElement.Triggers>
-                    <EventTrigger RoutedEvent="MediaElement.Loaded">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <MediaTimeline Source="http://blog.humann.info/image.axd?picture=2012%2f3%2fanimated_loader.gif"
-                             Storyboard.TargetName="yourMediaElement"  
-                             RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </MediaElement.Triggers>
-            </MediaElement-->
+                </Canvas>
         </Grid>
         <Grid Height="67" HorizontalAlignment="Left" Margin="4,192,0,0" Name="KayiGrid" VerticalAlignment="Top" Width="103"></Grid>
         <Grid Height="43" HorizontalAlignment="Left" Margin="4,263,0,0" Name="grid1" VerticalAlignment="Top" Width="224" >
-            <!--wfi:WindowsFormsHost Margin="0,0,0,0" Panel.ZIndex="10" Width="220" Height="10">
-                <winForms:PictureBox x:Name="pictureBoxLoading">
-                </winForms:PictureBox>
-            </wfi:WindowsFormsHost-->
             <MediaElement Name="WaitingGIF" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
         </Grid>
     </Grid>

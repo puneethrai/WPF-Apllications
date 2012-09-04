@@ -29,10 +29,26 @@ namespace ChokaBhara_Win8style
         public enum eServerConnectionStatus { STARTING,ESTABLISHING,ESTABLISHED,CONNECTED,DISCONNECTED,STOPPED,ERROR };
         public UInt16 PlayerStatus = 0;
         public enum ePlayerStatus {HisTurn,OthersTurn };
+        Rectangle[,] MoveRect = null;
+        Ellipse[,] MoveKayi = null;
         public MainWindow()
         {
             InitializeComponent();
             DiceRand = new Random();
+            MoveRect = new Rectangle[,]
+            {
+                {R31,R41,R51,R52,R53,R54,R55,R45,R35,R25,R15,R14,R13,R12,R11,R21,R22,R23,R24,R34,R44,R43,R42,R32,R33},
+                {R53,R54,R55,R45,R35,R25,R15,R14,R13,R12,R11,R21,R31,R41,R51,R52,R42,R32,R22,R23,R24,R34,R44,R43,R33},
+                {R35,R25,R15,R14,R13,R12,R11,R21,R31,R41,R51,R52,R53,R54,R55,R45,R44,R43,R42,R32,R22,R23,R24,R34,R33},
+                {R13,R12,R11,R21,R31,R41,R51,R52,R53,R54,R55,R45,R35,R25,R15,R14,R24,R34,R44,R43,R42,R32,R22,R23,R33}
+            };
+            MoveKayi = new Ellipse[,]
+            {
+                {CKayi11,CKayi12,CKayi13,CKayi14},
+                {CKayi21,CKayi22,CKayi23,CKayi24},
+                {CKayi31,CKayi32,CKayi33,CKayi34},
+                {CKayi41,CKayi42,CKayi43,CKayi44}
+            };
             /*
             StackPanel TitleBarStack = new StackPanel();
             TitleBarStack.Orientation = Orientation.Horizontal;
@@ -147,8 +163,13 @@ namespace ChokaBhara_Win8style
         
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            SetKayiPosition(CKayi11, R11, 1);
+            SetKayiPosition(CKayi12, R11, 2);
+            SetKayiPosition(CKayi13, R11, 3);
+            SetKayiPosition(CKayi14, R11, 4);
             // Create a collection of points for a polygon
             Turn();
+            
         }
         void Turn()
         {
@@ -250,8 +271,9 @@ namespace ChokaBhara_Win8style
             TempStackpanel.Children.Add(TempRadio3);
             TempStackpanel.Children.Add(TempRadio4);
             
+            
         }
-        Rectangle[,] MoveRect;
+        
         void TempRadio_Checked(object sender, RoutedEventArgs e)
         {
             if (sender.Equals(TempRadio1))
@@ -279,14 +301,16 @@ namespace ChokaBhara_Win8style
             KayiGrid.Background = Brushes.White;
            
             
-            MoveRect = new Rectangle[,]
+            for(int i=0;i<4;i++)
             {
-                {R13,R12,R11,R21,R31,R41,R51,R52,R53,R54,R55,R45,R35,R25,R15,R14,R24,R34,R44,R43,R42,R32,R22,R23,R33},
-                {R35,R25,R15,R14,R13,R12,R11,R21,R31,R41,R51,R52,R53,R54,R55,R45,R44,R43,R42,R32,R22,R23,R24,R34,R33},
-                {R53,R54,R55,R45,R35,R25,R15,R14,R13,R12,R11,R21,R31,R41,R51,R52,R42,R32,R22,R23,R24,R34,R44,R43,R33},
-                {R31,R41,R51,R52,R53,R54,R55,R45,R35,R25,R15,R14,R13,R12,R11,R21,R22,R23,R24,R34,R44,R43,R42,R32,R33}
-            };
-
+                for(int j=0;j<4;j++)
+                {
+                    
+                    SetKayiPosition(MoveKayi[i,j],MoveRect[i,DiceNo],j+1);
+                }
+            }
+            
+            /*
             // Create an Ellipse
             Ellipse blueRectangle = new Ellipse();
             blueRectangle.Height = 100;
@@ -364,9 +388,9 @@ namespace ChokaBhara_Win8style
                 Dispatcher.BeginInvoke((ThreadStart)delegate()
                 { Turn(); });
             }
-            
+         */   
         }
-
+        
 
     }
 }
