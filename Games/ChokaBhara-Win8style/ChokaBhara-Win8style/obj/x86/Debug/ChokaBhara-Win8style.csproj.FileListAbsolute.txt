@@ -10,3 +10,17 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8style.exe.config
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8style.exe.config
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.exe
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8style.exe
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8style.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\MainWindow.baml
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\MainWindow.g.cs
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\App.g.cs
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style_MarkupCompile.cache
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.g.resources
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara_Win8style.Properties.Resources.resources
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\GenerateResource.write.1.tlog

@@ -5,12 +5,14 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Configuration;
+using Newtonsoft.Json;
 namespace ChokaBhara_Win8style
 {
     public partial class MainWindow
     {
         Socket ClientSocket = null;
         byte[] RecvBuffer = null;
+        string InitialMessage = null;
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -26,10 +28,11 @@ namespace ChokaBhara_Win8style
                 ClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
                 ClientSocket.BeginConnect(ServerAddress, ServerPort, (IAsyncResult ar) =>
                     {
-                        
+                        ServerConnectionStatus = (UInt16)eServerConnectionStatus.ESTABLISHING;
+                        HandShake(ClientSocket);
                         if (ClientSocket.Connected)
                         {
-                            ServerConnectionStatus = (UInt16)eServerConnectionStatus.CONNECTED;
+                            
                             ClientSocket.BeginReceive(RecvBuffer, 0, RecvBuffer.Length, 0, SocketReceive, null);
                             Connected = true;
                             Console.WriteLine("Conected to server");
@@ -50,6 +53,17 @@ namespace ChokaBhara_Win8style
         private void SocketReceive(IAsyncResult ar)
         {
             string sRecvBuffer = Encoding.ASCII.GetString(RecvBuffer);
+        }
+        private void HandShake(Socket ClientSocket)
+        {
+            byte[] HandShakeReceiveBuffer = new byte[1024];
+            Send(ClientSocket, InitialMessage);
+            ClientSocket.Receive(HandShakeReceiveBuffer);
+            ClientSocket.Send(Encoding.ASCII.Ge);
+        }
+        private int Send(Socket ClientSocket,string Message)
+        {
+            return(ClientSocket.Send(Encoding.ASCII.GetBytes(Message)));
         }
     }
 }
