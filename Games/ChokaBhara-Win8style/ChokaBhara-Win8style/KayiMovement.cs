@@ -8,7 +8,7 @@ namespace ChokaBhara_Win8style
 {
     public partial class MainWindow
     {
-        public void SetKayiPosition(Ellipse Kayi, Rectangle RectNo, int KayiNo)
+        public void SetKayiPosition(Ellipse Kayi, Rectangle RectNo, uint KayiNo)
         {
             switch(KayiNo)
             {

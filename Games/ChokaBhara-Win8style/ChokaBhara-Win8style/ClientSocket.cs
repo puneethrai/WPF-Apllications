@@ -13,6 +13,7 @@ namespace ChokaBhara_Win8style
         Socket ClientSocket = null;
         byte[] RecvBuffer = null;
         string InitialMessage = null;
+        string AckMessage = null;
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -29,7 +30,7 @@ namespace ChokaBhara_Win8style
                 ClientSocket.BeginConnect(ServerAddress, ServerPort, (IAsyncResult ar) =>
                     {
                         ServerConnectionStatus = (UInt16)eServerConnectionStatus.ESTABLISHING;
-                        HandShake(ClientSocket);
+                        //HandShake(ClientSocket);
                         if (ClientSocket.Connected)
                         {
                             
@@ -45,6 +46,11 @@ namespace ChokaBhara_Win8style
                             Connected = false;
                         }
                     }, null);
+                JSONObjects JS = new JSONObjects() {RoomID = 0,HandShake = true,KayiNo = 0,KayiMove = 0,WhoIAm = 0,ClientVersion = System.Windows.Forms.Application.ProductVersion };
+                string js = JS.ToJsonString();
+                JS = JsonConvert.DeserializeObject<JSONObjects>(js);
+                Console.WriteLine(JS.ClientVersion);
+                System.Windows.Forms.MessageBox.Show("http://10.75.15.20");
                 
                 
             }
@@ -53,13 +59,16 @@ namespace ChokaBhara_Win8style
         private void SocketReceive(IAsyncResult ar)
         {
             string sRecvBuffer = Encoding.ASCII.GetString(RecvBuffer);
+            JSONObjects JS = new JSONObjects();
+            JS = JsonConvert.DeserializeObject<JSONObjects>(sRecvBuffer);
+            
         }
         private void HandShake(Socket ClientSocket)
         {
             byte[] HandShakeReceiveBuffer = new byte[1024];
             Send(ClientSocket, InitialMessage);
             ClientSocket.Receive(HandShakeReceiveBuffer);
-            ClientSocket.Send(Encoding.ASCII.Ge);
+            Send(ClientSocket,AckMessage);
         }
         private int Send(Socket ClientSocket,string Message)
         {

@@ -12,11 +12,16 @@ namespace ChokaBhara_Win8style
         public bool HandShake { get; set; }
 
         [JsonProperty]
-        public int[] KayiNo { get; set; }
+        public int KayiNo { get; set; }
 
         [JsonProperty]
         public int KayiMove { get; set; }
 
+        [JsonProperty]
+        public int WhoIAm { get; set; }
+
+        [JsonProperty]
+        public string ClientVersion { get; set; }
         public JSONObjects()
 		{
 		}

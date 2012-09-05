@@ -276,25 +276,30 @@ namespace ChokaBhara_Win8style
         
         void TempRadio_Checked(object sender, RoutedEventArgs e)
         {
+            uint KayiNo = 0; 
             if (sender.Equals(TempRadio1))
             {
                 if((bool)TempRadio1.IsChecked)
-                MessageBox.Show("Checked 1");
+                    KayiNo = 0;
+                
             }
             else if (sender.Equals(TempRadio2))
             {
                 if ((bool)TempRadio2.IsChecked)
-                    MessageBox.Show("Checked 2");
+                    KayiNo = 1;
+                    
             }
             else if (sender.Equals(TempRadio3))
             {
                 if ((bool)TempRadio3.IsChecked)
-                    MessageBox.Show("Checked 3");
+                    KayiNo = 2;
+                    
             }
             else if (sender.Equals(TempRadio4))
             {
                 if ((bool)TempRadio4.IsChecked)
-                    MessageBox.Show("Checked 4");
+                    KayiNo = 3;
+                    
             }
             
             KayiGrid.Children.Remove(TempStackpanel);
@@ -305,8 +310,8 @@ namespace ChokaBhara_Win8style
             {
                 for(int j=0;j<4;j++)
                 {
-                    
-                    SetKayiPosition(MoveKayi[i,j],MoveRect[i,DiceNo],j+1);
+
+                    SetKayiPosition(MoveKayi[i, KayiNo], MoveRect[i, DiceNo], KayiNo+1);
                 }
             }
             
