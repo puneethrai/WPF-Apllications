@@ -22,6 +22,7 @@ namespace ChokaBhara_Win8style
 
         [JsonProperty]
         public string ClientVersion { get; set; }
+
         public JSONObjects()
 		{
 		}

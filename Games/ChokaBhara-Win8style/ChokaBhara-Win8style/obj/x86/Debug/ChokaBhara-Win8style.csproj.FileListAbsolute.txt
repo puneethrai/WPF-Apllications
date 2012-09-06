@@ -28,3 +28,6 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.dll
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.xml

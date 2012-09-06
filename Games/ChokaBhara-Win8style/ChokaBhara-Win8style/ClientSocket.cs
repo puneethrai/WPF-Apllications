@@ -14,6 +14,7 @@ namespace ChokaBhara_Win8style
         byte[] RecvBuffer = null;
         string InitialMessage = null;
         string AckMessage = null;
+        int WhoIAm = 0;
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -50,7 +51,7 @@ namespace ChokaBhara_Win8style
                 string js = JS.ToJsonString();
                 JS = JsonConvert.DeserializeObject<JSONObjects>(js);
                 Console.WriteLine(JS.ClientVersion);
-                System.Windows.Forms.MessageBox.Show("http://10.75.15.20");
+               
                 
                 
             }

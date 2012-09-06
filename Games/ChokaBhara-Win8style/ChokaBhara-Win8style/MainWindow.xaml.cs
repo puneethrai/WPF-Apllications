@@ -21,8 +21,8 @@ namespace ChokaBhara_Win8style
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int TurnState;
-        private int DiceNo;
+        private uint TurnState;
+        private uint DiceNo;
         private Random DiceRand;
 
         public UInt16 ServerConnectionStatus = 0;
@@ -31,6 +31,14 @@ namespace ChokaBhara_Win8style
         public enum ePlayerStatus {HisTurn,OthersTurn };
         Rectangle[,] MoveRect = null;
         Ellipse[,] MoveKayi = null;
+        Thread TimerThread = null;
+        Brush[] TurnFill = new Brush[4];
+        
+        /// <summary> 
+        /// Defines the program entry point. 
+        /// </summary> 
+        /// <param name="args">An array of <see cref="T:System.String"/> containing command line parameters.</param> 
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -49,6 +57,11 @@ namespace ChokaBhara_Win8style
                 {CKayi31,CKayi32,CKayi33,CKayi34},
                 {CKayi41,CKayi42,CKayi43,CKayi44}
             };
+            
+            TurnFill[0] = Turn1.Fill;
+            TurnFill[1] = turn2.Fill;
+            TurnFill[2] = turn3.Fill;
+            TurnFill[3] = turn4.Fill;
             /*
             StackPanel TitleBarStack = new StackPanel();
             TitleBarStack.Orientation = Orientation.Horizontal;
@@ -151,28 +164,32 @@ namespace ChokaBhara_Win8style
         }
         #endregion
 
+        /// <summary> 
+        /// Entry Point when Main window gets loaded. 
+        /// </summary> 
+        /// <param name="sender">Sender Object <see cref="T:System.object"/></param> 
+        /// <param name="e">Routed Event Args <see cref="T:System.Windows.RoutedEventArgs"/></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Loaded");
+            TimeOutBarGridHeight = TimeOutBarGrid.Height;
+            TimeOutBarGridWidth = TimeOutBarGrid.Width;
             ReadConfig();
             GifActions();
-            
             ConnectToServer();
                
         }
         
-        private void button1_Click(object sender, RoutedEventArgs e)
+        /*private void button1_Click(object sender, RoutedEventArgs e)
         {
-            SetKayiPosition(CKayi11, R11, 1);
-            SetKayiPosition(CKayi12, R11, 2);
-            SetKayiPosition(CKayi13, R11, 3);
-            SetKayiPosition(CKayi14, R11, 4);
             // Create a collection of points for a polygon
             Turn();
             
-        }
-        void Turn()
+        }*/
+        public void Turn()
         {
+            PointCollection polygonPoints = null;
+            bool done = false;
             switch (TurnState)
             {
                 case 0:
@@ -180,15 +197,12 @@ namespace ChokaBhara_Win8style
                     System.Windows.Point Point2 = new System.Windows.Point(70, 50);
                     System.Windows.Point Point3 = new System.Windows.Point(80, 40);
                     System.Windows.Point Point4 = new System.Windows.Point(60, 40);
-                    PointCollection polygonPoints = new PointCollection();
+                    polygonPoints = new PointCollection();
                     polygonPoints.Add(Point1);
                     polygonPoints.Add(Point2);
                     polygonPoints.Add(Point3);
                     polygonPoints.Add(Point4);
 
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayRect.Fill = turn2.Fill;
-                    TurnDisplayTri.Fill = turn2.Fill;
                     TurnState++;
                     break;
                 case 1:
@@ -201,9 +215,7 @@ namespace ChokaBhara_Win8style
                     polygonPoints.Add(Point2);
                     polygonPoints.Add(Point3);
                     polygonPoints.Add(Point4);
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayRect.Fill = turn3.Fill;
-                    TurnDisplayTri.Fill = turn3.Fill;
+
                     TurnState++;
                     break;
                 case 2:
@@ -216,9 +228,7 @@ namespace ChokaBhara_Win8style
                     polygonPoints.Add(Point2);
                     polygonPoints.Add(Point3);
                     polygonPoints.Add(Point4);
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayRect.Fill = turn4.Fill;
-                    TurnDisplayTri.Fill = turn4.Fill;
+
                     TurnState++;
                     break;
                 case 3:
@@ -231,12 +241,37 @@ namespace ChokaBhara_Win8style
                     polygonPoints.Add(Point2);
                     polygonPoints.Add(Point3);
                     polygonPoints.Add(Point4);
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayRect.Fill = Turn1.Fill;
-                    TurnDisplayTri.Fill = Turn1.Fill;
+
                     TurnState = 0;
                     break;
             }
+            if (!TurnDisplayTri.Dispatcher.CheckAccess())
+            {
+                TurnDisplayTri.Dispatcher.BeginInvoke((ThreadStart)delegate()
+                {
+                    TurnDisplayTri.Points = polygonPoints;
+                    TurnDisplayTri.Fill = TurnFill[TurnState];
+                }, null);
+                
+                TurnDisplayRect.Dispatcher.BeginInvoke((ThreadStart)delegate()
+                {
+                    TurnDisplayRect.Fill = TurnFill[TurnState];
+                    done = true;
+                }, null);
+                
+                
+                
+            }
+            else
+            {
+
+                TurnDisplayTri.Points = polygonPoints;
+                TurnDisplayTri.Fill = TurnFill[TurnState];
+                TurnDisplayRect.Fill = TurnFill[TurnState];
+                done = true;
+            }
+            while (!done) ;
+            
         }
         RadioButton TempRadio1;
         RadioButton TempRadio2;
@@ -245,74 +280,165 @@ namespace ChokaBhara_Win8style
         StackPanel TempStackpanel;
         private void DiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            DiceNo = DiceRand.Next(1, 8);
-            DiceNoLabel.Content = "" + DiceNo;
-            KayiGrid.Background = Brushes.Magenta;
-            TempStackpanel = new StackPanel();
-            KayiGrid.Children.Add(TempStackpanel);
-            TempRadio1 = new RadioButton();
-            TempRadio1.Name = "TempRadio1";
-            TempRadio1.Content = "Kayi 1";
-            TempRadio2 = new RadioButton();
-            TempRadio2.Name = "TempRadio2";
-            TempRadio2.Content = "Kayi 2";
-            TempRadio3 = new RadioButton();
-            TempRadio3.Name = "TempRadio3";
-            TempRadio3.Content = "Kayi 3";
-            TempRadio4 = new RadioButton();
-            TempRadio4.Name = "TempRadio4";
-            TempRadio4.Content = "Kayi 4";
-            TempRadio1.Checked += new RoutedEventHandler(TempRadio_Checked);
-            TempRadio2.Checked += new RoutedEventHandler(TempRadio_Checked);
-            TempRadio3.Checked += new RoutedEventHandler(TempRadio_Checked);
-            TempRadio4.Checked += new RoutedEventHandler(TempRadio_Checked);
-            TempStackpanel.Children.Add(TempRadio1);
-            TempStackpanel.Children.Add(TempRadio2);
-            TempStackpanel.Children.Add(TempRadio3);
-            TempStackpanel.Children.Add(TempRadio4);
+            if (null == TimerThread)
+            {
+
+                DiceNo = (uint)DiceRand.Next(1, 8);
+                DiceNoLabel.Content = "" + DiceNo;
+                if (!NoMoreMove(DiceNo))
+                {
+                    KayiGrid.Background = Brushes.Magenta;
+                    TempStackpanel = new StackPanel();
+                    KayiGrid.Children.Add(TempStackpanel);
+                    TempRadio1 = new RadioButton();
+                    TempRadio1.Name = "TempRadio1";
+                    TempRadio1.Content = "Kayi 1";
+                    TempRadio2 = new RadioButton();
+                    TempRadio2.Name = "TempRadio2";
+                    TempRadio2.Content = "Kayi 2";
+                    TempRadio3 = new RadioButton();
+                    TempRadio3.Name = "TempRadio3";
+                    TempRadio3.Content = "Kayi 3";
+                    TempRadio4 = new RadioButton();
+                    TempRadio4.Name = "TempRadio4";
+                    TempRadio4.Content = "Kayi 4";
+                    TempRadio1.Checked += new RoutedEventHandler(TempRadio_Checked);
+                    TempRadio2.Checked += new RoutedEventHandler(TempRadio_Checked);
+                    TempRadio3.Checked += new RoutedEventHandler(TempRadio_Checked);
+                    TempRadio4.Checked += new RoutedEventHandler(TempRadio_Checked);
+                    TempStackpanel.Children.Add(TempRadio1);
+                    TempStackpanel.Children.Add(TempRadio2);
+                    TempStackpanel.Children.Add(TempRadio3);
+                    TempStackpanel.Children.Add(TempRadio4);
+                    ThreadStart start = new ThreadStart(TimerStart);
+                    TimerThread = new Thread(start);
+                    TimerThread.Name = "Timer Thread";
+                    TimerThread.Start();
+                    isMoved = false;
+                    TimedOut = false;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No More Move for this number");
+                    Turn();
+                }
+            }
             
             
         }
-        
-        void TempRadio_Checked(object sender, RoutedEventArgs e)
+        double TimeOutBarGridWidth;
+        double TimeOutBarGridHeight;
+        bool TimedOut = false;
+        void TimerStart()
         {
-            uint KayiNo = 0; 
-            if (sender.Equals(TempRadio1))
+            int TimeTicked = 0;
+            uint TempTurnState = TurnState;
+            Timer Timeout = new Timer((object state) =>
             {
-                if((bool)TempRadio1.IsChecked)
-                    KayiNo = 0;
+                TimeTicked++;
                 
-            }
-            else if (sender.Equals(TempRadio2))
-            {
-                if ((bool)TempRadio2.IsChecked)
-                    KayiNo = 1;
-                    
-            }
-            else if (sender.Equals(TempRadio3))
-            {
-                if ((bool)TempRadio3.IsChecked)
-                    KayiNo = 2;
-                    
-            }
-            else if (sender.Equals(TempRadio4))
-            {
-                if ((bool)TempRadio4.IsChecked)
-                    KayiNo = 3;
-                    
-            }
-            
-            KayiGrid.Children.Remove(TempStackpanel);
-            KayiGrid.Background = Brushes.White;
-           
-            
-            for(int i=0;i<4;i++)
-            {
-                for(int j=0;j<4;j++)
+                TimeOutBar.Dispatcher.BeginInvoke((ThreadStart)delegate()
                 {
 
-                    SetKayiPosition(MoveKayi[i, KayiNo], MoveRect[i, DiceNo], KayiNo+1);
+                    TimeOutBar.Height = TimeOutBarGridHeight;
+                    TimeOutBar.Width = (TimeTicked * (int)TimeOutBarGridWidth) / 200;
+
+
+                }, null);
+                
+            }, null, 0, 100);
+            
+            while (TimeTicked <= 200 && !isMoved) ;
+            
+            Timeout.Dispose();
+            TimedOut = true;
+            if (!isMoved)
+            {
+                System.Windows.Forms.MessageBox.Show("Timed Out");
+                KayiGrid.Dispatcher.BeginInvoke((ThreadStart)delegate()
+                {
+                    KayiGrid.Children.Remove(TempStackpanel);
+                    KayiGrid.Background = Brushes.White;
+                }, null);
+                try
+                {
+                    Turn();
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception");
+                }
+            }
+            
+            TimeOutBar.Dispatcher.BeginInvoke((ThreadStart)delegate()
+            {
+
+                TimeOutBar.Height = 0;
+                TimeOutBar.Width = 0;
+
+
+            }, null);
+            
+            TimerThread = null;
+        }
+        void TempRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            uint KayiNo = 0;
+            uint ToMove = 0;
+            if (!TimedOut)
+            {
+                if (sender.Equals(TempRadio1))
+                {
+                    if ((bool)TempRadio1.IsChecked)
+                        KayiNo = 0;
+
+                }
+                else if (sender.Equals(TempRadio2))
+                {
+                    if ((bool)TempRadio2.IsChecked)
+                        KayiNo = 1;
+
+                }
+                else if (sender.Equals(TempRadio3))
+                {
+                    if ((bool)TempRadio3.IsChecked)
+                        KayiNo = 2;
+
+                }
+                else if (sender.Equals(TempRadio4))
+                {
+                    if ((bool)TempRadio4.IsChecked)
+                        KayiNo = 3;
+
+                }
+                ToMove = DiceNo;
+                MyKayi[TurnState,KayiNo] += DiceNo;
+                ToMove = MyKayi[TurnState,KayiNo];
+                
+
+                if (ToMove < 25)
+                {
+                    KayiGrid.Children.Remove(TempStackpanel);
+                    KayiGrid.Background = Brushes.White;
+
+
+
+                    SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
+                    OutOfMyWay(MoveRect[TurnState, ToMove]);
+                    ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo);
+                    Turn();
+                }
+                else
+                {
+                    MyKayi[TurnState,KayiNo] -= DiceNo;
+                    System.Windows.Forms.MessageBox.Show("Unable to move");
+                }
+                
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Timed Out");
+                Turn();
             }
             
             /*
