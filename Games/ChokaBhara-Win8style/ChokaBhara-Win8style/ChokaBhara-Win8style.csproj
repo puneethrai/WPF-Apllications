@@ -69,6 +69,8 @@
     <Compile Include="JSONObjects.cs" />
     <Compile Include="KayiMovement.cs" />
     <Compile Include="ReadConfig.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="ThreadFunctions.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

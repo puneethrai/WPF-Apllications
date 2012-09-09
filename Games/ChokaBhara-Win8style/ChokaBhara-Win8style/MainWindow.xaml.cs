@@ -34,6 +34,7 @@ namespace ChokaBhara_Win8style
         Thread TimerThread = null;
         Brush[] TurnFill = new Brush[4];
         
+        
         /// <summary> 
         /// Defines the program entry point. 
         /// </summary> 
@@ -62,6 +63,8 @@ namespace ChokaBhara_Win8style
             TurnFill[1] = turn2.Fill;
             TurnFill[2] = turn3.Fill;
             TurnFill[3] = turn4.Fill;
+            TimeOutBarGridHeight = TimeOutBarGrid.Height;
+            TimeOutBarGridWidth = TimeOutBarGrid.Width;
             /*
             StackPanel TitleBarStack = new StackPanel();
             TitleBarStack.Orientation = Orientation.Horizontal;
@@ -172,11 +175,11 @@ namespace ChokaBhara_Win8style
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Loaded");
-            TimeOutBarGridHeight = TimeOutBarGrid.Height;
-            TimeOutBarGridWidth = TimeOutBarGrid.Width;
+            
             ReadConfig();
             GifActions();
             ConnectToServer();
+            Init();
                
         }
         
@@ -188,90 +191,45 @@ namespace ChokaBhara_Win8style
         }*/
         public void Turn()
         {
-            PointCollection polygonPoints = null;
-            bool done = false;
-            switch (TurnState)
+            
+            
+            TurnState = TurnState == 3 ? 0 : TurnState + 1;
+            Point Point1 = new Point(0 + (TurnState * 60), 40);
+            Point Point2 = new Point(10 + (TurnState * 60), 50);
+            Point Point3 = new Point(20 + (TurnState * 60), 40);
+            Point Point4 = new Point(0 + (TurnState * 60), 40);
+
+            if (TurnDisplayTri.Dispatcher.CheckAccess())
             {
-                case 0:
-                    System.Windows.Point Point1 = new System.Windows.Point(60, 40);
-                    System.Windows.Point Point2 = new System.Windows.Point(70, 50);
-                    System.Windows.Point Point3 = new System.Windows.Point(80, 40);
-                    System.Windows.Point Point4 = new System.Windows.Point(60, 40);
-                    polygonPoints = new PointCollection();
-                    polygonPoints.Add(Point1);
-                    polygonPoints.Add(Point2);
-                    polygonPoints.Add(Point3);
-                    polygonPoints.Add(Point4);
-
-                    TurnState++;
-                    break;
-                case 1:
-                    Point1 = new System.Windows.Point(120, 40);
-                    Point2 = new System.Windows.Point(130, 50);
-                    Point3 = new System.Windows.Point(140, 40);
-                    Point4 = new System.Windows.Point(120, 40);
-                    polygonPoints = new PointCollection();
-                    polygonPoints.Add(Point1);
-                    polygonPoints.Add(Point2);
-                    polygonPoints.Add(Point3);
-                    polygonPoints.Add(Point4);
-
-                    TurnState++;
-                    break;
-                case 2:
-                    Point1 = new System.Windows.Point(180, 40);
-                    Point2 = new System.Windows.Point(190, 50);
-                    Point3 = new System.Windows.Point(200, 40);
-                    Point4 = new System.Windows.Point(180, 40);
-                    polygonPoints = new PointCollection();
-                    polygonPoints.Add(Point1);
-                    polygonPoints.Add(Point2);
-                    polygonPoints.Add(Point3);
-                    polygonPoints.Add(Point4);
-
-                    TurnState++;
-                    break;
-                case 3:
-                    Point1 = new System.Windows.Point(0, 40);
-                    Point2 = new System.Windows.Point(10, 50);
-                    Point3 = new System.Windows.Point(20, 40);
-                    Point4 = new System.Windows.Point(0, 40);
-                    polygonPoints = new PointCollection();
-                    polygonPoints.Add(Point1);
-                    polygonPoints.Add(Point2);
-                    polygonPoints.Add(Point3);
-                    polygonPoints.Add(Point4);
-
-                    TurnState = 0;
-                    break;
-            }
-            if (!TurnDisplayTri.Dispatcher.CheckAccess())
-            {
-                TurnDisplayTri.Dispatcher.BeginInvoke((ThreadStart)delegate()
-                {
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayTri.Fill = TurnFill[TurnState];
-                }, null);
-                
-                TurnDisplayRect.Dispatcher.BeginInvoke((ThreadStart)delegate()
-                {
-                    TurnDisplayRect.Fill = TurnFill[TurnState];
-                    done = true;
-                }, null);
-                
-                
-                
-            }
-            else
-            {
-
+                PointCollection polygonPoints = new PointCollection();
+                polygonPoints.Add(Point1);
+                polygonPoints.Add(Point2);
+                polygonPoints.Add(Point3);
+                polygonPoints.Add(Point4);
                 TurnDisplayTri.Points = polygonPoints;
                 TurnDisplayTri.Fill = TurnFill[TurnState];
                 TurnDisplayRect.Fill = TurnFill[TurnState];
-                done = true;
             }
-            while (!done) ;
-            
+            else
+            {
+                TurnDisplayTri.Dispatcher.BeginInvoke((Action)delegate()
+                {
+                    PointCollection PolygonPoints = new PointCollection();
+                    PolygonPoints.Add(Point1);
+                    PolygonPoints.Add(Point2);
+                    PolygonPoints.Add(Point3);
+                    PolygonPoints.Add(Point4);
+                    TurnDisplayTri.Points = PolygonPoints;
+                    TurnDisplayTri.Fill = TurnFill[TurnState];
+                    
+                }, null);
+                
+                TurnDisplayRect.Dispatcher.BeginInvoke((Action)delegate()
+                {
+                    TurnDisplayRect.Fill = TurnFill[TurnState];
+                    
+                }, null);
+            }
         }
         RadioButton TempRadio1;
         RadioButton TempRadio2;
@@ -329,58 +287,7 @@ namespace ChokaBhara_Win8style
         double TimeOutBarGridWidth;
         double TimeOutBarGridHeight;
         bool TimedOut = false;
-        void TimerStart()
-        {
-            int TimeTicked = 0;
-            uint TempTurnState = TurnState;
-            Timer Timeout = new Timer((object state) =>
-            {
-                TimeTicked++;
-                
-                TimeOutBar.Dispatcher.BeginInvoke((ThreadStart)delegate()
-                {
-
-                    TimeOutBar.Height = TimeOutBarGridHeight;
-                    TimeOutBar.Width = (TimeTicked * (int)TimeOutBarGridWidth) / 200;
-
-
-                }, null);
-                
-            }, null, 0, 100);
-            
-            while (TimeTicked <= 200 && !isMoved) ;
-            
-            Timeout.Dispose();
-            TimedOut = true;
-            if (!isMoved)
-            {
-                System.Windows.Forms.MessageBox.Show("Timed Out");
-                KayiGrid.Dispatcher.BeginInvoke((ThreadStart)delegate()
-                {
-                    KayiGrid.Children.Remove(TempStackpanel);
-                    KayiGrid.Background = Brushes.White;
-                }, null);
-                try
-                {
-                    Turn();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception");
-                }
-            }
-            
-            TimeOutBar.Dispatcher.BeginInvoke((ThreadStart)delegate()
-            {
-
-                TimeOutBar.Height = 0;
-                TimeOutBar.Width = 0;
-
-
-            }, null);
-            
-            TimerThread = null;
-        }
+        
         void TempRadio_Checked(object sender, RoutedEventArgs e)
         {
             uint KayiNo = 0;
