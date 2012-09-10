@@ -8,3 +8,14 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Serve
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.xml
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.exe
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\ChokaBhara-Server.exe
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\ChokaBhara-Server.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Properties.Resources.resources
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\GenerateResource.write.1.tlog

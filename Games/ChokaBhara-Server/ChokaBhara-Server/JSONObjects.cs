@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ChokaBhara_Win8style
+namespace ChokaBhara_Server
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class JSONObjects
