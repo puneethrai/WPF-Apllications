@@ -18,3 +18,5 @@ C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.exe
 C:\Documents and Settings\manojkatarip\Desktop\WebSocket\bin\Debug\WebSocket.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
+C:\Users\user\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.exe
+C:\Users\user\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
