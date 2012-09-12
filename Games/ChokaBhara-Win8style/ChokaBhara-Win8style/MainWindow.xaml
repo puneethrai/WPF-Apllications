@@ -1,4 +1,4 @@
-﻿<Window x:Class="ChokaBhara_Win8style.MainWindow"
+﻿<Window x:Class="ChokaBharaWin8Style.MainWindow"
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" 
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

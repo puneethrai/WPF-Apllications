@@ -5,11 +5,14 @@ using System.Text;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows;
-namespace ChokaBhara_Win8style
+namespace ChokaBharaWin8Style
 {
+    /*
+     * TODO:if 4 & 8 dice 1 more chance,If they send other player home 1 more chance,dice options 1,2,3,4,8,1kaye kill 1 kayi only,In home make pawns in row
+     * */
     public partial class MainWindow
     {
-        bool isMoved = false;
+        bool isMoved;
         uint[,] MyKayi = new uint[4,4];
         uint[] ScoreCard = new uint[4];
         Rectangle[,] KayiPlaced = new Rectangle[4, 4];
@@ -17,28 +20,28 @@ namespace ChokaBhara_Win8style
         /// <summary> 
         /// Sets <see cref="T:Kayi"/> Position to <see cref="T:RectNo" /> with <see cref="T:KayiNo"/>
         /// </summary> 
-        /// <param name="Kayi">Kayi of <see cref="T:System.Windows.Shapes.Ellipse"/> to be moved.</param> 
+        /// <param name="kayi">Kayi of <see cref="T:System.Windows.Shapes.Ellipse"/> to be moved.</param> 
         /// <param name="RectNo">Rectangle of <see cref="T:System.Windows.Shapes.Rectangle"/> to be placed.</param>
         /// <param name="KayiNo">Which Kayi of <see cref="T:System.Windows.Shapes.Ellipse"/> to be moved</param>
-        public void SetKayiPosition(Ellipse Kayi, Rectangle RectNo, uint KayiNo)
+        public void SetKayiPosition(Ellipse kayi, Rectangle RectNo, uint KayiNo)
         {
             switch(KayiNo)
             {
                 case 0:
-                    Canvas.SetLeft(Kayi, Canvas.GetLeft(RectNo));
-                    Canvas.SetTop(Kayi, Canvas.GetTop(RectNo));
+                    Canvas.SetLeft(kayi, Canvas.GetLeft(RectNo));
+                    Canvas.SetTop(kayi, Canvas.GetTop(RectNo));
                     break;
                 case 1:
-                    Canvas.SetLeft(Kayi, Canvas.GetLeft(RectNo)+40);
-                    Canvas.SetTop(Kayi, Canvas.GetTop(RectNo));
+                    Canvas.SetLeft(kayi, Canvas.GetLeft(RectNo)+40);
+                    Canvas.SetTop(kayi, Canvas.GetTop(RectNo));
                     break;
                 case 2:
-                    Canvas.SetLeft(Kayi, Canvas.GetLeft(RectNo));
-                    Canvas.SetTop(Kayi, Canvas.GetTop(RectNo)+38);
+                    Canvas.SetLeft(kayi, Canvas.GetLeft(RectNo));
+                    Canvas.SetTop(kayi, Canvas.GetTop(RectNo)+38);
                     break;
                 case 3:
-                    Canvas.SetLeft(Kayi, Canvas.GetLeft(RectNo)+40);
-                    Canvas.SetTop(Kayi, Canvas.GetTop(RectNo)+38);
+                    Canvas.SetLeft(kayi, Canvas.GetLeft(RectNo)+40);
+                    Canvas.SetTop(kayi, Canvas.GetTop(RectNo)+38);
                     break;
                     
             }
@@ -53,8 +56,11 @@ namespace ChokaBhara_Win8style
                     CantMove = false;
             return CantMove;
         }
-        public void OutOfMyWay(Rectangle Placing)
+        
+         
+        public bool OutOfMyWay(Rectangle Placing)
         {
+            bool Flags = false;
             for (uint i = 0; i < 4; i++)
             {
                 if (i != TurnState)
@@ -63,16 +69,21 @@ namespace ChokaBhara_Win8style
                     {
                         if (KayiPlaced[i,j] == Placing)
                         {
-                            if (KayiPlaced[i, j] != R13 || KayiPlaced[i, j] != R31 || KayiPlaced[i, j] != R33 || KayiPlaced[i, j] != R35 || KayiPlaced[i, j] != R53)
+                            /*
+                             * Bug No.3
+                             */
+                            if (KayiPlaced[i, j] != R13 && KayiPlaced[i, j] != R31 && KayiPlaced[i, j] != R33 && KayiPlaced[i, j] != R35 && KayiPlaced[i, j] != R53)
                             {
                                 SetKayiPosition(MoveKayi[i, j], MoveRect[i, 0], j);
                                 MyKayi[i, j] = 0;
-                                
+                                Flags = true;
+                                break;
                             }
                         }
                     }
                 }
             }
+            return Flags;
         }
         public void ReachedHome(Ellipse CheckKayi,uint KayiNo)
         {

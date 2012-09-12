@@ -15,7 +15,7 @@ using System.Drawing;
 using System.Windows.Threading;
 using System.Windows.Interop;
 
-namespace ChokaBhara_Win8style
+namespace ChokaBharaWin8Style
 {
     public partial class MainWindow 
     {

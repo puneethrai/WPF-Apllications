@@ -1,0 +1,5 @@
+﻿1>Dice no. not able update in GUI
+2>Dice No. must be 1,2,3,4,8
+3>OutOfWay not working when Kayi's are in home
+4>If dice number is 4 & 8 it should not go for next turn & add those number//Yet to be implemneted
+5>If a player makes other kayi out he gets one more turn

@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChokaBhara-Win8style")]
+[assembly: AssemblyTitle("Choka Bhara")]
 [assembly: AssemblyDescription("Ancient ChokaBhara Game")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Puneeth Rai")]
-[assembly: AssemblyProduct("ChokaBhara-Win8style")]
+[assembly: AssemblyProduct("Choka Bhara Windows 8 Style")]
 [assembly: AssemblyCopyright("Copyright © Puneeth Rai 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

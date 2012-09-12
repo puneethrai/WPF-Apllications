@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChokaBhara_Win8style.Properties {
+namespace ChokaBharaWin8Style.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

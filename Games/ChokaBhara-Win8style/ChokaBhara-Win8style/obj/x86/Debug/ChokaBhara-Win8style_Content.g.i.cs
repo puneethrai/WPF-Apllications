@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/serverwait.gif")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bugsheet.txt")]
 
 

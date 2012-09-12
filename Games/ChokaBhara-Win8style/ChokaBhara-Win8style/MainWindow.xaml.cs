@@ -13,8 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Threading;
-
-namespace ChokaBhara_Win8style
+// Assembly marked as compliant.
+[assembly: CLSCompliant(true)]
+namespace ChokaBharaWin8Style
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -191,44 +192,48 @@ namespace ChokaBhara_Win8style
         }*/
         public void Turn()
         {
-            
-            
-            TurnState = TurnState == 3 ? 0 : TurnState + 1;
-            Point Point1 = new Point(0 + (TurnState * 60), 40);
-            Point Point2 = new Point(10 + (TurnState * 60), 50);
-            Point Point3 = new Point(20 + (TurnState * 60), 40);
-            Point Point4 = new Point(0 + (TurnState * 60), 40);
+            /*
+             * Bug No. 4
+             */
+            if (DiceNo != 4 && DiceNo != 8)
+            {
+                TurnState = TurnState == 3 ? 0 : TurnState + 1;
+                Point Point1 = new Point(0 + (TurnState * 60), 40);
+                Point Point2 = new Point(10 + (TurnState * 60), 50);
+                Point Point3 = new Point(20 + (TurnState * 60), 40);
+                Point Point4 = new Point(0 + (TurnState * 60), 40);
 
-            if (TurnDisplayTri.Dispatcher.CheckAccess())
-            {
-                PointCollection polygonPoints = new PointCollection();
-                polygonPoints.Add(Point1);
-                polygonPoints.Add(Point2);
-                polygonPoints.Add(Point3);
-                polygonPoints.Add(Point4);
-                TurnDisplayTri.Points = polygonPoints;
-                TurnDisplayTri.Fill = TurnFill[TurnState];
-                TurnDisplayRect.Fill = TurnFill[TurnState];
-            }
-            else
-            {
-                TurnDisplayTri.Dispatcher.BeginInvoke((Action)delegate()
+                if (TurnDisplayTri.Dispatcher.CheckAccess())
                 {
-                    PointCollection PolygonPoints = new PointCollection();
-                    PolygonPoints.Add(Point1);
-                    PolygonPoints.Add(Point2);
-                    PolygonPoints.Add(Point3);
-                    PolygonPoints.Add(Point4);
-                    TurnDisplayTri.Points = PolygonPoints;
+                    PointCollection polygonPoints = new PointCollection();
+                    polygonPoints.Add(Point1);
+                    polygonPoints.Add(Point2);
+                    polygonPoints.Add(Point3);
+                    polygonPoints.Add(Point4);
+                    TurnDisplayTri.Points = polygonPoints;
                     TurnDisplayTri.Fill = TurnFill[TurnState];
-                    
-                }, null);
-                
-                TurnDisplayRect.Dispatcher.BeginInvoke((Action)delegate()
-                {
                     TurnDisplayRect.Fill = TurnFill[TurnState];
-                    
-                }, null);
+                }
+                else
+                {
+                    TurnDisplayTri.Dispatcher.BeginInvoke((Action)delegate()
+                    {
+                        PointCollection PolygonPoints = new PointCollection();
+                        PolygonPoints.Add(Point1);
+                        PolygonPoints.Add(Point2);
+                        PolygonPoints.Add(Point3);
+                        PolygonPoints.Add(Point4);
+                        TurnDisplayTri.Points = PolygonPoints;
+                        TurnDisplayTri.Fill = TurnFill[TurnState];
+
+                    }, null);
+
+                    TurnDisplayRect.Dispatcher.BeginInvoke((Action)delegate()
+                    {
+                        TurnDisplayRect.Fill = TurnFill[TurnState];
+
+                    }, null);
+                }
             }
         }
         RadioButton TempRadio1;
@@ -240,9 +245,30 @@ namespace ChokaBhara_Win8style
         {
             if (null == TimerThread)
             {
-
-                DiceNo = (uint)DiceRand.Next(1, 8);
+                /*
+                 * Bug No. 2
+                 */
+                DiceNo = 5;
+                while(DiceNo==5||DiceNo==6||DiceNo==7)
+                {
+                    DiceNo = (uint)DiceRand.Next(1, 9);
+                    Console.WriteLine(DiceNo);
+                }
                 DiceNoLabel.Content = "" + DiceNo;
+                /*
+                 * Bug No. 1
+                 */
+                while (true)
+                {
+                    if (Convert.ToInt32(DiceNoLabel.Content) != (int)DiceNo)
+                    {
+                        DiceNoLabel.Content = "" + DiceNo;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
                 if (!NoMoreMove(DiceNo))
                 {
                     KayiGrid.Background = Brushes.Magenta;
@@ -331,9 +357,13 @@ namespace ChokaBhara_Win8style
 
 
                     SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
-                    OutOfMyWay(MoveRect[TurnState, ToMove]);
+                    /*
+                     * Bug No. 5
+                     */
+                    if(!OutOfMyWay(MoveRect[TurnState, ToMove]))
+                        Turn();
                     ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo);
-                    Turn();
+                    
                 }
                 else
                 {

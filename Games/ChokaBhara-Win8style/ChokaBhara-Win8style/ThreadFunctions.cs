@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ChokaBhara_Win8style
+namespace ChokaBharaWin8Style
 {
     public partial class MainWindow
     {

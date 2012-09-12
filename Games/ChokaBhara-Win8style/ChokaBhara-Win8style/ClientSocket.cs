@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Configuration;
 using Newtonsoft.Json;
-namespace ChokaBhara_Win8style
+namespace ChokaBharaWin8Style
 {
     public partial class MainWindow
     {

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
-namespace ChokaBhara_Win8style
+namespace ChokaBharaWin8Style
 {
     
     public partial class MainWindow
     {
-        public string ServerAddress = null;
-        public int ServerPort = 0;
+        private string ServerAddress = null;
+        private int ServerPort = 0;
         private uint TimeoutTime;  
         public void ReadConfig()
         {
