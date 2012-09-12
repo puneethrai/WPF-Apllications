@@ -24,6 +24,7 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid Name="MainGrid" Panel.ZIndex="-4">
+        
         <Grid Name="BodyFirstHalf" Margin="0,41,275,69" Panel.ZIndex="-2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="274*" />
@@ -43,12 +44,18 @@
             <Label Height="30" HorizontalAlignment="Left" Margin="84,56,0,0" Name="GreenPoint" VerticalAlignment="Top" Width="23" />
             <Label Height="30" HorizontalAlignment="Left" Margin="144,56,0,0" Name="BluePoint" VerticalAlignment="Top" Width="23" />
             <Label Height="30" HorizontalAlignment="Left" Margin="204,56,0,0" Name="YellowPoint" VerticalAlignment="Top" Width="23" Grid.ColumnSpan="2" />
+            
         </Grid>
         <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
             <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
             <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
             <Grid Name="m_grid" Panel.ZIndex="10" Height="39" VerticalAlignment="Top">
                 <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,100,14" Height="20" Width="220"/>
+                <!--Border Height="264" Width="271" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="228,47,-42,-272">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" />
+                    </Border.Effect>
+                </Border-->
             </Grid>
         </Grid>
         <Grid Name="ControlBar" Panel.ZIndex="-3">
@@ -58,8 +65,11 @@
             <Line Name="CloseLine1" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="0" X2="15" Y2="15" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="484,5,4,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             <Line Name="CloseLine2" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="0,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" Height="15" VerticalAlignment="Top" HorizontalAlignment="Right" />
             <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <Canvas Height="264" HorizontalAlignment="Left" Margin="228,47,0,0" Name="RectCanvas" VerticalAlignment="Top" Width="274" >
-
+            <Canvas Height="264" HorizontalAlignment="Left" Margin="228,47,0,0" Name="RectCanvas" VerticalAlignment="Top" Width="269" >
+                <Canvas.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="5" />
+                </Canvas.Effect>
+                
                 <Rectangle Name="R55" Width="50" Height="50" Canvas.Left="214" Canvas.Top="209" Fill="Silver" ></Rectangle>
                 <Rectangle Name="R54"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="209" Fill="Silver" ></Rectangle>
                 <Rectangle Name="R53"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="209" Fill="Green" Opacity="0.8" Stroke="Black"></Rectangle>
@@ -108,12 +118,19 @@
             </Canvas>
         </Grid>
         <Grid Height="67" HorizontalAlignment="Left" Margin="4,0,0,73" Name="KayiGrid" VerticalAlignment="Bottom" Width="103"></Grid>
+        <Grid Height="67" HorizontalAlignment="Left" Margin="120,0,0,73" Name="DestroyKayiGrid" VerticalAlignment="Bottom" Width="103" />
         <Grid Height="43" HorizontalAlignment="Left" Margin="4,263,0,0" Name="grid1" VerticalAlignment="Top" Width="224" >
             <MediaElement Name="WaitingGIF" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
             <!--Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="154,14,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" /-->
         </Grid>
         <Grid Name="TimeOutBarGrid" Height="10" HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Width="503" >
             <Rectangle Name="TimeOutBar" Fill="Blue" Width="0" Height="0" VerticalAlignment="Top" HorizontalAlignment="Left"></Rectangle>
+            
         </Grid>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
+            </Border.Effect>
+        </Border>
     </Grid>
 </Window>
