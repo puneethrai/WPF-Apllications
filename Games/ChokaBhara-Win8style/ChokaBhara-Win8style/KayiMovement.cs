@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 namespace ChokaBharaWin8Style
 {
     /*
@@ -13,10 +15,11 @@ namespace ChokaBharaWin8Style
     public partial class MainWindow
     {
         bool isMoved;
-        uint[,] MyKayi = new uint[4,4];
-        uint[] ScoreCard = new uint[4];
-        Rectangle[,] KayiPlaced = new Rectangle[4, 4];
-        
+        uint[,] MyKayi = null;
+        uint[] ScoreCard = null;
+        Rectangle[,] KayiPlaced = null;
+        bool[] WinnerDisplayed = null;
+                
         /// <summary> 
         /// Sets <see cref="T:Kayi"/> Position to <see cref="T:RectNo" /> with <see cref="T:KayiNo"/>
         /// </summary> 
@@ -48,10 +51,11 @@ namespace ChokaBharaWin8Style
             KayiPlaced[TurnState, KayiNo] = RectNo;
             isMoved = true;
         }
+        [CLSCompliant(false)]
         public bool NoMoreMove(uint MoveNo)
         {
             bool CantMove = true;
-            for (int i = 0; i < 4; i++)
+            for (uint i = MinKayi; i < MaxKayi; i++)
                 if ((MyKayi[TurnState, i] + MoveNo) < 25)
                     CantMove = false;
             return CantMove;
@@ -61,11 +65,11 @@ namespace ChokaBharaWin8Style
         public bool OutOfMyWay(Rectangle Placing)
         {
             bool Flags = false;
-            for (uint i = 0; i < 4; i++)
+            for (uint i = MinPlayer; i < MaxPlayer; i++)
             {
                 if (i != TurnState)
                 {
-                    for (uint j = 0; j < 4; j++)
+                    for (uint j = MinKayi; j < MaxKayi; j++)
                     {
                         if (KayiPlaced[i,j] == Placing)
                         {
@@ -87,34 +91,76 @@ namespace ChokaBharaWin8Style
         }
         public void ReachedHome(Ellipse CheckKayi,uint KayiNo)
         {
-            if (MyKayi[TurnState, KayiNo] == 24)
+            Storyboard s = null;
+            if (MyKayi[TurnState, KayiNo] == (MaxMoves - 1))
             {
                 CheckKayi.Visibility = System.Windows.Visibility.Hidden;
                 ScoreCard[TurnState]++;
-                RedPoint.Content = ""+ScoreCard[0];
+                RedPoint.Content = "" + ScoreCard[0];
                 GreenPoint.Content = "" + ScoreCard[1];
                 BluePoint.Content = "" + ScoreCard[2];
                 YellowPoint.Content = "" + ScoreCard[3];
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                if (ScoreCard[i] == 4)
+
+                for (uint i = MinPlayer; i < MaxPlayer; i++)
                 {
-                    switch (i)
+                    if (ScoreCard[i] == MaxKayi)
                     {
-                        case 0: MessageBox.Show("Red Wins");
-                            break;
-                        case 1: MessageBox.Show("Green Wins");
-                            break;
-                        case 2: MessageBox.Show("Blue Wins");
-                            break;
-                        case 3: MessageBox.Show("Yellow Wins");
-                            break;
+                        if (WinnerList.Visibility != Visibility.Visible)
+                            WinnerList.Visibility = Visibility.Visible;
+                        switch (i)
+                        {
+                            case 0:
+                                /*
+                                 * Bug No. 8
+                                 */
+                                if (!WinnerDisplayed[0])
+                                {
+                                    WinnerList.Items.Add("Red Wins");
+                                    // Locate Storyboard resource
+                                    s = (Storyboard)TryFindResource("PlayerBoxAnimate1");
+                                    s.Begin();	// Start animation
+                                    WinnerDisplayed[0] = true;
+                                }
+                                break;
+                            case 1: 
+                                if (!WinnerDisplayed[1])
+                                {
+                                    WinnerList.Items.Add("Green Wins");
+                                    // Locate Storyboard resource
+                                    s = (Storyboard)TryFindResource("PlayerBoxAnimate2");
+                                    s.Begin();	// Start animation
+                                    WinnerDisplayed[1] = true;
+                                }
+                                break;
+                            case 2: 
+                                if (!WinnerDisplayed[2])
+                                {
+                                    WinnerList.Items.Add("Blue Wins");
+                                    // Locate Storyboard resource
+                                    s = (Storyboard)TryFindResource("PlayerBoxAnimate3");
+                                    s.Begin();	// Start animation
+                                    WinnerDisplayed[2] = true;
+                                }
+                                break;
+                            case 3: 
+                                if (!WinnerDisplayed[3])
+                                {
+                                    WinnerList.Items.Add("Yellow Wins");
+                                    // Locate Storyboard resource
+                                    s = (Storyboard)TryFindResource("PlayerBoxAnimate4");
+                                    s.Begin();	// Start animation
+                                    WinnerDisplayed[3] = true;
+                                }
+                                break;
+
+                        }
 
                     }
-                    break;
+                    
+                    
                 }
             }
+            
         }
     }
 }

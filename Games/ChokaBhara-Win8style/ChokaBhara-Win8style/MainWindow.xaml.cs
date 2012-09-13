@@ -66,30 +66,6 @@ namespace ChokaBharaWin8Style
             TurnFill[3] = turn4.Fill;
             TimeOutBarGridHeight = TimeOutBarGrid.Height;
             TimeOutBarGridWidth = TimeOutBarGrid.Width;
-            /*
-            StackPanel TitleBarStack = new StackPanel();
-            TitleBarStack.Orientation = Orientation.Horizontal;
-            Image myImage = new Image();
-            BitmapImage myImageSource = new BitmapImage();
-            myImageSource.BeginInit();
-            myImageSource.UriSource = new Uri("autorun.ico");
-            myImageSource.EndInit();
-            myImage.Source = myImageSource;
-
-            TextBlock myTextBlock = new TextBlock();
-            myTextBlock.Text = "This is my image";
-
-            TitleBarStack.Children.Add(myImage);
-            TitleBarStack.Children.Add(myTextBlock);
-
-            TitleGrid.Children.Add(TitleBarStack);
-            BitmapImage logo = new BitmapImage();
-            logo.BeginInit();
-            logo.UriSource = new Uri(@"..\..\autorun.ico",UriKind.Relative);
-            logo.DecodePixelHeight = 19;
-            logo.DecodePixelWidth = 19;
-            logo.EndInit();
-            AppIcon.Source = logo;*/
         }
 
         #region WindowControRegion
@@ -197,7 +173,19 @@ namespace ChokaBharaWin8Style
              */
             if (DiceNo != 4 && DiceNo != 8)
             {
-                TurnState = TurnState == 3 ? 0 : TurnState + 1;
+                /*
+                 * Bug No. 7
+                 */
+                while (true)
+                {
+                    TurnState = TurnState >= (MaxPlayer - 1) ? 0 : TurnState + 1;
+                    if (ScoreCard[TurnState] == MaxKayi)
+                        TurnState++;
+                    else
+                    {
+                        break;
+                    }
+                }
                 Point Point1 = new Point(0 + (TurnState * 60), 40);
                 Point Point2 = new Point(10 + (TurnState * 60), 50);
                 Point Point3 = new Point(20 + (TurnState * 60), 40);
@@ -277,15 +265,23 @@ namespace ChokaBharaWin8Style
                     TempRadio1 = new RadioButton();
                     TempRadio1.Name = "TempRadio1";
                     TempRadio1.Content = "Kayi 1";
+                    if (MyKayi[TurnState, 0] >= (MaxMoves - 1))
+                        TempRadio1.Visibility = Visibility.Hidden;                    
                     TempRadio2 = new RadioButton();
                     TempRadio2.Name = "TempRadio2";
                     TempRadio2.Content = "Kayi 2";
+                    if (MyKayi[TurnState, 1] >= (MaxMoves - 1))
+                        TempRadio2.Visibility = Visibility.Hidden; 
                     TempRadio3 = new RadioButton();
                     TempRadio3.Name = "TempRadio3";
                     TempRadio3.Content = "Kayi 3";
+                    if (MyKayi[TurnState, 2] >= (MaxMoves - 1))
+                        TempRadio3.Visibility = Visibility.Hidden; 
                     TempRadio4 = new RadioButton();
                     TempRadio4.Name = "TempRadio4";
                     TempRadio4.Content = "Kayi 4";
+                    if (MyKayi[TurnState, 3] >= (MaxMoves - 1))
+                        TempRadio4.Visibility = Visibility.Hidden; 
                     TempRadio1.Checked += new RoutedEventHandler(TempRadio_Checked);
                     TempRadio2.Checked += new RoutedEventHandler(TempRadio_Checked);
                     TempRadio3.Checked += new RoutedEventHandler(TempRadio_Checked);
@@ -349,7 +345,7 @@ namespace ChokaBharaWin8Style
                 ToMove = MyKayi[TurnState,KayiNo];
                 
 
-                if (ToMove < 25)
+                if (ToMove < MaxMoves)
                 {
                     KayiGrid.Children.Remove(TempStackpanel);
                     KayiGrid.Background = Brushes.White;
@@ -357,12 +353,13 @@ namespace ChokaBharaWin8Style
 
 
                     SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
+                    
+                    ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo);
                     /*
                      * Bug No. 5
                      */
-                    if(!OutOfMyWay(MoveRect[TurnState, ToMove]))
+                    if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
                         Turn();
-                    ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo);
                     
                 }
                 else
@@ -378,85 +375,6 @@ namespace ChokaBharaWin8Style
                 Turn();
             }
             
-            /*
-            // Create an Ellipse
-            Ellipse blueRectangle = new Ellipse();
-            blueRectangle.Height = 100;
-            blueRectangle.Width = 200;
-
-            // Create a blue and a black Brush
-            SolidColorBrush blueBrush = new SolidColorBrush();
-            blueBrush.Color = Colors.Blue;
-            SolidColorBrush blackBrush = new SolidColorBrush();
-            blackBrush.Color = Colors.Black;
-
-            // Set Ellipse's width and color
-            blueRectangle.StrokeThickness = 4;
-            blueRectangle.Stroke = blackBrush;
-            // Fill rectangle with blue color
-            blueRectangle.Fill = blueBrush;
-            blueRectangle.HorizontalAlignment = MoveRect[0, 0].HorizontalAlignment;
-            blueRectangle.VerticalAlignment = MoveRect[0, 0].VerticalAlignment;
-             blueRectangle.Margin = MoveRect[0, 0].Margin;
-            // Add Ellipse to the Grid.
-            RectCanvas.Children.Add(blueRectangle);
-            ThreadStart start = new ThreadStart(Start);
-            Thread one = new Thread(start);
-            one.Start();
-            if (first)
-            {
-
-                first = false;
-                
-                temp1 = MoveRect[0, 0].Fill;
-                temp2 = MoveRect[1, 0].Fill;
-                temp3 = MoveRect[2, 0].Fill;
-                temp4 = MoveRect[3, 0].Fill;
-            }
-        }
-        bool first = true;
-        Brush temp1;
-        Brush temp2;
-        Brush temp3;
-        Brush temp4;
-        Ellipse blueRectangle;
-        void Start()
-        {
-
-            
-            
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 25; j++)
-                {
-
-                    MoveRect[i, j].Dispatcher.BeginInvoke((ThreadStart)delegate()
-                    {
-                        //blueRectangle.HorizontalAlignment = MoveRect[i, j].HorizontalAlignment;
-                        //blueRectangle.VerticalAlignment = MoveRect[i, j].VerticalAlignment;
-                       // blueRectangle.Margin = MoveRect[i, j].Margin;
-                        // Add Ellipse to the Grid.
-                        //RectCanvas.Children.Add(blueRectangle);
-                            switch (i)
-                            {
-                                case 0: MoveRect[i, DiceNo].Fill = temp1;
-                                    break;
-                                case 1: MoveRect[i, DiceNo].Fill = temp2;
-                                    break;
-                                case 2: MoveRect[i, DiceNo].Fill = temp3;
-                                    break;
-                                case 3: MoveRect[i, DiceNo].Fill = temp4;
-                                    break;
-                            }
-                            
-                           // RectCanvas.Children.Remove(blueRectangle);
-                        });
-                    for (long k = 0; k < 99999999; k++) ;
-                }
-                Dispatcher.BeginInvoke((ThreadStart)delegate()
-                { Turn(); });
-            }
-         */   
         }
         
 

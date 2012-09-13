@@ -5,6 +5,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Choka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="367" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" >
     <Window.Resources>
+        <Storyboard x:Key="PlayerBoxAnimate1" >
+            <DoubleAnimation Storyboard.TargetName="Turn1"
+          Storyboard.TargetProperty="Width" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="Turn1"
+          Storyboard.TargetProperty="Height" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:1"/>
+            <DoubleAnimation Storyboard.TargetName="Turn1"
+          Storyboard.TargetProperty="Height" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:2"/>
+            <DoubleAnimation  Storyboard.TargetName="Turn1"
+          Storyboard.TargetProperty="Width" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:3"/>
+        </Storyboard>
+        <Storyboard x:Key="PlayerBoxAnimate2" >
+            <DoubleAnimation Storyboard.TargetName="turn2"
+          Storyboard.TargetProperty="Width" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="turn2"
+          Storyboard.TargetProperty="Height" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:1"/>
+            <DoubleAnimation Storyboard.TargetName="turn2"
+          Storyboard.TargetProperty="Height" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:2"/>
+            <DoubleAnimation  Storyboard.TargetName="turn2"
+          Storyboard.TargetProperty="Width" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:3"/>
+        </Storyboard>
+        <Storyboard x:Key="PlayerBoxAnimate3" >
+            <DoubleAnimation Storyboard.TargetName="turn3"
+          Storyboard.TargetProperty="Width" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="turn3"
+          Storyboard.TargetProperty="Height" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:1"/>
+            <DoubleAnimation Storyboard.TargetName="turn3"
+          Storyboard.TargetProperty="Height" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:2"/>
+            <DoubleAnimation  Storyboard.TargetName="turn3"
+          Storyboard.TargetProperty="Width" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:3"/>
+        </Storyboard>
+        <Storyboard x:Key="PlayerBoxAnimate4" >
+            <DoubleAnimation Storyboard.TargetName="turn4"
+          Storyboard.TargetProperty="Width" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="turn4"
+          Storyboard.TargetProperty="Height" From="20" To="1" 
+          Duration="0:0:1" BeginTime="0:0:1"/>
+            <DoubleAnimation Storyboard.TargetName="turn4"
+          Storyboard.TargetProperty="Height" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:2"/>
+            <DoubleAnimation  Storyboard.TargetName="turn4"
+          Storyboard.TargetProperty="Width" From="1" To="20" 
+          Duration="0:0:1" BeginTime="0:0:3"/>
+        </Storyboard>
         <ControlTemplate x:Key="DiceButton"  TargetType="Button">
             <Border x:Name="DiceBorder" BorderThickness="0,0,0,0" CornerRadius="0,0,0,0"  Background="#C98172">
                 <ContentPresenter x:Name="Contents" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="3,3,3,3" />
@@ -23,114 +79,119 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
-    <Grid Name="MainGrid" Panel.ZIndex="-4">
-        
-        <Grid Name="BodyFirstHalf" Margin="0,41,275,69" Panel.ZIndex="-2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="274*" />
-                <ColumnDefinition Width="6*" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Width="201" Name="TurnDisplayRect" Fill="#FFEB0000" VerticalAlignment="Top" Height="42" HorizontalAlignment="Left"></Rectangle>
-            <!--60,40"0,40 10,50 20,40 0,40"-->
-            <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" Foreground="Magenta" />
-            <Rectangle HorizontalAlignment="Left" Width="20" Height="20" Margin="0,56,0,0" VerticalAlignment="Top" Fill="#FFEB0000" Name="Turn1"></Rectangle>
-            <Rectangle HorizontalAlignment="Left" Fill="Yellow" Height="20" Margin="182,56,0,0" VerticalAlignment="Top" Width="20" Name="turn4" />
-            <Rectangle HorizontalAlignment="Left" Fill="Blue" Height="20" Margin="122,56,0,0" VerticalAlignment="Top" Width="20" Name="turn3" />
-            <Rectangle HorizontalAlignment="Left" Fill="Green" Height="20" Margin="62,56,0,0" VerticalAlignment="Top" Width="20" Name="turn2" />
-            <Button Content="Dice" Height="24" HorizontalAlignment="Left" Margin="0,99,0,0" Name="DiceBtn" VerticalAlignment="Top" Width="69" Background="#FFFF9393" BorderBrush="Transparent" Template="{StaticResource DiceButton}" Click="DiceBtn_Click" />
-            <Label Content="Number:" Height="25" HorizontalAlignment="Left" Margin="75,100,0,0" Name="DiceNoLabel" VerticalAlignment="Top" Width="89" />
-            <Polygon Points="0,40 10,50 20,40 0,40" Fill="#FFEB0000" Name="TurnDisplayTri" Panel.ZIndex="2" Grid.ColumnSpan="2" Margin="0,2,0,-2" />
-            <Label Height="30" HorizontalAlignment="Left" Margin="22,56,0,0" Name="RedPoint" VerticalAlignment="Top" Width="23" />
-            <Label Height="30" HorizontalAlignment="Left" Margin="84,56,0,0" Name="GreenPoint" VerticalAlignment="Top" Width="23" />
-            <Label Height="30" HorizontalAlignment="Left" Margin="144,56,0,0" Name="BluePoint" VerticalAlignment="Top" Width="23" />
-            <Label Height="30" HorizontalAlignment="Left" Margin="204,56,0,0" Name="YellowPoint" VerticalAlignment="Top" Width="23" Grid.ColumnSpan="2" />
-            
-        </Grid>
-        <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
-            <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
-            <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
-            <Grid Name="m_grid" Panel.ZIndex="10" Height="39" VerticalAlignment="Top">
-                <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,100,14" Height="20" Width="220"/>
-                <!--Border Height="264" Width="271" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="228,47,-42,-272">
+    <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="5" >
+        <Grid Name="MainGrid" Panel.ZIndex="-4">
+
+            <Grid Name="BodyFirstHalf" Margin="0,41,275,69" Panel.ZIndex="-2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="274*" />
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Width="201" Name="TurnDisplayRect" Fill="#FFEB0000" VerticalAlignment="Top" Height="42" HorizontalAlignment="Left"></Rectangle>
+                <!--60,40"0,40 10,50 20,40 0,40"-->
+                <Label Content="Turn" Height="34" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label1" VerticalAlignment="Top" Width="44" FontFamily="Maiandra GD" FontSize="16" Foreground="Magenta" />
+                <ListBox Height="48" Name="WinnerList" Width="82" Margin="137,92,4,78" Visibility="Hidden"/>
+                <Rectangle HorizontalAlignment="Left" Fill="#FFEB0000" Width="20" Height="20" Margin="0,56,0,0" VerticalAlignment="Top"  Name="Turn1"></Rectangle>
+                <Rectangle HorizontalAlignment="Left" Fill="Yellow" Height="20" Margin="182,56,0,0" VerticalAlignment="Top" Width="20" Name="turn4" />
+                <Rectangle HorizontalAlignment="Left" Fill="Blue" Height="20" Margin="122,56,0,0" VerticalAlignment="Top" Width="20" Name="turn3" />
+                <Rectangle HorizontalAlignment="Left" Fill="Green" Height="20" Margin="62,56,0,0" VerticalAlignment="Top" Width="20" Name="turn2" />
+                <Button Content="Dice" Height="24" HorizontalAlignment="Left" Margin="0,99,0,0" Name="DiceBtn" VerticalAlignment="Top" Width="69" Background="#FFFF9393" BorderBrush="Transparent" Template="{StaticResource DiceButton}" Click="DiceBtn_Click" />
+                <Label Content="Number:" Height="25" HorizontalAlignment="Left" Margin="75,100,0,0" Name="DiceNoLabel" VerticalAlignment="Top" Width="89" />
+                <Polygon Points="0,40 10,50 20,40 0,40" Fill="#FFEB0000" Name="TurnDisplayTri" Panel.ZIndex="2" Grid.ColumnSpan="2" Margin="0,2,0,-2" />
+                <Label Height="30" HorizontalAlignment="Left" Margin="22,56,0,0" Name="RedPoint" VerticalAlignment="Top" Width="23" />
+                <Label Height="30" HorizontalAlignment="Left" Margin="84,56,0,0" Name="GreenPoint" VerticalAlignment="Top" Width="23" />
+                <Label Height="30" HorizontalAlignment="Left" Margin="144,56,0,0" Name="BluePoint" VerticalAlignment="Top" Width="23" />
+                <Label Height="30" HorizontalAlignment="Left" Margin="204,56,0,0" Name="YellowPoint" VerticalAlignment="Top" Width="23" Grid.ColumnSpan="2" />
+
+            </Grid>
+            <Grid Name="TitleGrid" Margin="0,0,46,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown">
+                <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
+                <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
+                <Grid Name="m_grid" Panel.ZIndex="10" Height="39" VerticalAlignment="Top">
+                    <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,100,14" Height="20" Width="220"/>
+                    <!--Border Height="264" Width="271" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="228,47,-42,-272">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" />
                     </Border.Effect>
                 </Border-->
+                </Grid>
             </Grid>
+            <Grid Name="ControlBar" Panel.ZIndex="-3">
+                <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"></Rectangle>
+                <Rectangle Name="CloseRect" Height="20" Width="21" Margin="482,0,0,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right">
+
+                </Rectangle>
+                <Line Name="CloseLine1" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="0" X2="15" Y2="15" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="484,5,4,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                <Line Name="CloseLine2" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="0,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" Height="15" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                <Canvas Height="264" HorizontalAlignment="Left" Margin="228,47,0,0" Name="RectCanvas" VerticalAlignment="Top" Width="269" >
+                    <Canvas.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" />
+                    </Canvas.Effect>
+
+                    <Rectangle Name="R55" Width="50" Height="50" Canvas.Left="214" Canvas.Top="209" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R54"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="209" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R53"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="209" Fill="Green" Opacity="0.8" Stroke="Black"></Rectangle>
+                    <Rectangle Name="R52"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="209" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R51" Width="50" Height="50"  Canvas.Left="6" Canvas.Top="209" Fill="Silver"></Rectangle>
+                    <Rectangle Name="R45"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="158" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R44"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="158" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R43"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="158" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R42"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="158" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R41"  Width="50" Height="50" Canvas.Left="6" Canvas.Top="158" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R35" Width="50" Height="50"  Canvas.Left="214" Canvas.Top="107" Fill="Blue" Opacity="0.8" Stroke="Black"></Rectangle>
+                    <Rectangle Name="R34"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="107" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R33"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="107" Opacity="0.8"></Rectangle>
+                    <Rectangle  Name="R32" Width="50" Height="50" Canvas.Left="58" Canvas.Top="107" Fill="Silver" ></Rectangle>
+                    <Rectangle  Name="R31" Width="50" Height="50" Canvas.Left="6" Canvas.Top="107" Fill="Red"  Opacity="0.8" Stroke="Black"></Rectangle>
+                    <Rectangle Name="R25"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="56" Fill="Silver" ></Rectangle>
+                    <Rectangle  Name="R24"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="56" Fill="Silver" ></Rectangle>
+                    <Rectangle  Name="R23"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="56" Fill="Silver" ></Rectangle>
+                    <Rectangle Name="R22" Width="50" Height="50" Canvas.Left="58" Canvas.Top="56" Fill="Silver"  VerticalAlignment="Bottom"></Rectangle>
+                    <Rectangle Name="R21" Width="50" Height="50" Canvas.Left="6" Canvas.Top="56" Fill="Silver" HorizontalAlignment="Right"></Rectangle>
+                    <Rectangle Name="R15" Width="50" Height="50" Canvas.Left="214" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
+                    <Rectangle Name="R14" Width="50" Height="50" Canvas.Left="162" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
+                    <Rectangle Name="R13" Width="50" Height="50" Canvas.Left="110" Canvas.Top="5" Fill="Yellow"  HorizontalAlignment="Left" Opacity="0.8" Stroke="Black"></Rectangle>
+                    <Rectangle Name="R12" Width="50" Height="50" Canvas.Left="58" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
+                    <Rectangle Name="R11" Width="50" Height="50" Canvas.Left="6" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
+
+
+                    <Ellipse Canvas.Left="6" Canvas.Top="107" Fill="#FFEB0000" Height="10" Name="CKayi11" Width="10" Stroke="Black"></Ellipse>
+                    <Ellipse Canvas.Left="46" Canvas.Top="145" Fill="#FFEB0000" Height="10" Name="CKayi14" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="6" Canvas.Top="145" Fill="#FFEB0000" Height="10" Name="CKayi13" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="46" Canvas.Top="107" Fill="#FFEB0000" Height="10" Name="CKayi12" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="110" Canvas.Top="210" Fill="Green" Height="10" Name="CKayi21" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="150" Canvas.Top="248" Fill="Green" Height="10" Name="CKayi24" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="110" Canvas.Top="248" Fill="Green" Height="10" Name="CKayi23" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="150" Canvas.Top="210" Fill="Green" Height="10" Name="CKayi22" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="214" Canvas.Top="109" Fill="Blue" Height="10" Name="CKayi31" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="254" Canvas.Top="147" Fill="Blue" Height="10" Name="CKayi34" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="214" Canvas.Top="147" Fill="Blue" Height="10" Name="CKayi33" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="254" Canvas.Top="109" Fill="Blue" Height="10" Name="CKayi32" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="110" Canvas.Top="7" Fill="Yellow" Height="10" Name="CKayi41" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="150" Canvas.Top="45" Fill="Yellow" Height="10" Name="CKayi44" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="110" Canvas.Top="45" Fill="Yellow" Height="10" Name="CKayi43" Width="10" Stroke="Black" />
+                    <Ellipse Canvas.Left="150" Canvas.Top="7" Fill="Yellow" Height="10" Name="CKayi42" Width="10" Stroke="Black" />
+                    <Line X1="50" Y1="50" Canvas.Left="110" Canvas.Top="107" Height="50" Width="50" Fill="Black" StrokeThickness="3"></Line>
+                    <Line X1="50" Y2="50" Canvas.Left="110" Canvas.Top="107" Height="50" Width="50" Fill="Black" StrokeThickness="3"></Line>
+                </Canvas>
+            </Grid>
+            <Grid Height="67" HorizontalAlignment="Left" Margin="4,0,0,73" Name="KayiGrid" VerticalAlignment="Bottom" Width="103"></Grid>
+            <Grid Height="67" HorizontalAlignment="Left" Margin="120,0,0,73" Name="DestroyKayiGrid" VerticalAlignment="Bottom" Width="103" />
+            <Grid Height="43" HorizontalAlignment="Left" Margin="4,263,0,0" Name="grid1" VerticalAlignment="Top" Width="224" >
+                <MediaElement Name="WaitingGIF" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
+                <!--Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="154,14,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" /-->
+            </Grid>
+            <Grid Name="TimeOutBarGrid" Height="10" HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Width="503" >
+                <Rectangle Name="TimeOutBar" Fill="Blue" Width="0" Height="0" VerticalAlignment="Top" HorizontalAlignment="Left"></Rectangle>
+
+            </Grid>
+            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Panel.ZIndex="5">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
+                </Border.Effect>
+
+            </Border>
         </Grid>
-        <Grid Name="ControlBar" Panel.ZIndex="-3">
-            <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"></Rectangle>
-            <Rectangle Name="CloseRect" Height="20" Width="21" Margin="482,0,0,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right">
-            </Rectangle>
-            <Line Name="CloseLine1" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="0" X2="15" Y2="15" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="484,5,4,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <Line Name="CloseLine2" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="15" X2="15" Y2="0" Fill="Black" StrokeThickness="2" Panel.ZIndex="2" Stroke="Black" Margin="0,5,4,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" Height="15" VerticalAlignment="Top" HorizontalAlignment="Right" />
-            <Line Name="MinimizeLine" Height="15" Width="15" Canvas.Left="482" Canvas.Top="5" X1="0" Y1="13" X2="15" Y2="13" Fill="Black" StrokeThickness="2" Panel.ZIndex="1" Stroke="Black" Margin="463,5,25,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <Canvas Height="264" HorizontalAlignment="Left" Margin="228,47,0,0" Name="RectCanvas" VerticalAlignment="Top" Width="269" >
-                <Canvas.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="5" />
-                </Canvas.Effect>
-                
-                <Rectangle Name="R55" Width="50" Height="50" Canvas.Left="214" Canvas.Top="209" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R54"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="209" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R53"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="209" Fill="Green" Opacity="0.8" Stroke="Black"></Rectangle>
-                <Rectangle Name="R52"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="209" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R51" Width="50" Height="50"  Canvas.Left="6" Canvas.Top="209" Fill="Silver"></Rectangle>
-                <Rectangle Name="R45"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="158" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R44"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="158" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R43"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="158" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R42"  Width="50" Height="50" Canvas.Left="58" Canvas.Top="158" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R41"  Width="50" Height="50" Canvas.Left="6" Canvas.Top="158" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R35" Width="50" Height="50"  Canvas.Left="214" Canvas.Top="107" Fill="Blue" Opacity="0.8" Stroke="Black"></Rectangle>
-                <Rectangle Name="R34"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="107" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R33"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="107" Opacity="0.8"></Rectangle>
-                <Rectangle  Name="R32" Width="50" Height="50" Canvas.Left="58" Canvas.Top="107" Fill="Silver" ></Rectangle>
-                <Rectangle  Name="R31" Width="50" Height="50" Canvas.Left="6" Canvas.Top="107" Fill="Red"  Opacity="0.8" Stroke="Black"></Rectangle>
-                <Rectangle Name="R25"  Width="50" Height="50" Canvas.Left="214" Canvas.Top="56" Fill="Silver" ></Rectangle>
-                <Rectangle  Name="R24"  Width="50" Height="50" Canvas.Left="162" Canvas.Top="56" Fill="Silver" ></Rectangle>
-                <Rectangle  Name="R23"  Width="50" Height="50" Canvas.Left="110" Canvas.Top="56" Fill="Silver" ></Rectangle>
-                <Rectangle Name="R22" Width="50" Height="50" Canvas.Left="58" Canvas.Top="56" Fill="Silver"  VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle Name="R21" Width="50" Height="50" Canvas.Left="6" Canvas.Top="56" Fill="Silver" HorizontalAlignment="Right"></Rectangle>
-                <Rectangle Name="R15" Width="50" Height="50" Canvas.Left="214" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
-                <Rectangle Name="R14" Width="50" Height="50" Canvas.Left="162" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
-                <Rectangle Name="R13" Width="50" Height="50" Canvas.Left="110" Canvas.Top="5" Fill="Yellow"  HorizontalAlignment="Left" Opacity="0.8" Stroke="Black"></Rectangle>
-                <Rectangle Name="R12" Width="50" Height="50" Canvas.Left="58" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
-                <Rectangle Name="R11" Width="50" Height="50" Canvas.Left="6" Canvas.Top="5" Fill="Silver"  HorizontalAlignment="Left"></Rectangle>
-                
-                
-                <Ellipse Canvas.Left="6" Canvas.Top="107" Fill="#FFEB0000" Height="10" Name="CKayi11" Width="10" Stroke="Black"></Ellipse>
-                <Ellipse Canvas.Left="46" Canvas.Top="145" Fill="#FFEB0000" Height="10" Name="CKayi14" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="6" Canvas.Top="145" Fill="#FFEB0000" Height="10" Name="CKayi13" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="46" Canvas.Top="107" Fill="#FFEB0000" Height="10" Name="CKayi12" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="110" Canvas.Top="210" Fill="Green" Height="10" Name="CKayi21" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="150" Canvas.Top="248" Fill="Green" Height="10" Name="CKayi24" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="110" Canvas.Top="248" Fill="Green" Height="10" Name="CKayi23" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="150" Canvas.Top="210" Fill="Green" Height="10" Name="CKayi22" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="214" Canvas.Top="109" Fill="Blue" Height="10" Name="CKayi31" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="254" Canvas.Top="147" Fill="Blue" Height="10" Name="CKayi34" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="214" Canvas.Top="147" Fill="Blue" Height="10" Name="CKayi33" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="254" Canvas.Top="109" Fill="Blue" Height="10" Name="CKayi32" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="110" Canvas.Top="7" Fill="Yellow" Height="10" Name="CKayi41" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="150" Canvas.Top="45" Fill="Yellow" Height="10" Name="CKayi44" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="110" Canvas.Top="45" Fill="Yellow" Height="10" Name="CKayi43" Width="10" Stroke="Black" />
-                <Ellipse Canvas.Left="150" Canvas.Top="7" Fill="Yellow" Height="10" Name="CKayi42" Width="10" Stroke="Black" />
-                <Line X1="50" Y1="50" Canvas.Left="110" Canvas.Top="107" Height="50" Width="50" Fill="Black" StrokeThickness="3"></Line>
-                <Line X1="50" Y2="50" Canvas.Left="110" Canvas.Top="107" Height="50" Width="50" Fill="Black" StrokeThickness="3"></Line>
-            </Canvas>
-        </Grid>
-        <Grid Height="67" HorizontalAlignment="Left" Margin="4,0,0,73" Name="KayiGrid" VerticalAlignment="Bottom" Width="103"></Grid>
-        <Grid Height="67" HorizontalAlignment="Left" Margin="120,0,0,73" Name="DestroyKayiGrid" VerticalAlignment="Bottom" Width="103" />
-        <Grid Height="43" HorizontalAlignment="Left" Margin="4,263,0,0" Name="grid1" VerticalAlignment="Top" Width="224" >
-            <MediaElement Name="WaitingGIF" Source="waiting.gif" Visibility="Visible"  Opacity="0.5" Height="40" Width="40" />
-            <!--Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="154,14,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" /-->
-        </Grid>
-        <Grid Name="TimeOutBarGrid" Height="10" HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Width="503" >
-            <Rectangle Name="TimeOutBar" Fill="Blue" Width="0" Height="0" VerticalAlignment="Top" HorizontalAlignment="Left"></Rectangle>
-            
-        </Grid>
-        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
-            </Border.Effect>
-        </Border>
-    </Grid>
+    </Border>
 </Window>

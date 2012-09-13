@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChokaBhara-Win8Style.exe" size="241664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChokaBhara-Win8Style.exe" size="245760">
       <assemblyIdentity name="ChokaBhara-Win8Style" version="1.0.0.0" publicKeyToken="87A12B2B5199C65D" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>OJOHi3qlixwF5yTwquBIeaBYyUM=</dsig:DigestValue>
+        <dsig:DigestValue>9Dj8U9COTo8i5U85xrAtE3M12Js=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -75,13 +75,13 @@
       <dsig:DigestValue>D+DEmdacXow7cZQB/95AcMavTVU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ChokaBhara-Win8Style.exe.config" size="1170">
+  <file name="ChokaBhara-Win8Style.exe.config" size="1208">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>DmM5KfH2zunYsVU6/4GW1YCoaQc=</dsig:DigestValue>
+      <dsig:DigestValue>YM0yxem976tuJ1b+a5XV0075NIo=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
