@@ -4,10 +4,10 @@
 4>If dice number is 4 & 8 it should not go for next turn & add those number//Yet to be implemneted
 5>If a player makes other kayi out he gets one more turn
 6>If player dice is 4 or 8 & hits other kayi he gets two turns
-7>After a player has won his trun must  be skipped
+7>After a player has won his turn must  be skipped
 8>Winner's list is repeatly showing who have won already
 9>If 8 or 4 & all kayi's reaches home then that is invalid turn & pass it to other
 
 
 //Feature to be added
-1>Add a tick mark next to the kayi option when it has reached home
+1>Add a tick mark next to the kayi option when it has reached home//replaced with deleting of kayi option

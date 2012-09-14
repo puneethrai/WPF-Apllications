@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Windows.Shapes;
+
 namespace ChokaBharaWin8Style
 {
     
@@ -17,7 +18,7 @@ namespace ChokaBharaWin8Style
         private const uint MinKayi = 0;
         private const uint MaxKayi = 4;
         private const uint MaxMoves = 25;
-        
+        private MessageDisplayer Displayer = null;
         public void ReadConfig()
         {
             ServerAddress = ConfigurationManager.AppSettings["ServerAddress"];
@@ -32,7 +33,13 @@ namespace ChokaBharaWin8Style
             ScoreCard = new uint[MaxKayi];
             KayiPlaced = new Rectangle[MaxKayi, MaxKayi];
             WinnerDisplayed = new bool[MaxKayi];
-            
+            if (Displayer == null)
+            {
+                Displayer = new MessageDisplayer();
+                Displayer.DisplayWindow = MessageBoxLabel;
+            }
+            //Displayer.Display("This should go");
+
         }
     }
 }

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChokaBhara-Win8Style.exe" size="245760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChokaBhara-Win8Style.exe" size="248832">
       <assemblyIdentity name="ChokaBhara-Win8Style" version="1.0.0.0" publicKeyToken="87A12B2B5199C65D" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9Dj8U9COTo8i5U85xrAtE3M12Js=</dsig:DigestValue>
+        <dsig:DigestValue>OoQ4RzFmGCAu6GRNQxeVW34JBKs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -81,7 +81,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>YM0yxem976tuJ1b+a5XV0075NIo=</dsig:DigestValue>
+      <dsig:DigestValue>xxOL9O6cyVQzAN4E1RozSMqY0kI=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

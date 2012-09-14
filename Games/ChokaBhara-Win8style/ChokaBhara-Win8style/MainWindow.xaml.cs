@@ -34,7 +34,7 @@ namespace ChokaBharaWin8Style
         Ellipse[,] MoveKayi = null;
         Thread TimerThread = null;
         Brush[] TurnFill = new Brush[4];
-        
+        bool AppExited = false;
         
         /// <summary> 
         /// Defines the program entry point. 
@@ -152,12 +152,21 @@ namespace ChokaBharaWin8Style
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Loaded");
-            
+            Application.Current.Exit += new ExitEventHandler(AppLicationExit);
             ReadConfig();
             GifActions();
             ConnectToServer();
             Init();
                
+        }
+
+        void AppLicationExit(object sender, ExitEventArgs e)
+        {
+            if (TimerThread != null)
+            {
+                AppExited = true;
+                TimerThread.Join();
+            }
         }
         
         /*private void button1_Click(object sender, RoutedEventArgs e)
@@ -299,7 +308,7 @@ namespace ChokaBharaWin8Style
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("No More Move for this number");
+                    Displayer.Display("No More Move for this number",TurnFill[TurnState]);
                     Turn();
                 }
             }
@@ -353,25 +362,34 @@ namespace ChokaBharaWin8Style
 
 
                     SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
-                    
-                    ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo);
                     /*
-                     * Bug No. 5
+                     * Bug No. 9
                      */
-                    if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
+                    if (ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo))
+                    {
+                        /*
+                         * Bug No. 5
+                         */
+                        if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
+                            Turn();
+                    }
+                    else
+                    {
                         Turn();
+                    }
                     
                 }
                 else
                 {
                     MyKayi[TurnState,KayiNo] -= DiceNo;
-                    System.Windows.Forms.MessageBox.Show("Unable to move");
+                    Displayer.Display("Unable to move", TurnFill[TurnState]);
+                    
                 }
                 
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Timed Out");
+                Displayer.Display("Timed Out", TurnFill[TurnState]);
                 Turn();
             }
             
