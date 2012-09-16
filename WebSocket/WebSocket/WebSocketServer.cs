@@ -40,6 +40,7 @@ namespace WebSocket
         public Dictionary<int, int> RoomKey = new Dictionary<int, int>();
         public Dictionary<Socket, int> SocketKey = new Dictionary<Socket, int>();
         public Dictionary<Socket, bool> PingKey = new Dictionary<Socket, bool>();
+        public Dictionary<Socket, bool> NodeSocket = new Dictionary<Socket, bool>();
         public static CheckedListBox.ObjectCollection item;
         public bool RoomFlag = false;
         
@@ -153,6 +154,7 @@ namespace WebSocket
                 while (r != "")
                 {
                     r = reader.ReadLine();
+                    Console.WriteLine(r);
                     //LogLine(r, ServerLogLevel.Verbose);
                     clienthandshake += r + "\n";
                 }
@@ -160,50 +162,87 @@ namespace WebSocket
                 string[] ar = new string[20];
                 string[] ar1 = new string[2];
                 string[] owner = new string[2];
+                bool isSocketIO = false;
                 ar = clienthandshake.Split('\n');
                 for (int i = 0; i < ar.Length; i++)
                 {
                     if (String.Compare(ar[i], 0, "GET", 0, "GET".Length) == 0)
                     {
-                        owner = ar[i].Split('?');
-                        if (String.Compare(owner[1], 0, "owner=true", 0, "owner=true".Length) == 0)
-                            IsOwner = true;
-                        else
+                        
+                        string[] ToCompare = ar[i].Split(' ');
+                        foreach (string CompareString in ToCompare)
                         {
-                            owner = owner[1].Split('&');
-                            owner = owner[1].Split(' ');
-                            Console.WriteLine("Room ID:"+Convert.ToDecimal(owner[0]));
-                          //  foreach (KeyValuePair<int, int> pair in RoomKey)
-                            foreach (var pair in RoomKey)
+                            if (String.Compare(CompareString, 0, "/socket.io/1/", 0, "/socket.io/1/".Length) == 0)
+                                isSocketIO = true;
+                        }
+                        if (!isSocketIO)
+                        {
+                            owner = ar[i].Split('?');
+                            if (String.Compare(owner[1], 0, "owner=true", 0, "owner=true".Length) == 0)
+                                IsOwner = true;
+                            else
                             {
-                                
-                                if (pair.Value == Convert.ToDecimal(owner[0]))
+                                owner = owner[1].Split('&');
+                                owner = owner[1].Split(' ');
+                                Console.WriteLine("Room ID:" + Convert.ToDecimal(owner[0]));
+                                //  foreach (KeyValuePair<int, int> pair in RoomKey)
+                                foreach (var pair in RoomKey)
                                 {
-                                    SocketKey.Add(conn, pair.Key);
-                                    RoomFlag = true;
-                                    break;
+
+                                    if (pair.Value == Convert.ToDecimal(owner[0]))
+                                    {
+                                        SocketKey.Add(conn, pair.Key);
+                                        RoomFlag = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
+                        else
+                        {
+                            NodeSocket.Add(conn, true);
+                        }
                     }
-                    if (String.Compare(ar[i], 0, "Sec-WebSocket-Key:", 0, "Sec-WebSocket-Key:".Length) == 0)
+                    if (!isSocketIO)
                     {
+                        if (String.Compare(ar[i], 0, "Sec-WebSocket-Key:", 0, "Sec-WebSocket-Key:".Length) == 0)
+                        {
 
-                        ar1 = ar[i].Split(':');
-                        ar1[1] = ar1[1].Trim();
+                            ar1 = ar[i].Split(':');
+                            ar1[1] = ar1[1].Trim();
+                        }
                     }
 
                 }
-                
-                // send handshake to the client
-                
-                string handshakemessage = "HTTP/1.1 101 Switching Protocols\r\n" +
-                    "Upgrade: websocket\r\n" +
-                    "Connection: Upgrade\r\n" +
-                    "Sec-WebSocket-Accept: " + ComputeWebSocketHandshakeSecurityHash09(ar1[1]) + "\r\n\r\n";
-                writer.Write(handshakemessage);
+                string handshakemessage = null;
+                if (!isSocketIO)
+                {
+                    // send handshake to the client
 
-                
+                    handshakemessage = "HTTP/1.1 101 Switching Protocols\r\n" +
+                        "Upgrade: websocket\r\n" +
+                        "Connection: Upgrade\r\n" +
+                        "Sec-WebSocket-Accept: " + ComputeWebSocketHandshakeSecurityHash09(ar1[1]) + "\r\n\r\n";
+                    writer.Write(handshakemessage);
+                }
+                else
+                {
+                    handshakemessage = "HTTP/1.1 200 OK\r\n" +
+                        "Content-Type:text/plain\r\n";
+                    writer.Write(handshakemessage);
+                    while (r != "")
+                    {
+                        r = reader.ReadLine();
+                        Console.WriteLine(r);
+                        //LogLine(r, ServerLogLevel.Verbose);
+                        clienthandshake += r + "\n";
+                    }
+                    handshakemessage = "HTTP/1.1 101 Switching Protocols\r\n" +
+                        "Upgrade: websocket\r\n" +
+                        "Connection: Upgrade\r\n";
+                    writer.Write(handshakemessage);
+                }
+                writer.Write(handshakemessage);
             }
             /*
             if (ServerMessage.InvokeRequired)

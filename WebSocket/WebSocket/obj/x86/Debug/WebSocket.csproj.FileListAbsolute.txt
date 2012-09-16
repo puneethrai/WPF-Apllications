@@ -20,3 +20,9 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\ob
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
 C:\Users\user\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.exe
 C:\Users\user\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\bin\Debug\WebSocket.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\bin\Debug\WebSocket.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.WebSocketApp.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.csproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocket\obj\x86\Debug\WebSocket.csprojResolveAssemblyReference.cache

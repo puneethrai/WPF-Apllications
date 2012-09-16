@@ -8,3 +8,11 @@ C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\Generat
 C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.dll
 C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.xml
 C:\Documents and Settings\manojkatarip\Desktop\WebSocketClient\obj\Debug\WebSocketClient.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\bin\WebSocketClient.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\bin\WebSocketClient.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\bin\WebSocketClient.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\obj\Debug\WebSocketClient.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\obj\Debug\WebSocketClient.vbproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\obj\Debug\WebSocketClient.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\obj\Debug\WebSocketClient.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocket\WebSocketClient\obj\Debug\WebSocketClient.pdb
