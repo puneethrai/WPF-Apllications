@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Windows.Shapes;
-
-namespace ChokaBharaWin8Style
+using System.Windows.Media.Animation;
+using System.Windows;
+using System.Windows.Controls;
+namespace ChowkaBaraWin8Style
 {
     
     public partial class MainWindow
@@ -18,7 +20,10 @@ namespace ChokaBharaWin8Style
         private const uint MinKayi = 0;
         private const uint MaxKayi = 4;
         private const uint MaxMoves = 25;
-        private MessageDisplayer Displayer = null;
+        private string ClientVersion = null;
+       /// <summary>
+       /// Reads the value from configuration file
+       /// </summary>
         public void ReadConfig()
         {
             ServerAddress = ConfigurationManager.AppSettings["ServerAddress"];
@@ -27,19 +32,18 @@ namespace ChokaBharaWin8Style
             MaxPlayer = (uint)Convert.ToInt32(ConfigurationManager.AppSettings["MaxPlayer"]);
             
         }
+        /// <summary>
+        /// Initialization of all non initialized objects
+        /// </summary>
         public void Init()
         {
             MyKayi = new uint[MaxKayi, MaxKayi];
             ScoreCard = new uint[MaxKayi];
             KayiPlaced = new Rectangle[MaxKayi, MaxKayi];
             WinnerDisplayed = new bool[MaxKayi];
-            if (Displayer == null)
-            {
-                Displayer = new MessageDisplayer();
-                Displayer.DisplayWindow = MessageBoxLabel;
-            }
-            //Displayer.Display("This should go");
-
+            DisplayWindow = MessageBoxLabel;
+            ClientVersion = System.Windows.Forms.Application.ProductVersion;
+            Display("Can't move to home when dice is 4 or 8 & last kayi", TurnFill[TurnState],5000);
         }
     }
 }

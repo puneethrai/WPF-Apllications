@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class JSONObjects

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
     /// <summary>
     /// Interaction logic for App.xaml

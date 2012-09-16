@@ -1,10 +1,16 @@
-﻿<Window x:Class="ChokaBharaWin8Style.MainWindow"
+﻿<Window x:Class="ChowkaBaraWin8Style.MainWindow"
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" 
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Chowka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="367" d:DesignWidth="525" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" >
+        Title="Chowka Bara" WindowStyle="None" AllowsTransparency="True" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="367" d:DesignWidth="566" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" >
     <Window.Resources>
+        <Storyboard x:Key="MessageBoxFadeOut">
+            <DoubleAnimation Storyboard.TargetName="MessageBoxLabel" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:1" BeginTime="0:0:0"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="MessageBoxFadeIn">
+            <DoubleAnimation Storyboard.TargetName="MessageBoxLabel" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1" BeginTime="0:0:0"></DoubleAnimation>
+        </Storyboard>
         <Storyboard x:Key="PlayerBoxAnimate1" >
             <DoubleAnimation Storyboard.TargetName="Turn1"
           Storyboard.TargetProperty="Width" From="20" To="1" 
@@ -81,7 +87,7 @@
     </Window.Resources>
     <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="5" >
         <Grid Name="MainGrid" Panel.ZIndex="-4">
-            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Panel.ZIndex="5" Margin="0,0,-2,0">
+            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Panel.ZIndex="5" Margin="0,0,-1,0">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
                 </Border.Effect>
@@ -110,7 +116,7 @@
             </Grid>
             <Grid Name="TitleGrid" Margin="0,0,0,272" Panel.ZIndex="-1" MouseDown="TitleGrid_MouseDown" HorizontalAlignment="Left" Width="455">
                 <Image Height="32" Source="autorun.ico" HorizontalAlignment="Left" Margin="4,3,0,0" Name="AppIcon" Stretch="Fill" VerticalAlignment="Top" Width="32" />
-                <Label Content="Choka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
+                <Label Content="Chowka Bara" Height="43" HorizontalAlignment="Left" Margin="33,-4,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="226" FontSize="16" />
                 <Grid Name="m_grid" Panel.ZIndex="10" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="455">
                     <MediaElement Name="ServerConnect" Source="serverwait.gif" Margin="137,5,0,14" Height="20" Width="220" HorizontalAlignment="Left" />
                     <!--Border Height="264" Width="271" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="228,47,-42,-272">
@@ -120,7 +126,7 @@
                 </Border-->
                 </Grid>
             </Grid>
-            <Grid Name="ControlBar" Panel.ZIndex="-3">
+            <Grid Name="ControlBar" Panel.ZIndex="-3" Margin="0,0,6,0">
                 <Rectangle Name="MinimizeRect" Height="20" Width="20" Margin="460,0,23,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right"></Rectangle>
                 <Rectangle Name="CloseRect" Height="20" Width="21" Margin="482,0,0,0" MouseEnter="WinControl_MouseEnter" MouseLeave="WinControl_MouseLeave"  MouseUp="WinControl_MouseUp" MouseDown="WinControl_MouseDown" VerticalAlignment="Top" HorizontalAlignment="Right">
 
@@ -187,7 +193,7 @@
                 <Label Name="MessageBoxLabel" Panel.ZIndex="100" Margin="45,2,0,0"></Label>
                 <!--Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="154,14,0,0" Name="button1" VerticalAlignment="Top" Width="44" Click="button1_Click" /-->
             </Grid>
-            <Grid Name="TimeOutBarGrid" Height="10" Margin="0,318,-2,0" VerticalAlignment="Top">
+            <Grid Name="TimeOutBarGrid" Height="10" Margin="0,318,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="512">
                 <Rectangle Name="TimeOutBar" Fill="Blue" Width="0" Height="0" VerticalAlignment="Top" HorizontalAlignment="Left"></Rectangle>
 
             </Grid>

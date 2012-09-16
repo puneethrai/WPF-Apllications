@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChokaBhara-Win8style", "ChokaBhara-Win8style\ChokaBhara-Win8style.csproj", "{EEB47A00-C8C5-4286-B6DB-7E597A454C55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChowkaBara-Win8style", "ChokaBhara-Win8style\ChowkaBara-Win8style.csproj", "{EEB47A00-C8C5-4286-B6DB-7E597A454C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

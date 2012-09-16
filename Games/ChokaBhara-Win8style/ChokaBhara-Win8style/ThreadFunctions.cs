@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
     public partial class MainWindow
     {
@@ -33,7 +33,7 @@ namespace ChokaBharaWin8Style
             {
                 if (!isMoved)
                 {
-                    Displayer.Display("Timed Out", TurnFill[TurnState]);
+                    Display("Timed Out", TurnFill[TurnState]);
                     KayiGrid.Dispatcher.BeginInvoke((ThreadStart)delegate()
                     {
                         KayiGrid.Children.Remove(TempStackpanel);

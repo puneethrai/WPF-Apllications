@@ -5,9 +5,9 @@ using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
-    class MessageDisplayer : MainWindow
+    public partial class MainWindow 
     {
         public Label DisplayWindow;
         /// <summary>
@@ -22,14 +22,15 @@ namespace ChokaBharaWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                     {
-                        DisplayWindow.Content = "";
                         DisplayWindow.Content = Message;
+                        DisplayAnimation(false, 0);
+
                     }, null);
                 }
                 else
                 {
-                    DisplayWindow.Content = "";
                     DisplayWindow.Content = Message;
+                    DisplayAnimation(false, 0);
                 }
                 
             }
@@ -42,8 +43,8 @@ namespace ChokaBharaWin8Style
         /// Displays Message on to appropriate window else pops out message box
         /// </summary>
         /// <param name="Message">Message to be displayed</param>
-        /// <param name="Color">Display Color</param>
-        public void Display(string Message,Brush Color)
+        /// <param name="BrushColor">Display Color</param>
+        public void Display(string Message,Brush BrushColor)
         {
             if (DisplayWindow != null)
             {
@@ -51,18 +52,52 @@ namespace ChokaBharaWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                     {
-                        DisplayWindow.Content = "";
                         DisplayWindow.Content = Message;
-                        DisplayWindow.Foreground = Color;
+                        DisplayWindow.Foreground = BrushColor;
+                        DisplayAnimation(false, 0);
+
                     }, null);
                 }
                 else
                 {
-                    DisplayWindow.Content = "";
                     DisplayWindow.Content = Message;
-                    DisplayWindow.Foreground = Color;
+                    DisplayWindow.Foreground = BrushColor;
+                    DisplayAnimation(false, 0);
                 }
                 
+            }
+            else
+            {
+                MessageBox.Show(Message);
+            }
+        }
+        /// <summary>
+        /// Displays Message on to appropriate window for given Duration and Color else pops out message box
+        /// </summary>
+        /// <param name="Message">Message to be displayed</param>
+        /// <param name="BrushColor">Display Color</param>
+        /// <param name="Duration">Duration in msec to be displayed</param>
+        public void Display(string Message, Brush BrushColor,int Duration)
+        {
+            if (DisplayWindow != null)
+            {
+                if (!DisplayWindow.Dispatcher.CheckAccess())
+                {
+                    DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
+                    {
+                        DisplayWindow.Content = Message;
+                        DisplayWindow.Foreground = BrushColor;
+                        DisplayAnimation(false, Duration);
+
+                    }, null);
+                }
+                else
+                {
+                    DisplayWindow.Content = Message;
+                    DisplayWindow.Foreground = BrushColor;
+                    DisplayAnimation(false, Duration);
+                }
+                DisplayAnimation(true, Duration);
             }
             else
             {
@@ -74,62 +109,64 @@ namespace ChokaBharaWin8Style
         /// </summary>
         /// <param name="Message">Message to be displayed</param>
         /// <param name="Duration">Duration in msec to be displayed</param>
-        public void Display(string Message,long Duration)
+        public void Display(string Message,int Duration)
         {
-            AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
             if (DisplayWindow != null)
             {
                 if (!DisplayWindow.Dispatcher.CheckAccess())
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                         {
-                            DisplayWindow.Opacity = 1;
-                            DisplayWindow.Content = "";
                             DisplayWindow.Content = Message;
+                            DisplayAnimation(false, Duration);
+                            
                         }, null);
                 }
                 else
                 {
-                    DisplayWindow.Opacity = 1;
-                    DisplayWindow.Content = "";
                     DisplayWindow.Content = Message;
+                    DisplayAnimation(false, Duration);
                 }
-                Console.WriteLine(Message);
-                Console.WriteLine(DisplayWindow+":"+Duration);
-                Timer Timeout = new Timer((object state) =>
-                {
-                    try
-                    {
-                        DisplayWindow.Dispatcher.BeginInvoke((ThreadStart)(() =>
-                        {
-
-                            DisplayWindow.Content = "";
-                            _autoResetEvent.Set();
-                        }), null);
-       
-                    }
-                    catch(Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                    
-
-                }, null, 0, Duration);
-                Thread th = new Thread(() =>
-                {
-                    _autoResetEvent.WaitOne();
-                    Timeout.Dispose();
-                });
-                th.Name = "Displayer Sync thread";
-                th.Start();
+                DisplayAnimation(true, Duration);
             }
             else
             {
                 MessageBox.Show(Message);
             }
         }
-        public MessageDisplayer()
+        /// <summary>
+        /// Fade IN & Fade OUT animation for Display message box
+        /// </summary>
+        /// <param name="FadeOut">Boolean to either Fade OUT or Fade IN</param>
+        /// <param name="Duration">Duration in msec after which fad IN or fade OUT should take place</param>
+        public void DisplayAnimation(bool FadeOut,int Duration)
         {
+            Storyboard s = null;
+            Thread Animation = new Thread(() =>
+            {
+                if (!FadeOut)
+                    Duration = 100;
+                Thread.Sleep(Duration);
+                DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
+                {
+                    if (FadeOut)
+                    {
+                        s = (Storyboard)TryFindResource("MessageBoxFadeOut");
+                        s.Begin();	// Start animation
+                        DisplayWindow.Foreground = new SolidColorBrush(Colors.Black);
+                    }
+                    else
+                    {
+                        s = (Storyboard)TryFindResource("MessageBoxFadeIn");
+                        s.Begin();	// Start animation
+                    }
+                }, null);
+
+            });
+            Animation.Name = "Animation Thread";
+            Animation.Start();
         }
+        
+       
     }
 }

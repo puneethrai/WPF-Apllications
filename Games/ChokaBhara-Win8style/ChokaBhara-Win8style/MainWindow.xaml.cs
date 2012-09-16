@@ -15,7 +15,7 @@ using System.Windows.Threading;
 using System.Threading;
 // Assembly marked as compliant.
 [assembly: CLSCompliant(true)]
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,7 +34,7 @@ namespace ChokaBharaWin8Style
         Ellipse[,] MoveKayi = null;
         Thread TimerThread = null;
         Brush[] TurnFill = new Brush[4];
-        bool AppExited = false;
+        bool AppExited = false,NoMoreMoveFlag = false;
         
         /// <summary> 
         /// Defines the program entry point. 
@@ -67,7 +67,11 @@ namespace ChokaBharaWin8Style
             TimeOutBarGridHeight = TimeOutBarGrid.Height;
             TimeOutBarGridWidth = TimeOutBarGrid.Width;
         }
-
+        /// <summary>
+        /// Close & minimize event handlers are defined in below region
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         #region WindowControRegion
 
         private void TitleGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -159,7 +163,11 @@ namespace ChokaBharaWin8Style
             Init();
                
         }
-
+        /// <summary>
+        /// Eventhandler for Application exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void AppLicationExit(object sender, ExitEventArgs e)
         {
             if (TimerThread != null)
@@ -175,71 +183,109 @@ namespace ChokaBharaWin8Style
             Turn();
             
         }*/
+        /// <summary>
+        /// Makes the next valid turn
+        /// </summary>
         public void Turn()
         {
+
+            bool AllWon = true;
             /*
              * Bug No. 4
              */
-            if (DiceNo != 4 && DiceNo != 8)
+            if ((DiceNo != 4 && DiceNo != 8) || NoMoreMoveFlag)
             {
                 /*
-                 * Bug No. 7
+                 * Bug No. 10
                  */
-                while (true)
+                for (uint i = 0; i < MaxPlayer; i++)
                 {
-                    TurnState = TurnState >= (MaxPlayer - 1) ? 0 : TurnState + 1;
-                    if (ScoreCard[TurnState] == MaxKayi)
-                        TurnState++;
-                    else
+                    if (ScoreCard[i] != 4)
                     {
+                        AllWon = false;
                         break;
                     }
-                }
-                Point Point1 = new Point(0 + (TurnState * 60), 40);
-                Point Point2 = new Point(10 + (TurnState * 60), 50);
-                Point Point3 = new Point(20 + (TurnState * 60), 40);
-                Point Point4 = new Point(0 + (TurnState * 60), 40);
 
-                if (TurnDisplayTri.Dispatcher.CheckAccess())
+                }
+                if (!AllWon)
                 {
-                    PointCollection polygonPoints = new PointCollection();
-                    polygonPoints.Add(Point1);
-                    polygonPoints.Add(Point2);
-                    polygonPoints.Add(Point3);
-                    polygonPoints.Add(Point4);
-                    TurnDisplayTri.Points = polygonPoints;
-                    TurnDisplayTri.Fill = TurnFill[TurnState];
-                    TurnDisplayRect.Fill = TurnFill[TurnState];
+                    /*
+                     * Bug No. 7
+                     */
+                    while (true)
+                    {
+                        TurnState = TurnState >= (MaxPlayer - 1) ? 0 : TurnState + 1;
+                        if (ScoreCard[TurnState] == MaxKayi)
+                            TurnState++;
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    Point Point1 = new Point(0 + (TurnState * 60), 40);
+                    Point Point2 = new Point(10 + (TurnState * 60), 50);
+                    Point Point3 = new Point(20 + (TurnState * 60), 40);
+                    Point Point4 = new Point(0 + (TurnState * 60), 40);
+
+                    if (TurnDisplayTri.Dispatcher.CheckAccess())
+                    {
+                        PointCollection polygonPoints = new PointCollection();
+                        polygonPoints.Add(Point1);
+                        polygonPoints.Add(Point2);
+                        polygonPoints.Add(Point3);
+                        polygonPoints.Add(Point4);
+                        TurnDisplayTri.Points = polygonPoints;
+                        TurnDisplayTri.Fill = TurnFill[TurnState];
+                        TurnDisplayRect.Fill = TurnFill[TurnState];
+                    }
+                    else
+                    {
+                        TurnDisplayTri.Dispatcher.BeginInvoke((Action)delegate()
+                        {
+                            PointCollection PolygonPoints = new PointCollection();
+                            PolygonPoints.Add(Point1);
+                            PolygonPoints.Add(Point2);
+                            PolygonPoints.Add(Point3);
+                            PolygonPoints.Add(Point4);
+                            TurnDisplayTri.Points = PolygonPoints;
+                            TurnDisplayTri.Fill = TurnFill[TurnState];
+
+                        }, null);
+
+                        TurnDisplayRect.Dispatcher.BeginInvoke((Action)delegate()
+                        {
+                            TurnDisplayRect.Fill = TurnFill[TurnState];
+
+                        }, null);
+                    }
                 }
                 else
                 {
-                    TurnDisplayTri.Dispatcher.BeginInvoke((Action)delegate()
-                    {
-                        PointCollection PolygonPoints = new PointCollection();
-                        PolygonPoints.Add(Point1);
-                        PolygonPoints.Add(Point2);
-                        PolygonPoints.Add(Point3);
-                        PolygonPoints.Add(Point4);
-                        TurnDisplayTri.Points = PolygonPoints;
-                        TurnDisplayTri.Fill = TurnFill[TurnState];
-
-                    }, null);
-
-                    TurnDisplayRect.Dispatcher.BeginInvoke((Action)delegate()
-                    {
-                        TurnDisplayRect.Fill = TurnFill[TurnState];
-
-                    }, null);
+                    Display("All have won");
+                    if (DiceBtn.Dispatcher.CheckAccess())
+                        DiceBtn.IsEnabled = false;
+                    else
+                        DiceBtn.Dispatcher.Invoke((Action)delegate()
+                        {
+                            DiceBtn.IsEnabled = false;
+                        }, null);
                 }
             }
+            
         }
         RadioButton TempRadio1;
         RadioButton TempRadio2;
         RadioButton TempRadio3;
         RadioButton TempRadio4;
         StackPanel TempStackpanel;
+        /// <summary>
+        /// Event handler for DiceBtn & performs game opertaion based on dice no.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DiceBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             if (null == TimerThread)
             {
                 /*
@@ -308,8 +354,10 @@ namespace ChokaBharaWin8Style
                 }
                 else
                 {
-                    Displayer.Display("No More Move for this number",TurnFill[TurnState]);
+                    NoMoreMoveFlag = true;
+                    Display("No More Move for this number",TurnFill[TurnState],4000);
                     Turn();
+                    NoMoreMoveFlag = false;
                 }
             }
             
@@ -318,7 +366,11 @@ namespace ChokaBharaWin8Style
         double TimeOutBarGridWidth;
         double TimeOutBarGridHeight;
         bool TimedOut = false;
-        
+        /// <summary>
+        /// Event handlers for Kayi Radio button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void TempRadio_Checked(object sender, RoutedEventArgs e)
         {
             uint KayiNo = 0;
@@ -361,7 +413,7 @@ namespace ChokaBharaWin8Style
 
 
 
-                    SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
+                    
                     /*
                      * Bug No. 9
                      */
@@ -370,26 +422,28 @@ namespace ChokaBharaWin8Style
                         /*
                          * Bug No. 5
                          */
+                        SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
                         if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
                             Turn();
                     }
                     else
                     {
                         Turn();
+                        isMoved = true;
                     }
                     
                 }
                 else
                 {
                     MyKayi[TurnState,KayiNo] -= DiceNo;
-                    Displayer.Display("Unable to move", TurnFill[TurnState]);
+                    Display("Unable to move", TurnFill[TurnState],4000);
                     
                 }
                 
             }
             else
             {
-                Displayer.Display("Timed Out", TurnFill[TurnState]);
+                Display("Timed Out", TurnFill[TurnState],4000);
                 Turn();
             }
             

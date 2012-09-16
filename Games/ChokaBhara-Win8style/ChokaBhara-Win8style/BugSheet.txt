@@ -7,6 +7,7 @@
 7>After a player has won his turn must  be skipped
 8>Winner's list is repeatly showing who have won already
 9>If 8 or 4 & all kayi's reaches home then that is invalid turn & pass it to other
+10>Game hangs when everyone has won 
 
 
 //Feature to be added

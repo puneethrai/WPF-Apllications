@@ -5,7 +5,6 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\App.g.cs
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style_MarkupCompile.cache
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.g.resources
-C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara_Win8style.Properties.Resources.resources
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.csproj.GenerateResource.Cache
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.pdb
@@ -36,3 +35,12 @@ C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Choka
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.TrustInfo.xml
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.exe.manifest
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8style.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBharaWin8Style.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8Style.exe.manifest
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\ChokaBhara-Win8Style.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8Style.TrustInfo.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8Style.exe.manifest
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Debug\ChokaBhara-Win8Style.application
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\SocketIOClient.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\WebSocket4Net.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\WebSocket4Net.pdb

@@ -8,7 +8,7 @@
     <ProjectGuid>{EEB47A00-C8C5-4286-B6DB-7E597A454C55}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChokaBharaWin8Style</RootNamespace>
+    <RootNamespace>ChowkaBaraWin8Style</RootNamespace>
     <AssemblyName>ChokaBhara-Win8Style</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -55,7 +55,7 @@
     <ApplicationIcon>autorun.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5ED9061FEA952C35F9A51A3904C1BD3CBA549AC1</ManifestCertificateThumbprint>
@@ -64,7 +64,7 @@
     <ManifestKeyFile>ChokaBhara-Win8style_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>ChokaBhara-Win8style_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
@@ -82,6 +82,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\JSON.NET\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SocketIOClient">
+      <HintPath>Resources\SocketIOClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -95,6 +98,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\..\..\..\..\..\Downloads\socketio4net\Reference\websocket4net\net40\WebSocket4Net.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

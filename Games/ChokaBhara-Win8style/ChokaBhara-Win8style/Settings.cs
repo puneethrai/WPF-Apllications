@@ -1,4 +1,4 @@
-﻿namespace ChokaBharaWin8Style.Properties {
+﻿namespace ChowkaBaraWin8Style.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

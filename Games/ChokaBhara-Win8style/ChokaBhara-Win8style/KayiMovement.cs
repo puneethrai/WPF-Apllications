@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-namespace ChokaBharaWin8Style
+namespace ChowkaBaraWin8Style
 {
     /*
      * TODO:if 4 & 8 dice 1 more chance,If they send other player home 1 more chance,dice options 1,2,3,4,8,1kaye kill 1 kayi only,In home make pawns in row
@@ -129,7 +129,7 @@ namespace ChokaBharaWin8Style
                 /*
                  * Bug No. 9
                  */
-                if ((DiceNo != 4 || DiceNo != 8) && ScoreCard[TurnState]!=3)
+                if ((DiceNo != 4 || DiceNo != 8) && ScoreCard[TurnState]<=(MaxKayi-1))
                 {
                     CheckKayi.Visibility = System.Windows.Visibility.Hidden;
                     ScoreCard[TurnState]++;
@@ -200,7 +200,7 @@ namespace ChokaBharaWin8Style
                 else
                 {
                     MyKayi[TurnState, KayiNo] -= DiceNo;
-                    Displayer.Display("Can't move to home when dice is 4 or 8 & last kayi", TurnFill[TurnState]);
+                    Display("Can't move to home when dice is 4 or 8 & last kayi", TurnFill[TurnState],3000);
                     isValid = false;
                 }
             }
