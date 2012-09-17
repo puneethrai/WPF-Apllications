@@ -8,6 +8,8 @@ using System.Configuration;
 using Newtonsoft.Json;
 using SocketIOClient;
 using WebSocket4Net;
+using WebSocketSharp;
+using WebSocketSharp.Frame;
 namespace ChowkaBaraWin8Style
 {
     public partial class MainWindow
@@ -19,7 +21,8 @@ namespace ChowkaBaraWin8Style
         string AckMessage = null;
         int WhoIAm = 0;
         int RoomID = 0;
-        WebSocket websocket;
+        WebSocket4Net.WebSocket websocket;
+        WebSocketSharp.WebSocket Websocket;
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -40,18 +43,63 @@ namespace ChowkaBaraWin8Style
                 NodeSocket.SocketConnectionClosed += new EventHandler(NodeSocket_SocketConnectionClosed);
                 
                 NodeSocket.Connect();
-                */
+                
 
-
-                websocket = new WebSocket("ws://localhost:8080/");
+                
+                websocket = new WebSocket4Net.WebSocket("ws://localhost:8080/");
                 websocket.Opened += new EventHandler(websocket_Opened);
                 websocket.Error += new EventHandler<SuperSocket.ClientEngine.ErrorEventArgs>(websocket_Error);
                 websocket.Closed += new EventHandler(webSocket_SocketConnectionClosed);
                 websocket.MessageReceived += new EventHandler<MessageReceivedEventArgs>(websocket_MessageReceived);
                 
                 websocket.Open();
-
-
+                
+                Websocket = new WebSocketSharp.WebSocket("ws://localhost:8080/");
+                Websocket.OnOpen += (sender, e) =>
+                {
+                    ServerConnectionStatus = (ushort)eServerConnectionStatus.ESTABLISHING;
+                    Console.WriteLine("Socket opened");
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
+                    {
+                        JSONObjects HandShakeMessage = new JSONObjects() 
+                        { RoomID = RoomID, HandShake = true, KayiNo = 0, KayiMove = 0, WhoIAm = WhoIAm, ClientVersion = ClientVersion };
+                        websocket.Send(HandShakeMessage.ToJsonString());
+                        
+                    }
+                };
+                Websocket.OnMessage += (sender, e) =>
+                {
+                    JSONObjects Message = JsonConvert.DeserializeObject<JSONObjects>(e.Data);
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
+                    {
+                        RoomID = Message.RoomID;
+                        WhoIAm = Message.WhoIAm;
+                        Console.WriteLine(RoomID + ":" + WhoIAm);
+                        ServerConnectionStatus = (ushort)eServerConnectionStatus.ESTABLISHED;
+                        JSONObjects ACKMesssage = new JSONObjects() { RoomID = RoomID, HandShake = false, KayiNo = 0, KayiMove = 0, WhoIAm = WhoIAm, ClientVersion = ClientVersion, ClientMessage = "ACK" };
+                        Websocket.Send(ACKMesssage.ToJsonString());
+                    }
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHED)
+                    {
+                        if (Message.ServerMessage == "ACK")
+                        {
+                            ServerConnectionStatus = (ushort)eServerConnectionStatus.CONNECTED;
+                            Console.WriteLine("Connected");
+                        }
+                    }
+                };
+                Websocket.OnError += (sender, e) =>
+                {
+                    ServerConnectionStatus = (ushort)eServerConnectionStatus.ERROR;
+                    Console.WriteLine("Error:" + e.Message);
+                };
+                Websocket.OnClose += (sender, e) =>
+                {
+                    ServerConnectionStatus = (ushort)eServerConnectionStatus.DISCONNECTED;
+                    Console.WriteLine("Socket Closed");
+                };
+                Websocket.Connect();
+                */
                 /*
                 ClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
                 ClientSocket.BeginConnect(ServerAddress, ServerPort, (IAsyncResult ar) =>
@@ -88,7 +136,7 @@ namespace ChowkaBaraWin8Style
         void websocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             Console.WriteLine(e.Message);
-            /*
+            
             JSONObjects Message = JsonConvert.DeserializeObject<JSONObjects>(e.Message);
             if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
             {
@@ -108,7 +156,7 @@ namespace ChowkaBaraWin8Style
                     Console.WriteLine("Connected");
                 }
             }
-             * */
+            
         }
         private void websocket_Opened(object sender, EventArgs e)
         {
@@ -129,7 +177,7 @@ namespace ChowkaBaraWin8Style
             Console.WriteLine("Socket Closed");
             //websocket.Open();
         }
-        private JSONObjects HandShake(WebSocket ClientSocket)
+        private JSONObjects HandShake(WebSocket4Net.WebSocket ClientSocket)
         {
             JSONObjects HandShakeMesssage = new JSONObjects() { RoomID = RoomID, HandShake = true, KayiNo = 0, KayiMove = 0, WhoIAm = WhoIAm, ClientVersion = ClientVersion };
 

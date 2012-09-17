@@ -7,8 +7,8 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Choka Bhara")]
-[assembly: AssemblyDescription("Ancient ChokaBhara Game")]
+[assembly: AssemblyTitle("Chowka Bhara")]
+[assembly: AssemblyDescription("Ancient Chowka Bhara Game")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Puneeth Rai")]
 [assembly: AssemblyProduct("Choka Bhara Windows 8 Style")]
