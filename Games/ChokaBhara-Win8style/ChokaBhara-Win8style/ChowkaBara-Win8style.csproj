@@ -118,6 +118,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\WebSocket4Net.dll</HintPath>
     </Reference>
+    <Reference Include="WebSocketClient">
+      <HintPath>..\..\..\WebSocketClient\WebSocketClient\bin\Debug\WebSocketClient.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

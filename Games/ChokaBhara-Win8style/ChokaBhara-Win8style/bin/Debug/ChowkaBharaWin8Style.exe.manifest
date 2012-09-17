@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChowkaBharaWin8Style.exe" size="251904">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChowkaBharaWin8Style.exe" size="251392">
       <assemblyIdentity name="ChowkaBharaWin8Style" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>p4aQ/PHDCxgnKcYoMPolYCHOvqs=</dsig:DigestValue>
+        <dsig:DigestValue>6sDYFA1SeM9Z8skMKPiTUYevRUc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -135,6 +135,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
         <dsig:DigestValue>uHo4x/RkFUtJ8YdxpiSj07mrmpE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebSocketClient.dll" size="8704">
+      <assemblyIdentity name="WebSocketClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>eJtHujuVNbUQO6TjqSJ5iROzdQ4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

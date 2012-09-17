@@ -10,6 +10,7 @@ using SocketIOClient;
 using WebSocket4Net;
 using WebSocketSharp;
 using WebSocketSharp.Frame;
+using WebSocketClient;
 namespace ChowkaBaraWin8Style
 {
     public partial class MainWindow
@@ -100,6 +101,9 @@ namespace ChowkaBaraWin8Style
                 };
                 Websocket.Connect();
                 */
+                WebSocketClient.WebSocketClient ws = new WebSocketClient.WebSocketClient(new Uri("ws://localhost:8080/"));
+                ws.Connect();
+                ws.Send("Hide");
                 /*
                 ClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
                 ClientSocket.BeginConnect(ServerAddress, ServerPort, (IAsyncResult ar) =>
