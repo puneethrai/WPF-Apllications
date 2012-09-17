@@ -1,0 +1,4 @@
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocketClient\WebSocketClient\bin\Debug\WebSocketClient.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocketClient\WebSocketClient\bin\Debug\WebSocketClient.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocketClient\WebSocketClient\obj\Debug\WebSocketClient.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\WebSocketClient\WebSocketClient\obj\Debug\WebSocketClient.pdb
