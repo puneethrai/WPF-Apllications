@@ -40,7 +40,7 @@ namespace WebSocket
         public Dictionary<int, int> RoomKey = new Dictionary<int, int>();
         public Dictionary<Socket, int> SocketKey = new Dictionary<Socket, int>();
         public Dictionary<Socket, bool> PingKey = new Dictionary<Socket, bool>();
-        public Dictionary<Socket, bool> NodeSocket = new Dictionary<Socket, bool>();
+        
         public static CheckedListBox.ObjectCollection item;
         public bool RoomFlag = false;
         
@@ -49,9 +49,7 @@ namespace WebSocket
         public WebSocketApp()
         {
             InitializeComponent();
-            
-            Form Active = Form.ActiveForm;
-            Active.FormClosed += AppExit;
+            Application.ApplicationExit += AppExit;
             // Create the thread object. This does not start the thread.
             workerThread = new Thread(DoWork);
             // Start the worker thread.
@@ -178,32 +176,42 @@ namespace WebSocket
                         if (!isSocketIO)
                         {
                             owner = ar[i].Split('?');
-                            if (String.Compare(owner[1], 0, "owner=true", 0, "owner=true".Length) == 0)
-                                IsOwner = true;
-                            else
+                            if (owner.Length > 1)
                             {
-                                owner = owner[1].Split('&');
-                                owner = owner[1].Split(' ');
-                                Console.WriteLine("Room ID:" + Convert.ToDecimal(owner[0]));
-                                //  foreach (KeyValuePair<int, int> pair in RoomKey)
-                                foreach (var pair in RoomKey)
+                                ChowkaWebSocket.Add(conn, false);
+                                if (String.Compare(owner[1], 0, "owner=true", 0, "owner=true".Length) == 0)
+                                    IsOwner = true;
+                                else
                                 {
-
-                                    if (pair.Value == Convert.ToDecimal(owner[0]))
+                                    owner = owner[1].Split('&');
+                                    owner = owner[1].Split(' ');
+                                    Console.WriteLine("Room ID:" + Convert.ToDecimal(owner[0]));
+                                    //  foreach (KeyValuePair<int, int> pair in RoomKey)
+                                    foreach (var pair in RoomKey)
                                     {
-                                        SocketKey.Add(conn, pair.Key);
-                                        RoomFlag = true;
-                                        break;
+
+                                        if (pair.Value == Convert.ToDecimal(owner[0]))
+                                        {
+                                            SocketKey.Add(conn, pair.Key);
+                                            RoomFlag = true;
+                                            break;
+                                        }
                                     }
                                 }
+                            }
+                            else
+                            {
+                                ChowkaClientState[conn] = (ushort)eClientConnectionStatus.STARTING;
+                                ChowkaWebSocket.Add(conn, true);
+                                IsOwner = true;
                             }
                         }
                         else
                         {
-                            NodeSocket.Add(conn, true);
+                            ChowkaWebSocket.Add(conn, true);
                         }
                     }
-                    if (!isSocketIO)
+                    if (!isSocketIO||ChowkaWebSocket[conn])
                     {
                         if (String.Compare(ar[i], 0, "Sec-WebSocket-Key:", 0, "Sec-WebSocket-Key:".Length) == 0)
                         {
@@ -213,9 +221,10 @@ namespace WebSocket
                         }
                     }
 
+
                 }
                 string handshakemessage = null;
-                if (!isSocketIO)
+                if (!isSocketIO||ChowkaWebSocket[conn])
                 {
                     // send handshake to the client
 
@@ -224,6 +233,7 @@ namespace WebSocket
                         "Connection: Upgrade\r\n" +
                         "Sec-WebSocket-Accept: " + ComputeWebSocketHandshakeSecurityHash09(ar1[1]) + "\r\n\r\n";
                     writer.Write(handshakemessage);
+                    ChowkaClientState[conn] = eClientConnectionStatus.ESTABLISHING;
                 }
                 else
                 {

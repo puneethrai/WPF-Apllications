@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllAboutChokaBara.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AllAboutRooms.cs">
       <SubType>Form</SubType>
     </Compile>

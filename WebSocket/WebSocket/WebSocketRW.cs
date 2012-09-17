@@ -77,6 +77,7 @@ namespace WebSocket
                             }
                             break;
                         case 9: Console.WriteLine("Ping");
+                            PongFrame(ConnectionSocket);
                             break;
                         case 10: Console.WriteLine("Pong from:" + ConnectionSocket.RemoteEndPoint);
                             PingKey[ConnectionSocket] = true;
@@ -90,7 +91,7 @@ namespace WebSocket
                         default: Console.WriteLine("Invalid Opcode:" + SocStatus);
                             break;
                     }
-                    if ((8 != SocStatus) && (10 != SocStatus))
+                    if ((9 != SocStatus) && (10 != SocStatus) && (9 != SocStatus))
                     {
                         Console.WriteLine("Payload Lenght:");
                         Console.WriteLine(payload);
@@ -147,15 +148,23 @@ namespace WebSocket
                         StringBuilder dataString1 = new StringBuilder();
                         dataString1.Append(Encoding.UTF8.GetString(data, 0, (int)length));
                         Console.WriteLine("Data Recevied:" + dataString1.ToString());
-
-
-                        int key = GetRoomInfo(ConnectionSocket);
-                        SendToAllExceptOne(dataString1.ToString(), ConnectionSocket, key);
+                        if (ChowkaWebSocket[ConnectionSocket])
+                        {
+                            if(SocStatus!=8)
+                                HandleChowkaWebSocket(ConnectionSocket, dataString1.ToString());
+                            dataBuffer = new byte[BUFFER_SIZE];
+                        }
+                        else
+                        {
+                            int key = GetRoomInfo(ConnectionSocket);
+                            SendToAllExceptOne(dataString1.ToString(), ConnectionSocket, key);
+                        }
                     }
                 }
                 else
                 {
-                    SocStatus = 8;
+                    if(9 != SocStatus)
+                        SocStatus = 8;
                 }
             }
             catch (Exception e)

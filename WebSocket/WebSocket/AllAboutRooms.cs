@@ -65,7 +65,13 @@ namespace WebSocket
                     {
                         if (pair.Key != ExceptSocket)
                         {
-                            pair.Key.Send(Send(MessageData));
+                            if (!ChowkaWebSocket[ExceptSocket])
+                                pair.Key.Send(Send(MessageData));
+                            else
+                            {
+                                JSONObjects SendMessage = new JSONObjects() {ServerMessage = MessageData };
+                                pair.Key.Send(Send(SendMessage.ToJsonString()));
+                            }
                         }
                     }
                 }
@@ -86,7 +92,13 @@ namespace WebSocket
                         {
                             if (pair.Key != ExceptSocket)
                             {
-                                pair.Key.Send(Send(MessageData));
+                                if (!ChowkaWebSocket[ExceptSocket])
+                                    pair.Key.Send(Send(MessageData));
+                                else
+                                {
+                                    JSONObjects SendMessage = new JSONObjects() { ServerMessage = MessageData };
+                                    pair.Key.Send(Send(SendMessage.ToJsonString()));
+                                }
 
                             }
                         }
@@ -96,7 +108,7 @@ namespace WebSocket
                 SocketKey.Remove(ExceptSocket);
                 PingKey.Remove(ExceptSocket);
                 Console.WriteLine("connection close with:" + ExceptSocket.RemoteEndPoint);
-                ExceptSocket.Close();
+                //ExceptSocket.Close();
                 
             }
         }
@@ -109,6 +121,14 @@ namespace WebSocket
             sendclient[0] = 0x89;
             sendclient[1] = 0x00;
             PingEndPoint.Send(sendclient);
+        }
+
+        public void PongFrame(Socket PongEndPoint)
+        {
+            byte[] sendclient = new byte[2];
+            sendclient[0] = 0x8A;
+            sendclient[1] = 0x00;
+            PongEndPoint.Send(sendclient);
         }
         
     }

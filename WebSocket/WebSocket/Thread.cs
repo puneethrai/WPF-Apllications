@@ -60,8 +60,19 @@ namespace WebSocket
                             }
                             else
                             {
-                                SendToAllExceptOne(DisEndPointAddress, AcceptSoc, GetRoomInfo(AcceptSoc), true);
-                                break;
+                                if (!ChowkaWebSocket[AcceptSoc])
+                                {
+                                    SendToAllExceptOne(DisEndPointAddress, AcceptSoc, GetRoomInfo(AcceptSoc), true);
+                                    break;
+                                }
+                                else
+                                {
+                                    if (ChowkaClientState[AcceptSoc] == eClientConnectionStatus.CONNECTED)
+                                    {
+                                        SendToAllExceptOne(DisEndPointAddress, AcceptSoc, GetRoomInfo(AcceptSoc), true);
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -75,31 +86,42 @@ namespace WebSocket
                 Thread clientThreads;
                 if (ShakeHands(AcceptSocket, ServerMessage))
                 {
-                    Console.WriteLine("Owner");
-                    int RandNo = GenerateRoomNo();
-                    RoomKey.Add(RoomIndex,RandNo);
-                    SocketKey.Add(AcceptSocket,RoomIndex);
-                    RoomIndex++;
-                    AcceptSocket.Send(Send("RoomID:" + RandNo.ToString()));
-                    if (Room_1.InvokeRequired)
+                    if (!ChowkaWebSocket[AcceptSocket])
                     {
-                        Room_1.Invoke(new MethodInvoker(delegate
+                        Console.WriteLine("Owner");
+                        int RandNo = GenerateRoomNo();
+                        RoomKey.Add(RoomIndex, RandNo);
+                        SocketKey.Add(AcceptSocket, RoomIndex);
+                        RoomIndex++;
+                        AcceptSocket.Send(Send("RoomID:" + RandNo.ToString()));
+                        if (Room_1.InvokeRequired)
                         {
-                            item.Add("Room " + (RoomIndex));
-                            NewRoom = false;
+                            Room_1.Invoke(new MethodInvoker(delegate
+                            {
+                                item.Add("Room " + (RoomIndex));
+                                NewRoom = false;
 
-                        }));
+                            }));
+                        }
+                        RoomFlag = true;
                     }
-                    RoomFlag = true;
+                    else
+                    {
+                        ChowkaClientState[AcceptSocket] = eClientConnectionStatus.ESTABLISHED;
+                        RoomFlag = true;
+                    }
                 }
                 if (RoomFlag)
                 {
                     AcceptSocket.BeginReceive(dataBuffer, 0, dataBuffer.Length, 0, Read, AcceptSocket);
                     // Create the thread object. This does not start the thread.
-                    clientThreads = new Thread(clientOperation);
+                    if (!ChowkaWebSocket[AcceptSocket])
+                    {
+                        clientThreads = new Thread(clientOperation);
 
-                    // Start the Client thread.
-                    clientThreads.Start();
+                        // Start the Client thread.
+                        clientThreads.Start();
+                    }
                     CurrentConectedUsers++;
                     Status.Text = "No of connection:" + CurrentConectedUsers;
                     Console.WriteLine("Waiting for other user");
