@@ -141,8 +141,13 @@ namespace WebSocket
                         Console.WriteLine("Lenght of Payload:" + length);
                         for (int i = 0; i < (int)length; i++)
                         {
-                            data[i] = dataBuffer[(maskstart + masklenght) + i];
-                            data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                            if (mask)
+                            {
+                                data[i] = dataBuffer[(maskstart + masklenght) + i];
+                                data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                            }
+                            else
+                                data[i] = dataBuffer[2 + i];
                             //Console.WriteLine("Decoded Data:" + Convert.ToChar(data[i]));
                         }
                         StringBuilder dataString1 = new StringBuilder();
