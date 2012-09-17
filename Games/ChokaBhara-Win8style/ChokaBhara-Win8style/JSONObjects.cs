@@ -23,6 +23,12 @@ namespace ChowkaBaraWin8Style
         [JsonProperty]
         public string ClientVersion { get; set; }
 
+        [JsonProperty]
+        public string ServerMessage { get; set; }
+
+        [JsonProperty]
+        public string ClientMessage { get; set; }
+
         public JSONObjects()
 		{
 		}
