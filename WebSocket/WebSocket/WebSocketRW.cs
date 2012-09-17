@@ -69,12 +69,12 @@ namespace WebSocket
                             Console.WriteLine("connection close with:" + ConnectionSocket.RemoteEndPoint);
 
                             int i = 0;
-                            i = GetRoomInfo(ConnectionSocket);
+                            /*i = GetRoomInfo(ConnectionSocket);
                             if (-1 != i)
                             {
                                 SendToAllExceptOne("User Disconnected:" + ConnectionSocket.RemoteEndPoint, ConnectionSocket, i, true);
 
-                            }
+                            }*/
                             break;
                         case 9: Console.WriteLine("Ping");
                             PongFrame(ConnectionSocket);
