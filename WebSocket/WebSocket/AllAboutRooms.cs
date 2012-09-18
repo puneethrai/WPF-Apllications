@@ -122,7 +122,10 @@ namespace WebSocket
             sendclient[1] = 0x00;
             PingEndPoint.Send(sendclient);
         }
-
+        /// <summary>
+        /// Sends a pong frame
+        /// </summary>
+        /// <param name="PongEndPoint">Pong End point</param>
         public void PongFrame(Socket PongEndPoint)
         {
             byte[] sendclient = new byte[2];

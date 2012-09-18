@@ -91,7 +91,7 @@ namespace WebSocket
                         default: Console.WriteLine("Invalid Opcode:" + SocStatus);
                             break;
                     }
-                    if ((9 != SocStatus) && (10 != SocStatus) && (9 != SocStatus))
+                    if ((8 != SocStatus) && (10 != SocStatus) && (9 != SocStatus))
                     {
                         Console.WriteLine("Payload Lenght:");
                         Console.WriteLine(payload);
@@ -147,7 +147,7 @@ namespace WebSocket
                                 data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
                             }
                             else
-                                data[i] = dataBuffer[2 + i];
+                                data[i] = dataBuffer[maskstart + i];
                             //Console.WriteLine("Decoded Data:" + Convert.ToChar(data[i]));
                         }
                         StringBuilder dataString1 = new StringBuilder();
@@ -155,9 +155,8 @@ namespace WebSocket
                         Console.WriteLine("Data Recevied:" + dataString1.ToString());
                         if (ChowkaWebSocket[ConnectionSocket])
                         {
-                            if(SocStatus!=8)
-                                HandleChowkaWebSocket(ConnectionSocket, dataString1.ToString());
-                            dataBuffer = new byte[BUFFER_SIZE];
+                            HandleChowkaWebSocket(ConnectionSocket, dataString1.ToString());
+                            
                         }
                         else
                         {
@@ -168,7 +167,7 @@ namespace WebSocket
                 }
                 else
                 {
-                    if(9 != SocStatus)
+                    if(9 != SocStatus||10 != SocStatus)
                         SocStatus = 8;
                 }
             }
