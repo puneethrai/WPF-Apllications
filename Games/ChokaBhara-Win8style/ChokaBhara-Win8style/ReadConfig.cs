@@ -43,7 +43,7 @@ namespace ChowkaBaraWin8Style
             WinnerDisplayed = new bool[MaxKayi];
             DisplayWindow = MessageBoxLabel;
             ClientVersion = System.Windows.Forms.Application.ProductVersion;
-            Display("Can't move to home when dice is 4 or 8 & last kayi", TurnFill[TurnState],5000);
+            
         }
     }
 }

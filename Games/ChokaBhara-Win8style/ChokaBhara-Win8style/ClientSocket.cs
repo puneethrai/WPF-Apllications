@@ -79,6 +79,7 @@ namespace ChowkaBaraWin8Style
                 {
                     ServerConnectionStatus = (ushort)eServerConnectionStatus.CONNECTED;
                     Console.WriteLine("Connected");
+                    Display("Connected to Server");
                 }
             }
             if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
