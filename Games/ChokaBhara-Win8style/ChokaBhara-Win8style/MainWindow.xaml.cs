@@ -26,9 +26,7 @@ namespace ChowkaBaraWin8Style
         private uint DiceNo;
         private Random DiceRand;
 
-        public UInt16 ServerConnectionStatus = 0;
-        public enum eServerConnectionStatus { STARTING,ESTABLISHING,ESTABLISHED,CONNECTED,DISCONNECTED,STOPPED,ERROR };
-        public UInt16 PlayerStatus = 0;
+        public ePlayerStatus PlayerStatus = 0;
         public enum ePlayerStatus {HisTurn,OthersTurn };
         Rectangle[,] MoveRect = null;
         Ellipse[,] MoveKayi = null;
@@ -44,6 +42,7 @@ namespace ChowkaBaraWin8Style
         public MainWindow()
         {
             InitializeComponent();
+            
             DiceRand = new Random();
             MoveRect = new Rectangle[,]
             {
@@ -173,6 +172,8 @@ namespace ChowkaBaraWin8Style
             if (TimerThread != null)
             {
                 AppExited = true;
+                if(ServerConnectionStatus <= (ushort) eServerConnectionStatus.CONNECTED)
+                    ws.Close();
                 TimerThread.Join();
             }
         }

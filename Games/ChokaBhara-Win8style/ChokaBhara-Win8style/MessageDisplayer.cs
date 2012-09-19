@@ -151,14 +151,19 @@ namespace ChowkaBaraWin8Style
                 {
                     if (FadeOut)
                     {
+                        
                         s = (Storyboard)TryFindResource("MessageBoxFadeOut");
                         s.Begin();	// Start animation
+                        DisplayWindow.Opacity = 0;
                         DisplayWindow.Foreground = new SolidColorBrush(Colors.Black);
                     }
                     else
                     {
+                        
                         s = (Storyboard)TryFindResource("MessageBoxFadeIn");
                         s.Begin();	// Start animation
+                        DisplayWindow.Opacity = 1;
+                        
                     }
                 }, null);
 

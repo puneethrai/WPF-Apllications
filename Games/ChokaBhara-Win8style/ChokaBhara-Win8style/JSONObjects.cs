@@ -18,7 +18,7 @@ namespace ChowkaBaraWin8Style
         public int KayiMove { get; set; }
 
         [JsonProperty]
-        public int WhoIAm { get; set; }
+        public byte WhoIAm { get; set; }
 
         [JsonProperty]
         public string ClientVersion { get; set; }
@@ -28,6 +28,8 @@ namespace ChowkaBaraWin8Style
 
         [JsonProperty]
         public string ClientMessage { get; set; }
+
+        public byte TurnState { get; set; }
 
         public JSONObjects()
 		{

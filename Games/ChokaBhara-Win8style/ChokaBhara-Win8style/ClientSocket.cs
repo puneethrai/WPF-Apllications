@@ -20,9 +20,14 @@ namespace ChowkaBaraWin8Style
         byte[] RecvBuffer = null;
         string InitialMessage = null;
         string AckMessage = null;
-        int WhoIAm = 0;
+        byte WhoIAm = 0;
         int RoomID = 0;
         WebSocket ws= null;
+
+        public UInt16 ServerConnectionStatus = 0;
+        public enum eServerConnectionStatus { STARTING, ESTABLISHING, ESTABLISHED, CONNECTED, DISCONNECTED, STOPPED, ERROR };
+        public enum ePlayStatus {IDLE,PLAYING };
+        public ePlayStatus PlayStatus;
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -79,11 +84,28 @@ namespace ChowkaBaraWin8Style
                 {
                     ServerConnectionStatus = (ushort)eServerConnectionStatus.CONNECTED;
                     Console.WriteLine("Connected");
-                    Display("Connected to Server");
+                    Display("Connected to Server",2000);
+                    Display("Your Turn:"+WhoIAm);
                 }
             }
             if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
             {
+                if (Message.ServerMessage == "START")
+                {
+                    if (WhoIAm == 1)
+                    {
+                        Message.ClientMessage = "STARTED";
+                        ws.Send(Message.ToJsonString());
+                    }
+                    PlayStatus = ePlayStatus.PLAYING;
+                }
+                else if (PlayStatus == ePlayStatus.PLAYING)
+                {
+                    if (Message.TurnState == WhoIAm - 1)
+                    {
+
+                    }
+                }
             }
         }
 

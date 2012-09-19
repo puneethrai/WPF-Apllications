@@ -9,7 +9,7 @@
             <DoubleAnimation Storyboard.TargetName="MessageBoxLabel" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:1" BeginTime="0:0:0"></DoubleAnimation>
         </Storyboard>
         <Storyboard x:Key="MessageBoxFadeIn">
-            <DoubleAnimation Storyboard.TargetName="MessageBoxLabel" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1" BeginTime="0:0:0"></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="MessageBoxLabel" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:2" BeginTime="0:0:1"></DoubleAnimation>
         </Storyboard>
         <Storyboard x:Key="PlayerBoxAnimate1" >
             <DoubleAnimation Storyboard.TargetName="Turn1"

@@ -48,7 +48,7 @@ namespace ChowkaBaraWin8Style
             }
             else
             {
-                if (PlayerStatus == (UInt16)ePlayerStatus.OthersTurn)
+                if (PlayerStatus == ePlayerStatus.OthersTurn)
                 {
                     WaitingGIF.Visibility = Visibility.Visible;
                     WaitingGIF.LoadedBehavior = MediaState.Manual;
