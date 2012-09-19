@@ -16,7 +16,7 @@ namespace WebSocket
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WebSocketApp());
-            Application.ApplicationExit += WebSocketApp.AppExit;
+            
         }
 
     }

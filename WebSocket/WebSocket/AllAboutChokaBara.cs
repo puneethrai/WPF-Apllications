@@ -24,7 +24,7 @@ namespace WebSocket
         public int KayiMove { get; set; }
 
         [JsonProperty]
-        public int WhoIAm { get; set; }
+        public byte WhoIAm { get; set; }
 
         [JsonProperty]
         public string ClientVersion { get; set; }
@@ -34,6 +34,8 @@ namespace WebSocket
 
         [JsonProperty]
         public string ClientMessage { get; set; }
+
+        public byte TurnState { get; set; }
 
         public JSONObjects()
         {
@@ -67,7 +69,7 @@ namespace WebSocket
             int RoomID = 0;
             foreach (var room in ChowkaRoom)
             {
-                if (room.Value < 4)
+                if (room.Value < MaxPlayer)
                 {
                     if (ChowkaRoomState[room.Key] == eChowkaRoomState.CREATED)
                     {
@@ -75,6 +77,16 @@ namespace WebSocket
                         RoomID = room.Key;
                         ChowkaRoom[room.Key]++;
                         HandShake.WhoIAm = ChowkaRoom[room.Key];
+                        if (ChowkaRoom[room.Key] == MaxPlayer)
+                            ChowkaRoomState[room.Key] = eChowkaRoomState.STARTING;
+                        foreach (var roomindex in RoomKey)
+                        {
+                            if (roomindex.Value == RoomID)
+                            {
+                                SocketKey.Add(CreateJoinSocket, roomindex.Key);
+                                break;
+                            }
+                        }
                         break;
                     }
                 }
@@ -83,17 +95,20 @@ namespace WebSocket
             {
                 RoomID = GenerateRoomNo();
                 RoomKey.Add(RoomIndex, RoomID);
+                SocketKey.Add(CreateJoinSocket, RoomIndex);
                 ChowkaRoom.Add(RoomID, 1);
                 ChowkaRoomState.Add(RoomID,eChowkaRoomState.CREATED);
+                
                 RoomIndex++;
                 HandShake.WhoIAm = 1;
             }
             HandShake.RoomID = RoomID;
-            SocketKey.Add(CreateJoinSocket, RoomID);
-            
+
+                        
         }
         public void HandleChowkaWebSocket(Socket WebSocket,string ReceivedData)
         {
+            Console.WriteLine("SoketState:" + ChowkaClientState[WebSocket]);
             if (ChowkaClientState[WebSocket] == eClientConnectionStatus.ESTABLISHED)
             {
                 JSONObjects HandShake = Newtonsoft.Json.JsonConvert.DeserializeObject<JSONObjects>(ReceivedData);
@@ -101,12 +116,36 @@ namespace WebSocket
                 {
                     CreateJoinRoom(WebSocket, HandShake);
                     WebSocket.Send(Send(HandShake.ToJsonString()));
+                    Console.WriteLine("Sent:" + HandShake.ToJsonString());
                 }
                 else if (HandShake.ClientMessage == "ACK")
                 {
                     ChowkaClientState[WebSocket] = eClientConnectionStatus.CONNECTED;
                     HandShake.ServerMessage = "ACK";
                     WebSocket.Send(Send(HandShake.ToJsonString()));
+                    Console.WriteLine("Sent ACK:" + HandShake.ToJsonString());
+                    
+                }
+            }
+            if (ChowkaClientState[WebSocket] == eClientConnectionStatus.CONNECTED)
+            {
+                JSONObjects ConnectedState = Newtonsoft.Json.JsonConvert.DeserializeObject<JSONObjects>(ReceivedData);
+                if (ChowkaRoomState[ConnectedState.RoomID] == eChowkaRoomState.STARTING)
+                {
+                    if (ConnectedState.ClientMessage != "STARTED")
+                    {
+                        ConnectedState.ServerMessage = "START";
+                        WebSocket.Send(Send(ConnectedState.ToJsonString()));
+                        SendToAllExceptOne("START", WebSocket, ConnectedState.RoomID);
+                    }
+                    else
+                    {
+                        ChowkaRoomState[ConnectedState.RoomID] = eChowkaRoomState.STARTED;
+                    }
+                }
+                else if (ChowkaRoomState[ConnectedState.RoomID] == eChowkaRoomState.STARTED)
+                {
+                    SendToAllExceptOne(ReceivedData, WebSocket, ConnectedState.RoomID);
                 }
             }
         }

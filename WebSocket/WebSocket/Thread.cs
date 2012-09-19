@@ -31,7 +31,7 @@ namespace WebSocket
             // member will be accessed by multiple threads.
             private static volatile bool _shouldStop;
             private static volatile bool StopAllClient = false;
-            public static void AppExit(object sender, EventArgs e)
+            public void AppExit(object sender, EventArgs e)
             {
                 // Request that the worker thread stop itself:
                 RequestStop();
@@ -39,6 +39,8 @@ namespace WebSocket
                 // Use the Join method to block the current thread 
                 // until the object's thread terminates.
                 workerThread.Join();
+                serverSocket.Disconnect(false);
+                serverSocket.Dispose();
             }
             public void clientOperation()
             {
@@ -115,13 +117,11 @@ namespace WebSocket
                 {
                     AcceptSocket.BeginReceive(dataBuffer, 0, dataBuffer.Length, 0, Read, AcceptSocket);
                     // Create the thread object. This does not start the thread.
-                    if (!ChowkaWebSocket[AcceptSocket])
-                    {
-                        clientThreads = new Thread(clientOperation);
+                    clientThreads = new Thread(clientOperation);
 
-                        // Start the Client thread.
-                        clientThreads.Start();
-                    }
+                    // Start the Client thread.
+                    clientThreads.Start();
+                    
                     CurrentConectedUsers++;
                     Status.Text = "No of connection:" + CurrentConectedUsers;
                     Console.WriteLine("Waiting for other user");

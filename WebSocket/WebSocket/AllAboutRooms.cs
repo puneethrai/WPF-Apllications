@@ -48,7 +48,8 @@ namespace WebSocket
                 }
 
             }*/
-            i = SocketKey[Key];
+            if(SocketKey.ContainsKey(Key))
+                i = SocketKey[Key];
             return i;
 
         }
@@ -108,7 +109,7 @@ namespace WebSocket
                 SocketKey.Remove(ExceptSocket);
                 PingKey.Remove(ExceptSocket);
                 Console.WriteLine("connection close with:" + ExceptSocket.RemoteEndPoint);
-                //ExceptSocket.Close();
+                ExceptSocket.Close();
                 
             }
         }

@@ -76,7 +76,7 @@ namespace WebSocket
         // look for connecting clients
         private void ListenForClients()
         {
-            serverSocket.BeginAccept(new AsyncCallback(OnClientConnect), null);
+            serverSocket.BeginAccept(OnClientConnect, null);
             
         }
         

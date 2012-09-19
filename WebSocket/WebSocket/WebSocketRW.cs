@@ -32,7 +32,7 @@ namespace WebSocket
             try
             {
 
-                Console.WriteLine("Hey I Read Something");
+                //Console.WriteLine("Hey I Read Something");
                 if (ConnectionSocket.Connected)
                 {
                     int sizeOfReceivedData = dataBuffer.Length;
@@ -69,17 +69,17 @@ namespace WebSocket
                             Console.WriteLine("connection close with:" + ConnectionSocket.RemoteEndPoint);
 
                             int i = 0;
-                            /*i = GetRoomInfo(ConnectionSocket);
+                            i = GetRoomInfo(ConnectionSocket);
                             if (-1 != i)
                             {
                                 SendToAllExceptOne("User Disconnected:" + ConnectionSocket.RemoteEndPoint, ConnectionSocket, i, true);
 
-                            }*/
+                            }
                             break;
                         case 9: Console.WriteLine("Ping");
                             PongFrame(ConnectionSocket);
                             break;
-                        case 10: Console.WriteLine("Pong from:" + ConnectionSocket.RemoteEndPoint);
+                        case 10: //Console.WriteLine("Pong from:" + ConnectionSocket.RemoteEndPoint);
                             PingKey[ConnectionSocket] = true;
                             break;
                         case 11:
@@ -178,8 +178,22 @@ namespace WebSocket
             }
             finally
             {
-                if(8 != SocStatus)
-                    ConnectionSocket.BeginReceive(dataBuffer, 0, dataBuffer.Length, 0, Read, ConnectionSocket);
+                if (8 != SocStatus)
+                {
+                    try
+                    {
+                        ConnectionSocket.BeginReceive(dataBuffer, 0, dataBuffer.Length, 0, Read, ConnectionSocket);
+                    }
+                    catch (Exception ex)
+                    {
+                        int i = GetRoomInfo(ConnectionSocket);
+                        if (-1 != i)
+                        {
+                            SendToAllExceptOne("User Disconnected:" + ConnectionSocket.RemoteEndPoint, ConnectionSocket, i, true);
+
+                        }
+                    }
+                }
             }
            
         }
