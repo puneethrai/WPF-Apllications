@@ -465,10 +465,10 @@ namespace WebSocketClient
 
                     recvBuffer.Append(Encoding.UTF8.GetString(data, 0, (int)length));
                     onDebugMessage("Data Recevied:" + recvBuffer.ToString());
-                        
+                    FireMessageReceived(recvBuffer.ToString(), Opcode);
                 }
                                
-                FireMessageReceived(recvBuffer.ToString(),Opcode);
+                
                 if (Opcode != eWebSocketOpcode.CLOSE) 
                     mStream.BeginRead(DataBuffer, 0, DataBuffer.Length, RecvData, null);
                 else if(Opcode == eWebSocketOpcode.CLOSE)
@@ -482,7 +482,7 @@ namespace WebSocketClient
             return recvBuffer.ToString();
         }
 
-        public void Close(string reason)
+        private void Close(string reason)
         {
             State = eWebSocketClientState.DISCONNECTING;
             mStream.Dispose();
@@ -492,6 +492,17 @@ namespace WebSocketClient
             mHandshakeComplete = false;
             State = eWebSocketClientState.DISCONNECTED;
             onDebugMessage("Websocket connection closed"+Environment.NewLine+"Reason:"+reason);
+        }
+        public void Close()
+        {
+            State = eWebSocketClientState.DISCONNECTING;
+            byte[] SendClose = new byte[2];
+            SendClose[0] = 0x88;
+            SendClose[1] = 0x00;
+            mStream.Write(SendClose, 0, SendClose.Length);
+            State = eWebSocketClientState.DISCONNECTED;
+            onDebugMessage("Websocket connection closed" + Environment.NewLine + "Reason:Client Closed");
+
         }
         #endregion
         #region internal
