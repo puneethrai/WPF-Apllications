@@ -16,6 +16,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,12 +29,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -82,21 +82,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\JSON.NET\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleJson">
-      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\SimpleJson.dll</HintPath>
-    </Reference>
-    <Reference Include="SocketIOClient">
-      <HintPath>Resources\SocketIOClient.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.ClientEngine.Common">
-      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\SuperSocket.ClientEngine.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.ClientEngine.Core">
-      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\SuperSocket.ClientEngine.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.ClientEngine.Protocol">
-      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\SuperSocket.ClientEngine.Protocol.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -110,13 +95,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>..\..\..\..\..\Visual Studio 2012\Projects\websocket-sharp\websocket-sharp\bin\Release\websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="WebSocket4Net, Version=0.7.0.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\bin\net40\Debug\WebSocket4Net.dll</HintPath>
     </Reference>
     <Reference Include="WebSocketClient">
       <HintPath>..\..\..\WebSocketClient\WebSocketClient\bin\Debug\WebSocketClient.dll</HintPath>

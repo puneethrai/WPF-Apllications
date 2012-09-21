@@ -13,7 +13,7 @@ using System.Windows;
 [assembly: AssemblyCompany("Puneeth Rai")]
 [assembly: AssemblyProduct("Choka Bhara Windows 8 Style")]
 [assembly: AssemblyCopyright("Copyright © Puneeth Rai 2012")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("PR")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

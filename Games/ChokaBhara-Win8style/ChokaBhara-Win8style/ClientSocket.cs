@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Configuration;
 using Newtonsoft.Json;
-using SocketIOClient;
+
 //using WebSocket4Net;
 //using WebSocketSharp;
 //using WebSocketSharp.Frame;
@@ -16,7 +16,7 @@ namespace ChowkaBaraWin8Style
     public partial class MainWindow
     {
         Socket ClientSocket = null;
-        Client NodeSocket;
+        
         byte[] RecvBuffer = null;
         string InitialMessage = null;
         string AckMessage = null;
@@ -24,7 +24,7 @@ namespace ChowkaBaraWin8Style
         int RoomID = 0;
         WebSocket ws= null;
 
-        public UInt16 ServerConnectionStatus = 0;
+        public UInt16 ServerConnectionStatus = (ushort)eServerConnectionStatus.STOPPED;
         public enum eServerConnectionStatus { STARTING, ESTABLISHING, ESTABLISHED, CONNECTED, DISCONNECTED, STOPPED, ERROR };
         public enum ePlayStatus {IDLE,PLAYING };
         public ePlayStatus PlayStatus;
@@ -116,7 +116,6 @@ namespace ChowkaBaraWin8Style
             if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
             {
                 JSONObjects HandShakeMessage = HandShake();
-                //ws.Send("Hey");
                 ws.Send(HandShakeMessage.ToJsonString());
                 Console.WriteLine(ws.State);
                 
@@ -127,6 +126,21 @@ namespace ChowkaBaraWin8Style
         {
             ServerConnectionStatus = (ushort)eServerConnectionStatus.ERROR;
             Console.WriteLine("Error:" + e.Message);
+            if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ERROR)
+            {
+                if (GoOffLine.Dispatcher.CheckAccess())
+                {
+                    GoOffLine.IsEnabled = true;
+                    GoOnLine.IsChecked = false;
+                }
+                else
+                    GoOffLine.Dispatcher.Invoke((Action)delegate()
+                    {
+                        GoOffLine.IsEnabled = true;
+                        GoOnLine.IsChecked = false;
+                    }, null);
+                StartPlay = false;
+            }
         }
         private JSONObjects HandShake()
         {

@@ -32,7 +32,7 @@ namespace ChowkaBaraWin8Style
         Ellipse[,] MoveKayi = null;
         Thread TimerThread = null;
         Brush[] TurnFill = new Brush[4];
-        bool AppExited = false,NoMoreMoveFlag = false;
+        bool AppExited = false,NoMoreMoveFlag = false,StartPlay,isOnline;
         
         /// <summary> 
         /// Defines the program entry point. 
@@ -157,10 +157,7 @@ namespace ChowkaBaraWin8Style
             Console.WriteLine("Loaded");
             Application.Current.Exit += new ExitEventHandler(AppLicationExit);
             ReadConfig();
-            GifActions();
-            ConnectToServer();
             Init();
-               
         }
         /// <summary>
         /// Eventhandler for Application exit
@@ -189,7 +186,7 @@ namespace ChowkaBaraWin8Style
         /// </summary>
         public void Turn()
         {
-
+            
             bool AllWon = true;
             /*
              * Bug No. 4
@@ -286,82 +283,88 @@ namespace ChowkaBaraWin8Style
         /// <param name="e"></param>
         private void DiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (null == TimerThread)
+            if (StartPlay)
             {
-                /*
-                 * Bug No. 2
-                 */
-                DiceNo = 5;
-                while(DiceNo==5||DiceNo==6||DiceNo==7)
+
+                if (null == TimerThread)
                 {
-                    DiceNo = (uint)DiceRand.Next(1, 9);
-                    Console.WriteLine(DiceNo);
-                }
-                DiceNoLabel.Content = "" + DiceNo;
-                /*
-                 * Bug No. 1
-                 */
-                while (true)
-                {
-                    if (Convert.ToInt32(DiceNoLabel.Content) != (int)DiceNo)
+                    /*
+                     * Bug No. 2
+                     */
+                    DiceNo = 5;
+                    while (DiceNo == 5 || DiceNo == 6 || DiceNo == 7)
                     {
-                        DiceNoLabel.Content = "" + DiceNo;
+                        DiceNo = (uint)DiceRand.Next(1, 9);
+                        Console.WriteLine(DiceNo);
+                    }
+                    DiceNoLabel.Content = "" + DiceNo;
+                    /*
+                     * Bug No. 1
+                     */
+                    while (true)
+                    {
+                        if (Convert.ToInt32(DiceNoLabel.Content) != (int)DiceNo)
+                        {
+                            DiceNoLabel.Content = "" + DiceNo;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (!NoMoreMove(DiceNo))
+                    {
+                        KayiGrid.Background = Brushes.Magenta;
+                        TempStackpanel = new StackPanel();
+                        KayiGrid.Children.Add(TempStackpanel);
+                        TempRadio1 = new RadioButton();
+                        TempRadio1.Name = "TempRadio1";
+                        TempRadio1.Content = "Kayi 1";
+                        if (MyKayi[TurnState, 0] >= (MaxMoves - 1))
+                            TempRadio1.Visibility = Visibility.Hidden;
+                        TempRadio2 = new RadioButton();
+                        TempRadio2.Name = "TempRadio2";
+                        TempRadio2.Content = "Kayi 2";
+                        if (MyKayi[TurnState, 1] >= (MaxMoves - 1))
+                            TempRadio2.Visibility = Visibility.Hidden;
+                        TempRadio3 = new RadioButton();
+                        TempRadio3.Name = "TempRadio3";
+                        TempRadio3.Content = "Kayi 3";
+                        if (MyKayi[TurnState, 2] >= (MaxMoves - 1))
+                            TempRadio3.Visibility = Visibility.Hidden;
+                        TempRadio4 = new RadioButton();
+                        TempRadio4.Name = "TempRadio4";
+                        TempRadio4.Content = "Kayi 4";
+                        if (MyKayi[TurnState, 3] >= (MaxMoves - 1))
+                            TempRadio4.Visibility = Visibility.Hidden;
+                        TempRadio1.Checked += new RoutedEventHandler(TempRadio_Checked);
+                        TempRadio2.Checked += new RoutedEventHandler(TempRadio_Checked);
+                        TempRadio3.Checked += new RoutedEventHandler(TempRadio_Checked);
+                        TempRadio4.Checked += new RoutedEventHandler(TempRadio_Checked);
+                        TempStackpanel.Children.Add(TempRadio1);
+                        TempStackpanel.Children.Add(TempRadio2);
+                        TempStackpanel.Children.Add(TempRadio3);
+                        TempStackpanel.Children.Add(TempRadio4);
+                        ThreadStart start = new ThreadStart(TimerStart);
+                        TimerThread = new Thread(start);
+                        TimerThread.Name = "Timer Thread";
+                        TimerThread.Start();
+                        isMoved = false;
+                        TimedOut = false;
                     }
                     else
                     {
-                        break;
+                        NoMoreMoveFlag = true;
+                        Display("No More Move for this number", TurnFill[TurnState], 4000);
+                        Turn();
+                        NoMoreMoveFlag = false;
                     }
                 }
-                if (!NoMoreMove(DiceNo))
-                {
-                    KayiGrid.Background = Brushes.Magenta;
-                    TempStackpanel = new StackPanel();
-                    KayiGrid.Children.Add(TempStackpanel);
-                    TempRadio1 = new RadioButton();
-                    TempRadio1.Name = "TempRadio1";
-                    TempRadio1.Content = "Kayi 1";
-                    if (MyKayi[TurnState, 0] >= (MaxMoves - 1))
-                        TempRadio1.Visibility = Visibility.Hidden;                    
-                    TempRadio2 = new RadioButton();
-                    TempRadio2.Name = "TempRadio2";
-                    TempRadio2.Content = "Kayi 2";
-                    if (MyKayi[TurnState, 1] >= (MaxMoves - 1))
-                        TempRadio2.Visibility = Visibility.Hidden; 
-                    TempRadio3 = new RadioButton();
-                    TempRadio3.Name = "TempRadio3";
-                    TempRadio3.Content = "Kayi 3";
-                    if (MyKayi[TurnState, 2] >= (MaxMoves - 1))
-                        TempRadio3.Visibility = Visibility.Hidden; 
-                    TempRadio4 = new RadioButton();
-                    TempRadio4.Name = "TempRadio4";
-                    TempRadio4.Content = "Kayi 4";
-                    if (MyKayi[TurnState, 3] >= (MaxMoves - 1))
-                        TempRadio4.Visibility = Visibility.Hidden; 
-                    TempRadio1.Checked += new RoutedEventHandler(TempRadio_Checked);
-                    TempRadio2.Checked += new RoutedEventHandler(TempRadio_Checked);
-                    TempRadio3.Checked += new RoutedEventHandler(TempRadio_Checked);
-                    TempRadio4.Checked += new RoutedEventHandler(TempRadio_Checked);
-                    TempStackpanel.Children.Add(TempRadio1);
-                    TempStackpanel.Children.Add(TempRadio2);
-                    TempStackpanel.Children.Add(TempRadio3);
-                    TempStackpanel.Children.Add(TempRadio4);
-                    ThreadStart start = new ThreadStart(TimerStart);
-                    TimerThread = new Thread(start);
-                    TimerThread.Name = "Timer Thread";
-                    TimerThread.Start();
-                    isMoved = false;
-                    TimedOut = false;
-                }
-                else
-                {
-                    NoMoreMoveFlag = true;
-                    Display("No More Move for this number",TurnFill[TurnState],4000);
-                    Turn();
-                    NoMoreMoveFlag = false;
-                }
             }
-            
+            else
+            {
+                Display("Game not yet started", 2000);
+            }
             
         }
         double TimeOutBarGridWidth;
@@ -448,6 +451,28 @@ namespace ChowkaBaraWin8Style
                 Turn();
             }
             
+        }
+
+        private void GoOnLine_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!StartPlay && ServerConnectionStatus> (ushort)eServerConnectionStatus.CONNECTED)
+            {
+                ConnectToServer();
+                GifActions();
+                isOnline = true;
+                GoOffLine.IsEnabled = false;
+            }
+        }
+
+        private void GoOffLine_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!StartPlay)
+            {
+                StartPlay = true;
+                isOnline = false;
+                
+                GoOnLine.IsEnabled = false;
+            }
         }
         
 

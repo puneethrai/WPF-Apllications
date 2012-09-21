@@ -22,10 +22,16 @@ namespace ChowkaBaraWin8Style
         private void GifActions()
         {
             ServerConnect.LoadedBehavior = MediaState.Manual;
+            ServerConnect.Source = new Uri("serverwait.gif",UriKind.Relative);
             ServerConnect.Play();
             ServerConnect.MediaEnded += new RoutedEventHandler(GIF_MediaEnded);
             WaitingGIF.LoadedBehavior = MediaState.Manual;
-            WaitingGIF.Play();
+            WaitingGIF.Source = new Uri("waiting.gif", UriKind.Relative);
+            if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
+                WaitingGIF.Play();
+            else
+                WaitingGIF.Visibility = Visibility.Hidden;
+            
             WaitingGIF.MediaEnded += new RoutedEventHandler(GIF_MediaEnded);
         }
         private void GIF_MediaEnded(object sender, RoutedEventArgs REA)
