@@ -102,134 +102,138 @@ namespace WebSocketClient
         /// Decodes the received message & triggers the message received event
         /// </summary>
         /// <returns>Returns decoded message in string </returns>
-        private string Recv(byte[] DataBuffer)
+        private void Recv(byte[] DataBuffer)
         {
             StringBuilder recvBuffer = new StringBuilder();
             eWebSocketOpcode Opcode = eWebSocketOpcode.CRESERVED;
             if (EnsureWebSocketOpen())
             {
-
-                byte payload = (byte)((DataBuffer[1] & 0x40) | (DataBuffer[1] & 0x20) | (DataBuffer[1] & 0x10) | (DataBuffer[1] & 0x8) | (DataBuffer[1] & 0x4) | (DataBuffer[1] & 0x2) | (DataBuffer[1] & 0x1));
-                byte SocStatus = (byte)(DataBuffer[0] & 0x0F);
-                bool mask = (DataBuffer[1] & 0x80) == 0x80;
-                byte[] data = null, maskKeys = new byte[4];
-                int maskstart = 0, masklenght = 4;
-                switch (SocStatus)
+                try
                 {
-                    case 0: Opcode = eWebSocketOpcode.CONTINUATION;
-                        onDebugMessage("continuation frame");
-                        break;
-                    case 1: Opcode = eWebSocketOpcode.TEXT;
-                        onDebugMessage("text frame");
-                        break;
-                    case 2: Opcode = eWebSocketOpcode.BINARY;
-                        onDebugMessage("binary frame");
-                        break;
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7: Opcode = eWebSocketOpcode.NCRESERVED;
-                        onDebugMessage("reserved for further non-control frames");
-                        break;
-                    case 8:
-                        break;
-                    case 9: Opcode = eWebSocketOpcode.PING;
-                        onDebugMessage("Ping");
-                        PongFrame(mStream);
-                        break;
-                    case 10: Opcode = eWebSocketOpcode.PONG;
-                        onDebugMessage("Pong");
-                        PingFrame(mStream);
-                        break;
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15: Opcode = eWebSocketOpcode.CRESERVED;
-                        onDebugMessage("reserved for further control frame");
-                        break;
-                    default: onDebugMessage("Invalid Opcode:" + SocStatus);
-                        break;
-                }
-                if ((8 != SocStatus) && (10 != SocStatus) && (9 != SocStatus))
-                {
-                    onDebugMessage("Payload Lenght:");
-                    onDebugMessage("" + payload);
-                    ulong length = 0;
-                    switch (payload)
+                    byte payload = (byte)((DataBuffer[1] & 0x40) | (DataBuffer[1] & 0x20) | (DataBuffer[1] & 0x10) | (DataBuffer[1] & 0x8) | (DataBuffer[1] & 0x4) | (DataBuffer[1] & 0x2) | (DataBuffer[1] & 0x1));
+                    byte SocStatus = (byte)(DataBuffer[0] & 0x0F);
+                    bool mask = (DataBuffer[1] & 0x80) == 0x80;
+                    byte[] data = null, maskKeys = new byte[4];
+                    int maskstart = 0, masklenght = 4;
+                    switch (SocStatus)
                     {
-                        case 126:
-                            maskstart = 4;
-                            byte[] bytesUShort = new byte[2];
-                            for (int i = 0; i <= 1; i++)
-                                bytesUShort[i] = DataBuffer[i + 2];
-                            if (bytesUShort != null)
-                            {
-                                length = BitConverter.ToUInt16(bytesUShort.Reverse().ToArray(), 0);
-                            }
+                        case 0: Opcode = eWebSocketOpcode.CONTINUATION;
+                            onDebugMessage("continuation frame");
                             break;
-                        case 127:
-                            maskstart = 9;
-                            byte[] bytesULong = new byte[8];
-                            for (int i = 0; i <= 7; i++)
-                                bytesULong[i] = DataBuffer[i + 2];
-                            if (bytesULong != null)
-                            {
-                                length = BitConverter.ToUInt16(bytesULong.Reverse().ToArray(), 0);
-                            }
+                        case 1: Opcode = eWebSocketOpcode.TEXT;
+                            onDebugMessage("text frame");
                             break;
-
-                        default:
-                            maskstart = 2;
-                            length = payload;
-                            data = new byte[payload + 1];
+                        case 2: Opcode = eWebSocketOpcode.BINARY;
+                            onDebugMessage("binary frame");
+                            break;
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7: Opcode = eWebSocketOpcode.NCRESERVED;
+                            onDebugMessage("reserved for further non-control frames");
+                            break;
+                        case 8:
+                            break;
+                        case 9: Opcode = eWebSocketOpcode.PING;
+                            onDebugMessage("Ping");
+                            PongFrame(mStream);
+                            break;
+                        case 10: Opcode = eWebSocketOpcode.PONG;
+                            onDebugMessage("Pong");
+                            PingFrame(mStream);
+                            break;
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15: Opcode = eWebSocketOpcode.CRESERVED;
+                            onDebugMessage("reserved for further control frame");
+                            break;
+                        default: onDebugMessage("Invalid Opcode:" + SocStatus);
                             break;
                     }
-
-                    if (mask)
+                    if ((8 != SocStatus) && (10 != SocStatus) && (9 != SocStatus))
                     {
-                        onDebugMessage("mask bit is set ,searching for Masking key from position" + maskstart);
-                        onDebugMessage("Masking Keys are:");
-                        for (int i = maskstart; i < (maskstart + masklenght); i++)
+                        onDebugMessage("Payload Lenght:");
+                        onDebugMessage("" + payload);
+                        ulong length = 0;
+                        switch (payload)
                         {
-                            maskKeys[i - maskstart] = DataBuffer[i];
-                            onDebugMessage("" + maskKeys[i - maskstart]);
-                        }
-                    }
-                    onDebugMessage("Lenght of data:" + length);
-                    if (data == null)
-                        data = new byte[length + 1];
+                            case 126:
+                                maskstart = 4;
+                                byte[] bytesUShort = new byte[2];
+                                for (int i = 0; i <= 1; i++)
+                                    bytesUShort[i] = DataBuffer[i + 2];
+                                if (bytesUShort != null)
+                                {
+                                    length = BitConverter.ToUInt16(bytesUShort.Reverse().ToArray(), 0);
+                                }
+                                break;
+                            case 127:
+                                maskstart = 9;
+                                byte[] bytesULong = new byte[8];
+                                for (int i = 0; i <= 7; i++)
+                                    bytesULong[i] = DataBuffer[i + 2];
+                                if (bytesULong != null)
+                                {
+                                    length = BitConverter.ToUInt16(bytesULong.Reverse().ToArray(), 0);
+                                }
+                                break;
 
-                    for (int i = 0; i < (int)length; i++)
-                    {
+                            default:
+                                maskstart = 2;
+                                length = payload;
+                                data = new byte[payload + 1];
+                                break;
+                        }
+
                         if (mask)
                         {
-                            data[i] = DataBuffer[(maskstart + masklenght) + i];
-                            data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                            onDebugMessage("mask bit is set ,searching for Masking key from position" + maskstart);
+                            onDebugMessage("Masking Keys are:");
+                            for (int i = maskstart; i < (maskstart + masklenght); i++)
+                            {
+                                maskKeys[i - maskstart] = DataBuffer[i];
+                                onDebugMessage("" + maskKeys[i - maskstart]);
+                            }
                         }
-                        else
-                            data[i] = DataBuffer[maskstart + i];
+                        onDebugMessage("Lenght of data:" + length);
+                        if (data == null)
+                            data = new byte[length + 1];
 
+                        for (int i = 0; i < (int)length; i++)
+                        {
+                            if (mask)
+                            {
+                                data[i] = DataBuffer[(maskstart + masklenght) + i];
+                                data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                            }
+                            else
+                                data[i] = DataBuffer[maskstart + i];
+
+                        }
+
+                        recvBuffer.Append(Encoding.UTF8.GetString(data, 0, (int)length));
+                        onDebugMessage("Data Recevied:" + recvBuffer.ToString());
+                        FireMessageReceived(recvBuffer.ToString(), Opcode);
                     }
 
-                    recvBuffer.Append(Encoding.UTF8.GetString(data, 0, (int)length));
-                    onDebugMessage("Data Recevied:" + recvBuffer.ToString());
-                    FireMessageReceived(recvBuffer.ToString(), Opcode);
+
+                    if (Opcode != eWebSocketOpcode.CLOSE)
+                        mStream.BeginRead(DataBuffer, 0, DataBuffer.Length, RecvData, null);
+                    else if (Opcode == eWebSocketOpcode.CLOSE)
+                    {
+                        Close(m_ServerClosedMessage);
+                    }
                 }
-
-
-                if (Opcode != eWebSocketOpcode.CLOSE)
-                    mStream.BeginRead(DataBuffer, 0, DataBuffer.Length, RecvData, null);
-                else if (Opcode == eWebSocketOpcode.CLOSE)
+                catch (Exception ex)
                 {
-                    Close(m_ServerClosedMessage);
+                    OnError(ex);
                 }
-
 
             }
 
-            return recvBuffer.ToString();
         }
         private const string m_NotOpenSendingMessage = "You must send data by websocket after websocket is opened!";
         private bool EnsureWebSocketOpen()
