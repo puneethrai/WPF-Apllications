@@ -53,6 +53,15 @@ namespace WebSocket
             return i;
 
         }
+        public int GetRoomIndex(int RoomID)
+        {
+            foreach (var room in RoomKey)
+            {
+                if (room.Value == RoomID)
+                    return room.Key;
+            }
+            return -1;
+        }
         /// <summary>
         /// Broadcasts a given message to every one except the one who created it.
         /// </summary>
@@ -66,13 +75,7 @@ namespace WebSocket
                     {
                         if (pair.Key != ExceptSocket)
                         {
-                            if (!ChowkaWebSocket[ExceptSocket])
-                                pair.Key.Send(Send(MessageData));
-                            else
-                            {
-                                JSONObjects SendMessage = new JSONObjects() {ServerMessage = MessageData };
-                                pair.Key.Send(Send(SendMessage.ToJsonString()));
-                            }
+                            pair.Key.Send(Send(MessageData));
                         }
                     }
                 }
@@ -98,7 +101,13 @@ namespace WebSocket
                                 else
                                 {
                                     JSONObjects SendMessage = new JSONObjects() { ServerMessage = MessageData };
-                                    pair.Key.Send(Send(SendMessage.ToJsonString()));
+                                    try
+                                    {
+                                        pair.Key.Send(Send(SendMessage.ToJsonString()));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
                                 }
 
                             }

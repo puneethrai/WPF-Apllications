@@ -36,11 +36,25 @@ namespace WebSocket
         
         public int RoomNo=0;
         public bool NewRoom = true;
+        /// <summary>
+        /// Holds the index or count of room created
+        /// </summary>
         public int RoomIndex = 0;
+        /// <summary>
+        /// Dictionary containing RoomIndex as Key and RoomID as value
+        /// </summary>
         public Dictionary<int, int> RoomKey = new Dictionary<int, int>();
+        /// <summary>
+        /// Dictionary containing Socket FD as Key and RoomIndex as value
+        /// </summary>
         public Dictionary<Socket, int> SocketKey = new Dictionary<Socket, int>();
+        /// <summary>
+        /// Dictionary containing Socket FD as Key and boolean for ping status as value
+        /// </summary>
         public Dictionary<Socket, bool> PingKey = new Dictionary<Socket, bool>();
-        
+        /// <summary>
+        /// List of item to add for room info used in GUI
+        /// </summary>
         public static CheckedListBox.ObjectCollection item;
         public bool RoomFlag = false;
         
@@ -70,14 +84,22 @@ namespace WebSocket
                 ServerMessage.AppendText("Server Listing on 8080");
                 Console.WriteLine("main thread: Starting worker thread...");
                 item = Room_1.Items;
-                
-            
+               
         }
         // look for connecting clients
         private void ListenForClients()
         {
-            serverSocket.BeginAccept(OnClientConnect, null);
-            
+            try
+            {
+                serverSocket.BeginAccept(OnClientConnect, null);
+            }
+            catch (ObjectDisposedException)
+            {
+                if (_shouldStop)
+                    return;
+                else
+                    throw;
+            }
         }
         
 
@@ -89,7 +111,17 @@ namespace WebSocket
                 Socket client = null;
                 if (serverSocket != null && serverSocket.IsBound)
                 {
-                    client = serverSocket.EndAccept(result);
+                    try
+                    {
+                        client = serverSocket.EndAccept(result);
+                    }
+                    catch(ObjectDisposedException)
+                    {
+                        if (_shouldStop)
+                            return;
+                        else
+                            throw;
+                    }
                     
                 }
                 if (client != null)

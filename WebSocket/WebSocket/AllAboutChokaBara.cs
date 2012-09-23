@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 namespace WebSocket
 {
     #region JSON
+    
     [JsonObject(MemberSerialization.OptIn)]
     public class JSONObjects
     {
@@ -18,10 +19,10 @@ namespace WebSocket
         public bool HandShake { get; set; }
 
         [JsonProperty]
-        public int KayiNo { get; set; }
+        public uint KayiNo { get; set; }
 
         [JsonProperty]
-        public int KayiMove { get; set; }
+        public uint KayiMove { get; set; }
 
         [JsonProperty]
         public byte WhoIAm { get; set; }
@@ -35,21 +36,27 @@ namespace WebSocket
         [JsonProperty]
         public string ClientMessage { get; set; }
 
+        [JsonProperty]
         public byte TurnState { get; set; }
 
-        public JSONObjects()
-        {
-        }
+        [JsonProperty]
+        public bool ChatMessage { get; set; }
 
-        public string ToJsonString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
+        public JSONObjects()
+		{
+		}
+
+		public string ToJsonString()
+		{
+			return JsonConvert.SerializeObject(this);
+		}
         public static JSONObjects Deserialize(string jsonString)
-        {
+		{
             return JsonConvert.DeserializeObject<JSONObjects>(jsonString);
-        }
+		}
     }
+
+
     #endregion
     partial class WebSocketApp
     {
@@ -106,37 +113,43 @@ namespace WebSocket
 
                         
         }
-        public void HandleChowkaWebSocket(Socket WebSocket,string ReceivedData)
+        public void HandleChowkaWebSocket(Socket WebSocketClient,string ReceivedData)
         {
-            Console.WriteLine("SoketState:" + ChowkaClientState[WebSocket]);
-            if (ChowkaClientState[WebSocket] == eClientConnectionStatus.ESTABLISHED)
+            Console.WriteLine("SoketState:" + ChowkaClientState[WebSocketClient]);
+            
+            if (ChowkaClientState[WebSocketClient] == eClientConnectionStatus.ESTABLISHED)
             {
                 JSONObjects HandShake = Newtonsoft.Json.JsonConvert.DeserializeObject<JSONObjects>(ReceivedData);
                 if (HandShake.HandShake)
                 {
-                    CreateJoinRoom(WebSocket, HandShake);
-                    WebSocket.Send(Send(HandShake.ToJsonString()));
+                    CreateJoinRoom(WebSocketClient, HandShake);
+                    WebSocketClient.Send(Send(HandShake.ToJsonString()));
                     Console.WriteLine("Sent:" + HandShake.ToJsonString());
                 }
                 else if (HandShake.ClientMessage == "ACK")
                 {
-                    ChowkaClientState[WebSocket] = eClientConnectionStatus.CONNECTED;
+                    ChowkaClientState[WebSocketClient] = eClientConnectionStatus.CONNECTED;
                     HandShake.ServerMessage = "ACK";
-                    WebSocket.Send(Send(HandShake.ToJsonString()));
+                    WebSocketClient.Send(Send(HandShake.ToJsonString()));
                     Console.WriteLine("Sent ACK:" + HandShake.ToJsonString());
                     
                 }
             }
-            if (ChowkaClientState[WebSocket] == eClientConnectionStatus.CONNECTED)
+            if (ChowkaClientState[WebSocketClient] == eClientConnectionStatus.CONNECTED)
             {
                 JSONObjects ConnectedState = Newtonsoft.Json.JsonConvert.DeserializeObject<JSONObjects>(ReceivedData);
-                if (ChowkaRoomState[ConnectedState.RoomID] == eChowkaRoomState.STARTING)
+                int RoomIndex = GetRoomIndex(ConnectedState.RoomID);
+                if (ConnectedState.ChatMessage)
+                {
+                    SendToAllExceptOne(ConnectedState.ToJsonString(), WebSocketClient, RoomIndex);
+                }
+                else if (ChowkaRoomState[ConnectedState.RoomID] == eChowkaRoomState.STARTING)
                 {
                     if (ConnectedState.ClientMessage != "STARTED")
                     {
                         ConnectedState.ServerMessage = "START";
-                        WebSocket.Send(Send(ConnectedState.ToJsonString()));
-                        SendToAllExceptOne("START", WebSocket, ConnectedState.RoomID);
+                        WebSocketClient.Send(Send(ConnectedState.ToJsonString()));
+                        SendToAllExceptOne(ConnectedState.ToJsonString(), WebSocketClient, RoomIndex);
                     }
                     else
                     {
@@ -145,7 +158,7 @@ namespace WebSocket
                 }
                 else if (ChowkaRoomState[ConnectedState.RoomID] == eChowkaRoomState.STARTED)
                 {
-                    SendToAllExceptOne(ReceivedData, WebSocket, ConnectedState.RoomID);
+                    SendToAllExceptOne(ReceivedData, WebSocketClient, RoomIndex);
                 }
             }
         }

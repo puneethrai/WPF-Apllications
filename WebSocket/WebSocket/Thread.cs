@@ -39,7 +39,6 @@ namespace WebSocket
                 // Use the Join method to block the current thread 
                 // until the object's thread terminates.
                 workerThread.Join();
-                serverSocket.Disconnect(false);
                 serverSocket.Dispose();
             }
             public void clientOperation()
