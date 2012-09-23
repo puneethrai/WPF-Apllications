@@ -24,8 +24,11 @@ namespace ChowkaBaraWin8Style
                 }, null);
 
             }, null, 0, 100);
-            
-            while (TimeTicked <= (TimeoutTime*10) && !isMoved && !AppExited) ;
+
+            while (TimeTicked <= (TimeoutTime * 10) && !isMoved && !AppExited)
+            {
+                Thread.Sleep(100);
+            }
 
             Timeout.Dispose();
             TimedOut = true;
@@ -39,7 +42,14 @@ namespace ChowkaBaraWin8Style
                         KayiGrid.Children.Remove(TempStackpanel);
                         KayiGrid.Background = Brushes.White;
                     }, null);
-
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED && PlayerStatus == ePlayerStatus.HisTurn)
+                    {
+                        SendObject.ClientMessage = "KAYIMOVE";
+                        SendObject.TurnState = (byte)TurnState;
+                        SendObject.KayiMove = 0;
+                        SendObject.KayiNo = 0;
+                        ws.Send(SendObject.ToJsonString());
+                    }
                     Turn();
 
                 }

@@ -21,6 +21,8 @@ namespace ChowkaBaraWin8Style
         private const uint MaxKayi = 4;
         private const uint MaxMoves = 25;
         private string ClientVersion = null;
+        private double MainWindowWidth;
+        private double MainWindowHeight;
        /// <summary>
        /// Reads the value from configuration file
        /// </summary>
@@ -43,7 +45,8 @@ namespace ChowkaBaraWin8Style
             WinnerDisplayed = new bool[MaxKayi];
             DisplayWindow = MessageBoxLabel;
             ClientVersion = System.Windows.Forms.Application.ProductVersion;
-            
+            MainWindowHeight = this.Height;
+            MainWindowWidth = this.Width;
         }
     }
 }

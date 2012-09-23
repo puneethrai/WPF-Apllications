@@ -9,7 +9,8 @@ namespace ChowkaBaraWin8Style
 {
     public partial class MainWindow 
     {
-        public Label DisplayWindow;
+        //public Label DisplayWindow;
+        public TextBox DisplayWindow;
         /// <summary>
         /// Displays Message on to appropriate window else pops out message box
         /// </summary>
@@ -22,14 +23,14 @@ namespace ChowkaBaraWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                     {
-                        DisplayWindow.Content = Message;
+                        DisplayWindow.Text = Message;
                         DisplayAnimation(false, 0);
 
                     }, null);
                 }
                 else
                 {
-                    DisplayWindow.Content = Message;
+                    DisplayWindow.Text = Message;
                     DisplayAnimation(false, 0);
                 }
                 
@@ -52,7 +53,7 @@ namespace ChowkaBaraWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                     {
-                        DisplayWindow.Content = Message;
+                        DisplayWindow.Text  = Message;
                         DisplayWindow.Foreground = BrushColor;
                         DisplayAnimation(false, 0);
 
@@ -60,7 +61,7 @@ namespace ChowkaBaraWin8Style
                 }
                 else
                 {
-                    DisplayWindow.Content = Message;
+                    DisplayWindow.Text = Message;
                     DisplayWindow.Foreground = BrushColor;
                     DisplayAnimation(false, 0);
                 }
@@ -85,7 +86,7 @@ namespace ChowkaBaraWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                     {
-                        DisplayWindow.Content = Message;
+                        DisplayWindow.Text  = Message;
                         DisplayWindow.Foreground = BrushColor;
                         DisplayAnimation(false, Duration);
 
@@ -93,11 +94,11 @@ namespace ChowkaBaraWin8Style
                 }
                 else
                 {
-                    DisplayWindow.Content = Message;
+                    DisplayWindow.Text = Message;
                     DisplayWindow.Foreground = BrushColor;
                     DisplayAnimation(false, Duration);
                 }
-                DisplayAnimation(true, Duration);
+                //DisplayAnimation(true, Duration);
             }
             else
             {
@@ -117,14 +118,14 @@ namespace ChowkaBaraWin8Style
                 {
                     DisplayWindow.Dispatcher.BeginInvoke((Action)delegate()
                         {
-                            DisplayWindow.Content = Message;
+                            DisplayWindow.Text = Message;
                             DisplayAnimation(false, Duration);
                             
                         }, null);
                 }
                 else
                 {
-                    DisplayWindow.Content = Message;
+                    DisplayWindow.Text = Message;
                     DisplayAnimation(false, Duration);
                 }
                 DisplayAnimation(true, Duration);
@@ -154,7 +155,6 @@ namespace ChowkaBaraWin8Style
                         
                         s = (Storyboard)TryFindResource("MessageBoxFadeOut");
                         s.Begin();	// Start animation
-                        DisplayWindow.Opacity = 0;
                         DisplayWindow.Foreground = new SolidColorBrush(Colors.Black);
                     }
                     else
@@ -162,7 +162,6 @@ namespace ChowkaBaraWin8Style
                         
                         s = (Storyboard)TryFindResource("MessageBoxFadeIn");
                         s.Begin();	// Start animation
-                        DisplayWindow.Opacity = 1;
                         
                     }
                 }, null);
@@ -171,7 +170,31 @@ namespace ChowkaBaraWin8Style
             Animation.Name = "Animation Thread";
             Animation.Start();
         }
-        
+        /// <summary>
+        /// Creates a Story board animation for TargetName of TargetProperty
+        /// </summary>
+        /// <param name="Target">Target in <see cref="System.Windows.DependencyObject"/> to animate</param>
+        /// <param name="TargetPropertyPath">Target type in <see cref="System.object"/> to animate</param>
+        /// <param name="From">From value <see cref="System.Double"/> to animate</param>
+        /// <param name="To">To value <see cref="System.Double"/> to animate</param>
+        /// <param name="Duration">Duration for animation in <see cref="System.Double"/> milliseconds</param>
+        /// <returns>Returns StoryBoard</returns>
+        public Storyboard CreateAnimation(DependencyObject Target,object TargetPropertyPath,double From,double To,double Duration)
+        {
+            DoubleAnimation CreateDoubleAnimation = new DoubleAnimation();
+            CreateDoubleAnimation.From = From;
+            CreateDoubleAnimation.To = To;
+            CreateDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(Duration));
+            Storyboard.SetTarget(CreateDoubleAnimation, Target);
+            Storyboard.SetTargetProperty(CreateDoubleAnimation, new PropertyPath(TargetPropertyPath));
+            Storyboard CreateStoryBoard = new Storyboard();
+            CreateStoryBoard.Children.Add(CreateDoubleAnimation);
+            return CreateStoryBoard;
+        }
+        public void StartAnimation(Storyboard StoryBoardToStart)
+        {
+            StoryBoardToStart.Begin();
+        }
        
     }
 }

@@ -212,13 +212,12 @@ namespace ChowkaBaraWin8Style
                      */
                     while (true)
                     {
+                        /*
+                         * Bug No. 12
+                         */
                         TurnState = TurnState >= (MaxPlayer - 1) ? 0 : TurnState + 1;
-                        if (ScoreCard[TurnState] == MaxKayi)
-                            TurnState++;
-                        else
-                        {
+                        if (ScoreCard[TurnState] != MaxKayi)
                             break;
-                        }
                     }
                     Point Point1 = new Point(0 + (TurnState * 60), 40);
                     Point Point2 = new Point(10 + (TurnState * 60), 50);
@@ -256,6 +255,18 @@ namespace ChowkaBaraWin8Style
 
                         }, null);
                     }
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
+                    {
+                        if (TurnState != WhoIAm - 1)
+                        {
+                            PlayerStatus = ePlayerStatus.OthersTurn;
+                            SendObject.ClientMessage = "TURN";
+                            SendObject.KayiMove = 0;
+                            SendObject.KayiNo = 0;
+                            SendObject.TurnState = (byte)TurnState;
+                            ws.Send(SendObject.ToJsonString());
+                        }
+                    }
                 }
                 else
                 {
@@ -285,8 +296,11 @@ namespace ChowkaBaraWin8Style
         {
             if (StartPlay)
             {
-
-                if (null == TimerThread)
+                if (isOnline)
+                    if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
+                        if (!(PlayerStatus == ePlayerStatus.HisTurn))
+                            return;
+                if (null == TimerThread || isOnline)
                 {
                     /*
                      * Bug No. 2
@@ -345,10 +359,13 @@ namespace ChowkaBaraWin8Style
                         TempStackpanel.Children.Add(TempRadio2);
                         TempStackpanel.Children.Add(TempRadio3);
                         TempStackpanel.Children.Add(TempRadio4);
-                        ThreadStart start = new ThreadStart(TimerStart);
-                        TimerThread = new Thread(start);
-                        TimerThread.Name = "Timer Thread";
-                        TimerThread.Start();
+                        if (!isOnline)
+                        {
+                            ThreadStart start = new ThreadStart(TimerStart);
+                            TimerThread = new Thread(start);
+                            TimerThread.Name = "Timer Thread";
+                            TimerThread.Start();
+                        }
                         isMoved = false;
                         TimedOut = false;
                     }
@@ -356,6 +373,14 @@ namespace ChowkaBaraWin8Style
                     {
                         NoMoreMoveFlag = true;
                         Display("No More Move for this number", TurnFill[TurnState], 4000);
+                        if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED && PlayerStatus == ePlayerStatus.HisTurn)
+                        {
+                            SendObject.ClientMessage = "KAYIMOVE";
+                            SendObject.TurnState = (byte)TurnState;
+                            SendObject.KayiMove = 0;
+                            SendObject.KayiNo = 0;
+                            ws.Send(SendObject.ToJsonString());
+                        }
                         Turn();
                         NoMoreMoveFlag = false;
                     }
@@ -405,45 +430,7 @@ namespace ChowkaBaraWin8Style
                         KayiNo = 3;
 
                 }
-                ToMove = DiceNo;
-                MyKayi[TurnState,KayiNo] += DiceNo;
-                ToMove = MyKayi[TurnState,KayiNo];
-                
-
-                if (ToMove < MaxMoves)
-                {
-                    KayiGrid.Children.Remove(TempStackpanel);
-                    KayiGrid.Background = Brushes.White;
-
-
-
-                    
-                    /*
-                     * Bug No. 9
-                     */
-                    if (ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo))
-                    {
-                        /*
-                         * Bug No. 5
-                         */
-                        SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
-                        if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
-                            Turn();
-                    }
-                    else
-                    {
-                        Turn();
-                        isMoved = true;
-                    }
-                    
-                }
-                else
-                {
-                    MyKayi[TurnState,KayiNo] -= DiceNo;
-                    Display("Unable to move", TurnFill[TurnState],4000);
-                    
-                }
-                
+                LetsMoveKayi(DiceNo,KayiNo);
             }
             else
             {
@@ -452,7 +439,55 @@ namespace ChowkaBaraWin8Style
             }
             
         }
-
+        /// <summary>
+        /// Does the kayi movement logic 
+        /// </summary>
+        /// <param name="DiceNum">Number on Dice</param>
+        /// <param name="KayiNo">Kayi Number</param>
+        private void LetsMoveKayi(uint DiceNum, uint KayiNo)
+        {
+            DiceNo = DiceNum;
+            uint ToMove = DiceNum;
+            MyKayi[TurnState,KayiNo] += DiceNum;
+            ToMove = MyKayi[TurnState,KayiNo];
+            if (ServerConnectionStatus == (ushort) eServerConnectionStatus.CONNECTED &&PlayerStatus == ePlayerStatus.HisTurn )
+            {
+                SendObject.ClientMessage = "KAYIMOVE";
+                SendObject.TurnState = (byte)TurnState;
+                SendObject.KayiMove = DiceNum;
+                SendObject.KayiNo = KayiNo;
+                ws.Send(SendObject.ToJsonString());
+            }
+            if (ToMove < MaxMoves)
+            {
+                KayiGrid.Children.Remove(TempStackpanel);
+                KayiGrid.Background = Brushes.White;
+                /*
+                    * Bug No. 9
+                    */
+                if (ReachedHome(MoveKayi[TurnState, KayiNo], KayiNo))
+                {
+                    /*
+                        * Bug No. 5
+                        */
+                    SetKayiPosition(MoveKayi[TurnState, KayiNo], MoveRect[TurnState, ToMove], KayiNo);
+                    if (!OutOfMyWay(MoveRect[TurnState, ToMove]))
+                        Turn();
+                }
+                else
+                {
+                    Turn();
+                    isMoved = true;
+                }
+                    
+            }
+            else
+            {
+                MyKayi[TurnState,KayiNo] -= DiceNum;
+                Display("Unable to move", TurnFill[TurnState],4000);
+                    
+            }    
+        }
         private void GoOnLine_Checked(object sender, RoutedEventArgs e)
         {
             if (!StartPlay && ServerConnectionStatus> (ushort)eServerConnectionStatus.CONNECTED)
@@ -461,6 +496,7 @@ namespace ChowkaBaraWin8Style
                 GifActions();
                 isOnline = true;
                 GoOffLine.IsEnabled = false;
+                  
             }
         }
 
@@ -468,10 +504,30 @@ namespace ChowkaBaraWin8Style
         {
             if (!StartPlay)
             {
+                StartAnimation(CreateAnimation(ChatGrid, Grid.WidthProperty, ChatGrid.Width, ChatGrid.Width - 200, 1000));
+                StartAnimation(CreateAnimation(ChatBox, TextBox.WidthProperty, 150, 0, 1000));
+                StartAnimation(CreateAnimation(this, Window.WidthProperty, this.Width, MainWindowWidth, 1000));
+                ChatGrid.Visibility = Visibility.Collapsed;
                 StartPlay = true;
                 isOnline = false;
-                
                 GoOnLine.IsEnabled = false;
+                TimeOutBarGrid.Width = TimeOutBarGridWidth;
+            }
+        }
+
+        private void ChatSend_MouseEvent(object sender, MouseButtonEventArgs e)
+        {
+            if (ChatBox.Text.Length > 0)
+            {
+                string Message = "Player" + WhoIAm + ": " + ChatBox.Text;
+                ChatLabel.Items.Add(Message);
+                if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
+                {
+                    SendObject.ClientMessage = Message;
+                    SendObject.ChatMessage = true;
+                    ws.Send(SendObject.ToJsonString());
+                    SendObject.ChatMessage = false;
+                }
             }
         }
         

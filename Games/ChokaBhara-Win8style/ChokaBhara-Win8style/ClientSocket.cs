@@ -6,10 +6,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Configuration;
 using Newtonsoft.Json;
-
-//using WebSocket4Net;
-//using WebSocketSharp;
-//using WebSocketSharp.Frame;
+using System.Windows;
+using System.Windows.Controls;
+using System.Threading;
 using WebSocketClient;
 namespace ChowkaBaraWin8Style
 {
@@ -23,7 +22,7 @@ namespace ChowkaBaraWin8Style
         byte WhoIAm = 0;
         int RoomID = 0;
         WebSocket ws= null;
-
+        JSONObjects SendObject = null;
         public UInt16 ServerConnectionStatus = (ushort)eServerConnectionStatus.STOPPED;
         public enum eServerConnectionStatus { STARTING, ESTABLISHING, ESTABLISHED, CONNECTED, DISCONNECTED, STOPPED, ERROR };
         public enum ePlayStatus {IDLE,PLAYING };
@@ -86,25 +85,79 @@ namespace ChowkaBaraWin8Style
                     Console.WriteLine("Connected");
                     Display("Connected to Server",2000);
                     Display("Your Turn:"+WhoIAm);
+                    SendObject = Message;
+                    this.Dispatcher.Invoke((Action)delegate()
+                    {
+                        ChatGrid.Visibility = Visibility.Visible;
+                        StartAnimation(CreateAnimation(this, Window.WidthProperty, MainWindowWidth, MainWindowWidth + 200, 1000));
+                        StartAnimation(CreateAnimation(ChatGrid, Grid.WidthProperty, ChatGrid.Width, ChatGrid.Width + 200, 1000));
+                        StartAnimation(CreateAnimation(ChatBox, TextBox.WidthProperty, 0, 150, 1000));
+                        TimeOutBarGrid.Width += 200; 
+                    }, null);
                 }
             }
             if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
             {
+                if (Message.ChatMessage)
+                {
+                    this.Dispatcher.Invoke((Action)delegate()
+                    {
+                        ChatLabel.Items.Add(Message.ClientMessage);
+                    }, null);
+                }
                 if (Message.ServerMessage == "START")
                 {
+                    StartPlay = true;
+                    MaxPlayer = MaxKayi;
+                    if (WhoIAm != 1)
+                        this.Dispatcher.Invoke((Action)delegate()
+                        {
+                            WaitingGIF.Play();
+                        }, null);
                     if (WhoIAm == 1)
                     {
                         Message.ClientMessage = "STARTED";
                         ws.Send(Message.ToJsonString());
+                        isMoved = false;
+                        ThreadStart start = new ThreadStart(TimerStart);
+                        TimerThread = new Thread(start);
+                        TimerThread.Name = "Timer Thread";
+                        TimerThread.Start();
+                        PlayerStatus = ePlayerStatus.HisTurn;
                     }
                     PlayStatus = ePlayStatus.PLAYING;
                 }
                 else if (PlayStatus == ePlayStatus.PLAYING)
                 {
-                    if (Message.TurnState == WhoIAm - 1)
+                    this.Dispatcher.Invoke((Action)delegate()
                     {
-
-                    }
+                        if (Message.TurnState == WhoIAm - 1)
+                        {
+                            isMoved = false;
+                            ThreadStart start = new ThreadStart(TimerStart);
+                            TimerThread = new Thread(start);
+                            TimerThread.Name = "Timer Thread";
+                            TimerThread.Start();
+                            PlayerStatus = ePlayerStatus.HisTurn;
+                            WaitingGIF.Visibility = Visibility.Hidden;
+                            WaitingGIF.Stop();
+                        }
+                        else
+                        {
+                            PlayerStatus = ePlayerStatus.OthersTurn;
+                            /*
+                            if (Message.ClientMessage == "TURN")
+                            {
+                                TurnState = Message.TurnState;
+                                Turn();
+                            }*/
+                            WaitingGIF.Visibility = Visibility.Visible;
+                            WaitingGIF.Play();
+                            if (Message.ClientMessage == "KAYIMOVE")
+                                LetsMoveKayi(Message.KayiMove, Message.KayiNo);
+                            
+                        }
+                    }, null);
                 }
             }
         }

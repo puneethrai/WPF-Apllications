@@ -12,10 +12,10 @@ namespace ChowkaBaraWin8Style
         public bool HandShake { get; set; }
 
         [JsonProperty]
-        public int KayiNo { get; set; }
+        public uint KayiNo { get; set; }
 
         [JsonProperty]
-        public int KayiMove { get; set; }
+        public uint KayiMove { get; set; }
 
         [JsonProperty]
         public byte WhoIAm { get; set; }
@@ -29,7 +29,11 @@ namespace ChowkaBaraWin8Style
         [JsonProperty]
         public string ClientMessage { get; set; }
 
+        [JsonProperty]
         public byte TurnState { get; set; }
+
+        [JsonProperty]
+        public bool ChatMessage { get; set; }
 
         public JSONObjects()
 		{

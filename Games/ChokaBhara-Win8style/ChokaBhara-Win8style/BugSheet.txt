@@ -8,7 +8,9 @@
 8>Winner's list is repeatly showing who have won already
 9>If 8 or 4 & all kayi's reaches home then that is invalid turn & pass it to other
 10>Game hangs when everyone has won 
-
+11>OutOfMyWay no working when pawns are inside the home circle
+12>if 2 or 3 wins first then 3 or 4 won't get turn until 1 wins
+13>If timed out & Dice No is 4 or 8 then turn should go to next player
 
 //Feature to be added
 1>Add a tick mark next to the kayi option when it has reached home//replaced with deleting of kayi option

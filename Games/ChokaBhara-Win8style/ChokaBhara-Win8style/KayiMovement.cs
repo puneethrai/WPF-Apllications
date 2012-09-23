@@ -84,12 +84,15 @@ namespace ChowkaBaraWin8Style
                     {
                         if (KayiPlaced[i, j] != null)
                         {
+                            /*
+                             * Bug No. 11
+                             */
                             if (KayiPlaced[i, j].Name == Placing.Name)
                             {
                                 /*
-                                 * Bug No.3
+                                 * Bug No.3 & 11
                                  */
-                                if (KayiPlaced[i, j] != R13 && KayiPlaced[i, j] != R31 && KayiPlaced[i, j] != R33 && KayiPlaced[i, j] != R35 && KayiPlaced[i, j] != R53)
+                                if (KayiPlaced[i, j].Name != "R13" && KayiPlaced[i, j].Name != "R31" && KayiPlaced[i, j].Name != "R33" && KayiPlaced[i, j].Name != "R35" && KayiPlaced[i, j].Name != "R53")
                                 {
                                     SetKayiPosition(MoveKayi[i, j], MoveRect[i, 0], j);
                                     MyKayi[i, j] = 0;
