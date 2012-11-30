@@ -495,7 +495,13 @@ namespace ChowkaBaraWin8Style
                 ConnectToServer();
                 GifActions();
                 isOnline = true;
+                ToggleModeGUI();
+                GoOnLine.IsEnabled = false;
                 GoOffLine.IsEnabled = false;
+                OnePlayer.IsEnabled = true;
+                TwoPlayer.IsEnabled = true;
+                ThreePlayer.IsEnabled = true;
+                FourPlayer.IsEnabled = true;
                   
             }
         }
@@ -510,8 +516,14 @@ namespace ChowkaBaraWin8Style
                 ChatGrid.Visibility = Visibility.Collapsed;
                 StartPlay = true;
                 isOnline = false;
-                GoOnLine.IsEnabled = false;
                 TimeOutBarGrid.Width = TimeOutBarGridWidth;
+                ToggleModeGUI();
+                GoOnLine.IsEnabled = false;
+                GoOffLine.IsEnabled = false;
+                OnePlayer.IsEnabled = true;
+                TwoPlayer.IsEnabled = true;
+                ThreePlayer.IsEnabled = true;
+                FourPlayer.IsEnabled = true;
             }
         }
 
@@ -528,6 +540,75 @@ namespace ChowkaBaraWin8Style
                     ws.Send(SendObject.ToJsonString());
                     SendObject.ChatMessage = false;
                 }
+            }
+        }
+
+        private void ChangeNoOfPlayer(object sender, RoutedEventArgs e)
+        {
+            if (sender.Equals(OnePlayer))
+                MaxPlayer = 1;
+            else if (sender.Equals(TwoPlayer))
+                MaxPlayer = 2;
+            else if (sender.Equals(ThreePlayer))
+                MaxPlayer = 3;
+            else if (sender.Equals(FourPlayer))
+                MaxPlayer = 4;
+            OnePlayer.IsEnabled = false;
+            TwoPlayer.IsEnabled = false;
+            ThreePlayer.IsEnabled = false;
+            FourPlayer.IsEnabled = false;
+
+        }
+        private void StopPlaying(object sender, RoutedEventArgs e)
+        {
+            ToggleModeGUI();
+            GoOnLine.IsEnabled = true;
+            GoOffLine.IsEnabled = true;
+            StartPlay = false;
+        }
+
+        private void ToggleModeGUI()
+        {
+            if (GameMode.Visibility == Visibility.Collapsed)
+            {
+                GameMode.Visibility = Visibility.Visible;
+                NoOfPlayer.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                GameMode.Visibility = Visibility.Collapsed;
+                NoOfPlayer.Visibility = Visibility.Visible;
+            }
+        }
+        private void ToggleModeEnable()
+        {
+            if (OnePlayer.IsEnabled)
+            {
+                OnePlayer.IsEnabled = false;
+                TwoPlayer.IsEnabled = false;
+                ThreePlayer.IsEnabled = false;
+                FourPlayer.IsEnabled = false;
+                GoOnLine.IsEnabled = true;
+                GoOffLine.IsEnabled = true;
+            }
+            else
+            {
+                OnePlayer.IsEnabled = true;
+                TwoPlayer.IsEnabled = true;
+                ThreePlayer.IsEnabled = true;
+                FourPlayer.IsEnabled = true;
+                GoOnLine.IsEnabled = false;
+                GoOffLine.IsEnabled = false;
+            }
+            if (GoOffLine.IsEnabled)
+            {
+                GoOnLine.IsEnabled = false;
+                GoOffLine.IsEnabled = false;
+            }
+            else
+            {
+                GoOnLine.IsEnabled = true;
+                GoOffLine.IsEnabled = true;
             }
         }
         
