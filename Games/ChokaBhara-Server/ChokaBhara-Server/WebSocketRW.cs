@@ -51,7 +51,7 @@ namespace ChokaBhara_Server
         /// </summary>
         public void Send(Socket SendSocket,string SendData)
         {
-            JSONObjects JS = new JSONObjects{ClientVersion = Application.ProductName,HandShake = true,}
+            JSONObjects JS = new JSONObjects { ClientVersion = Application.ProductName, HandShake = true, };
             SendSocket.Send(Encoding.ASCII.GetBytes(SendData));
         }
     }

@@ -19,3 +19,8 @@ C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBha
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Properties.Resources.resources
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\GenerateResource.write.1.tlog
+\\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.exe
+\\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.pdb
+\\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csprojResolveAssemblyReference.cache
+\\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Properties.Resources.resources
+\\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csproj.GenerateResource.Cache

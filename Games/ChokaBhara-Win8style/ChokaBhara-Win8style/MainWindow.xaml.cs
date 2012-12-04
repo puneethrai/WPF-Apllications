@@ -403,7 +403,6 @@ namespace ChowkaBaraWin8Style
         void TempRadio_Checked(object sender, RoutedEventArgs e)
         {
             uint KayiNo = 0;
-            uint ToMove = 0;
             if (!TimedOut)
             {
                 if (sender.Equals(TempRadio1))
@@ -488,6 +487,11 @@ namespace ChowkaBaraWin8Style
                     
             }    
         }
+        /// <summary>
+        /// Game mode changes to Online mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoOnLine_Checked(object sender, RoutedEventArgs e)
         {
             if (!StartPlay && ServerConnectionStatus> (ushort)eServerConnectionStatus.CONNECTED)
@@ -505,7 +509,11 @@ namespace ChowkaBaraWin8Style
                   
             }
         }
-
+        /// <summary>
+        /// Game mode changes to offline mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoOffLine_Checked(object sender, RoutedEventArgs e)
         {
             if (!StartPlay)
@@ -526,7 +534,11 @@ namespace ChowkaBaraWin8Style
                 FourPlayer.IsEnabled = true;
             }
         }
-
+        /// <summary>
+        /// Send chat message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChatSend_MouseEvent(object sender, MouseButtonEventArgs e)
         {
             if (ChatBox.Text.Length > 0)
@@ -542,7 +554,11 @@ namespace ChowkaBaraWin8Style
                 }
             }
         }
-
+        /// <summary>
+        /// Changes max no. of player for this session
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeNoOfPlayer(object sender, RoutedEventArgs e)
         {
             if (sender.Equals(OnePlayer))
@@ -559,6 +575,11 @@ namespace ChowkaBaraWin8Style
             FourPlayer.IsEnabled = false;
 
         }
+        /// <summary>
+        /// Stops the existing game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopPlaying(object sender, RoutedEventArgs e)
         {
             ToggleModeGUI();
@@ -566,7 +587,9 @@ namespace ChowkaBaraWin8Style
             GoOffLine.IsEnabled = true;
             StartPlay = false;
         }
-
+        /// <summary>
+        /// Toggles between Game mode and Max no of player
+        /// </summary>
         private void ToggleModeGUI()
         {
             if (GameMode.Visibility == Visibility.Collapsed)
@@ -580,6 +603,9 @@ namespace ChowkaBaraWin8Style
                 NoOfPlayer.Visibility = Visibility.Visible;
             }
         }
+        /// <summary>
+        /// Experimental toggle between Game mode & max user
+        /// </summary>
         private void ToggleModeEnable()
         {
             if (OnePlayer.IsEnabled)
