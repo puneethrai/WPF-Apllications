@@ -6,11 +6,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChokaBhara-Server", "..\ChokaBhara-Server\ChokaBhara-Server\ChokaBhara-Server.csproj", "{F78D06C5-4BA9-4192-A309-97274D3C5DDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocket", "WebSocket\WebSocket.csproj", "{3301D590-3714-4CA1-B955-D4C76C004CEA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0} = {BB3CA95E-778B-4B48-BA32-9B074441E4C0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServerTestDLL", "WebSocketServerTestDLL\WebSocketServerTestDLL.csproj", "{979ACB4E-6D8C-4684-8D34-25FF6AF26FC3}"
 	ProjectSection(ProjectDependencies) = postProject
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0} = {BB3CA95E-778B-4B48-BA32-9B074441E4C0}
 		{3301D590-3714-4CA1-B955-D4C76C004CEA} = {3301D590-3714-4CA1-B955-D4C76C004CEA}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debug", "Debug\Debug.csproj", "{BB3CA95E-778B-4B48-BA32-9B074441E4C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketClient", "..\..\WebSocketClient\WebSocketClient\WebSocketClient.csproj", "{B5951737-5FC4-4C14-A425-4E7C27245356}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +70,26 @@ Global
 		{979ACB4E-6D8C-4684-8D34-25FF6AF26FC3}.Release|Mixed Platforms.Build.0 = Release|x86
 		{979ACB4E-6D8C-4684-8D34-25FF6AF26FC3}.Release|x86.ActiveCfg = Release|x86
 		{979ACB4E-6D8C-4684-8D34-25FF6AF26FC3}.Release|x86.Build.0 = Release|x86
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BB3CA95E-778B-4B48-BA32-9B074441E4C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

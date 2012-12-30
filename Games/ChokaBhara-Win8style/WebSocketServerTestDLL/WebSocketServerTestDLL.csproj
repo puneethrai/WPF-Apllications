@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Debug\Debug.csproj">
+      <Project>{BB3CA95E-778B-4B48-BA32-9B074441E4C0}</Project>
+      <Name>Debug</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSocket\WebSocket.csproj">
       <Project>{3301D590-3714-4CA1-B955-D4C76C004CEA}</Project>
       <Name>WebSocket</Name>
