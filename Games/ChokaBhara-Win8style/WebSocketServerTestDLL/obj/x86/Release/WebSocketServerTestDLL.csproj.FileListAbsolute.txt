@@ -1,0 +1,9 @@
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\obj\x86\Release\WebSocketServerTestDLL.csprojResolveAssemblyReference.cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocketServerTestDLL.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocketServerTestDLL.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\Debug.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocket.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\Debug.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocket.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\obj\x86\Release\WebSocketServerTestDLL.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\obj\x86\Release\WebSocketServerTestDLL.pdb
