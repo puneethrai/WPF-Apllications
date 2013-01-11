@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebSocketClient.MessageReceivedEventArgs" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAQ=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketClient.ErrorEventArgs" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketClient.WebSocketOpened">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketClient.DebugMessages" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketClient.WebSocketClose">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketClient.WebSocket">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="WebSocketClient.WebSocket.eWebSocketClientState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WebSocketClient.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="WebSocketClient.WebSocket.eWebSocketOpcode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WebSocketClient.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgUUICAhRgAAEFAAJBAEIAUAQIAEEAAFwSCgQA=</HashCode>
+      <FileName>WebSocketClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

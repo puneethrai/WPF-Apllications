@@ -144,6 +144,12 @@ namespace WebSocketServer
         {
             return this.State;
         }
+        /// <summary>
+        /// Sets given value
+        /// </summary>
+        /// <param name="set">Set type</param>
+        /// <param name="value">Value to be set</param>
+        /// <returns></returns>
         public bool Set(eWebSocketServerSetValue set, dynamic value)
         {
             if (set == eWebSocketServerSetValue.PORT)
