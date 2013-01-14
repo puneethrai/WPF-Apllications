@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debug", "Debug\Debug.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketClient", "..\..\WebSocketClient\WebSocketClient\WebSocketClient.csproj", "{B5951737-5FC4-4C14-A425-4E7C27245356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManager", "RoomManager\RoomManager.csproj", "{645BF4D8-3191-4E50-A026-A67E44827FAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,16 @@ Global
 		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B5951737-5FC4-4C14-A425-4E7C27245356}.Release|x86.ActiveCfg = Release|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{645BF4D8-3191-4E50-A026-A67E44827FAE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
