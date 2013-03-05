@@ -1,33 +1,65 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+using System.Net;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("RoomManager")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Toshiba")]
-[assembly: AssemblyProduct("RoomManager")]
-[assembly: AssemblyCopyright("Copyright © Toshiba 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6474f031-b891-4e31-9593-b3b65ba2ebab")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+namespace RoomManager
+{
+    class PeerManager
+    {
+        #region private
+        private Dictionary<int, Tuple<Socket, string>> PeerInfo = null;
+        private int peerCount = 0;
+        private int peerID = 0;
+        private int peerSize = 0;
+        private int GetUID()
+        {
+            return peerID++;
+        }
+        #endregion
+        #region public
+        public PeerManager(int PeerSize)
+        {
+            this.peerSize = PeerSize;
+            this.PeerInfo = new Dictionary<int,Tuple<Socket,string>>(this.peerSize);
+        }
+        
+        public int GetPeerCount()
+        {
+            return this.peerCount;
+        }
+        public int AddPeer(Socket peerSocket, string peerName)
+        {
+            int currentPeerID = GetUID();
+            this.PeerInfo[currentPeerID] = new Tuple<Socket, string>(peerSocket, peerName);
+            peerCount++;
+            return currentPeerID;
+        }
+        public bool RemovePeer(int peerID)
+        {
+            foreach (var peerid in this.PeerInfo)
+            {
+                if (peerid.Key == peerID)
+                {
+                    this.PeerInfo[peerID] = null;
+                    peerCount--;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool Dispose()
+        {
+            
+            foreach (var peerid in this.PeerInfo)
+            {
+                this.PeerInfo[peerid.Key] = null;
+            }
+            this.PeerInfo = null;
+            return false;
+        }
+        #endregion
+    }
+}
