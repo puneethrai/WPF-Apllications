@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using Debug;
 namespace RoomManager
 {
     class RoomHost
@@ -18,18 +19,44 @@ namespace RoomManager
         /// </summary>
         private int roomSize = 0;
         /// <summary>
-        /// Peer Manger instance object
+        /// Boolean to know room is locked
         /// </summary>
-        private PeerManager peerList = null;
         private bool locked = false;
-        private enum ERROR {ROOMFULL};
+        private bool canDebug = false;
+        private Debug.Debug debugObject = null;
+        public enum STATE {ROOMFULL,LOCKED,ROOMEMPTY,ROOMFREE};
+        
+        private Dictionary<int, Tuple<Socket, string>> PeerInfo = null;
+        private int peerCount = 0;
+        private int peerID = 0;
+        private int peerSize = 0;
+        private STATE RoomState = STATE.ROOMEMPTY;
+        public int GetPeerCount()
+        {
+            return this.peerCount;
+        }
+        /// <summary>
+        /// Get Unique ID for each peer added
+        /// </summary>
+        /// <returns></returns>
+        private int GetUID()
+        {
+            return peerID++;
+        }
         /// <summary>
         /// Returns boolean whether room is full or not
         /// </summary>
         /// <returns></returns>
         private bool RoomFull()
         {
-            return this.roomSize <= peerList.GetPeerCount();
+            return this.roomSize <= GetPeerCount();
+        }
+        private void Trace(string message,Debug.Debug.elogLevel logLevel)
+        {
+            if (canDebug)
+            {
+                debugObject.Print(message, logLevel);
+            }
         }
         #endregion
         #region public
@@ -42,7 +69,7 @@ namespace RoomManager
             {
                 return RoomFull();
             }
-            set;
+            set{}
         }
         /// <summary>
         /// Constructor
@@ -53,7 +80,23 @@ namespace RoomManager
         {
             this.roomNumber = roomNo;
             this.roomSize = maxPeerSize;
-            this.peerList = new PeerManager(maxPeerSize);
+            this.PeerInfo = new Dictionary<int,Tuple<Socket,string>>(this.peerSize);
+            Trace("New Room Created", Debug.Debug.elogLevel.INFO);
+        }
+        /// <summary>
+        /// Constructor with debug enabled
+        /// </summary>
+        /// <param name="roomNo">Room Number assigned</param>
+        /// <param name="maxPeerSize">Max peers allowed</param>
+        /// <param name="debugObj">Debug object instance</param>
+        public RoomHost(int roomNo,int maxPeerSize,Debug.Debug debugObj)
+        {
+            this.roomNumber = roomNo;
+            this.roomSize = maxPeerSize;
+            this.PeerInfo = new Dictionary<int, Tuple<Socket, string>>(this.peerSize);
+            this.debugObject = debugObj;
+            this.canDebug = true;
+            Trace("New Room Created with debug on", Debug.Debug.elogLevel.INFO);
         }
 
         /// <summary>
@@ -66,10 +109,21 @@ namespace RoomManager
         {
             if(!RoomFull() && !locked)
             {
-                int peerID = peerList.AddPeer(peerSocket,peerName);
-                return peerID;
+                int currentPeerID = GetUID();
+                this.PeerInfo[currentPeerID] = new Tuple<Socket, string>(peerSocket, peerName);
+                peerCount++;
+                Trace("Added new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName, Debug.Debug.elogLevel.INFO);
+                RoomState = STATE.ROOMFREE;
+                return currentPeerID;
             }
-            return (int)ERROR.ROOMFULL;
+            if (RoomState != STATE.LOCKED)
+            {
+                Trace("Unable to add new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName +" RoomFull", Debug.Debug.elogLevel.ERROR);
+                RoomState = STATE.ROOMFULL;
+            }
+            else
+                Trace("Unable to add new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName + " RoomLocked", Debug.Debug.elogLevel.ERROR);
+            return (int)RoomState;
         }
         /// <summary>
         /// Removes a peer from the room
@@ -78,31 +132,55 @@ namespace RoomManager
         /// <returns></returns>
         public bool RemovePeer(int peerID)
         {
-            return peerList.RemovePeer(peerID);
+            foreach (var peerid in this.PeerInfo)
+            {
+                if (peerid.Key == peerID)
+                {
+                    Trace("Removed user IP:" + peerid.Value.Item1.RemoteEndPoint.ToString() + " with Name:" + peerid.Value.Item2 + " RoomLocked", Debug.Debug.elogLevel.INFO);
+                    this.PeerInfo[peerID] = null;
+                    peerCount--;
+                    return true;
+                }
+            }
+            Trace("Unable to find user with peer ID:"+peerID,Debug.Debug.elogLevel.ERROR);
+            return false;
         }
+        /// <summary>
+        /// Lock the current room futher peer addition
+        /// </summary>
         public void lookRoom()
         {
             locked = true;
+            RoomState = STATE.LOCKED;
+            Trace("Room Locked", Debug.Debug.elogLevel.INFO);
         }
         /// <summary>
         /// returns room number
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns current instances room number</returns>
         public int GetRoomNumber()
         {
             return this.roomNumber;
         }
+        public STATE GetRoomStatus()
+        {
+            return RoomState;
+        }
         /// <summary>
         /// Destructor 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Dispose success status</returns>
         public bool Dispose()
         {
-            this.peerList.Dispose();
-            this.peerList = null;
-            return false;
+            foreach (var peerid in this.PeerInfo)
+            {
+                this.PeerInfo[peerid.Key] = null;
+            }
+            this.PeerInfo = null;
+            Trace("Room " + this.roomNumber +" deleted", Debug.Debug.elogLevel.INFO);
+            return true;
         }
-        public 
+        
         #endregion
 
     }

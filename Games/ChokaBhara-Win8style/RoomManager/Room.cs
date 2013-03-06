@@ -13,7 +13,7 @@ namespace RoomManager
         /// <summary>
         /// Contains List of socket FD & Name of perticular room
         /// </summary>
-        private Dictionary<int,Tuple<Socket,string>> RoomInfo;
+        private Dictionary<int,RoomHost> RoomInfo;
         /// <summary>
         /// Max Room allowed,Max Room Size and Min Room Size
         /// </summary>
@@ -24,6 +24,7 @@ namespace RoomManager
             this.MaxRoom = maxRoom;
             this.MaxRoomSize = maxRoomSize;
             this.MinRoomSize = minRoomSize;
+            this.RoomInfo = new Dictionary<int, RoomHost>(maxRoom);
         }
         /// <summary>
         /// Gets a unique ID for a room
@@ -45,11 +46,37 @@ namespace RoomManager
         public int CreateRoom()
         {
             int RoomID = GetUID();
-            this.RoomInfo[RoomID] = null;
+            this.RoomInfo[RoomID] = new RoomHost(RoomID,this.MaxRoomSize);
             return RoomID;
         }
-        public int JoinUser(Socket userSocket, string userName)
+        /// <summary>
+        /// Add user to a room
+        /// </summary>
+        /// <param name="RoomID"></param>
+        /// <param name="userSocket"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public int AddUser(int RoomID,Socket userSocket, string userName = "Dummy")
         {
+            foreach (var Room in RoomInfo)
+            {
+                if (Room.Key == RoomID)
+                    this.RoomInfo[RoomID].AddPeer(userSocket, userName);
+                return 0;
+            }
+            return INVALIDROOM;
+        }
+        public List<int> GetAvailableRoomNumber()
+        {
+            List<int> AvailableRoomNumber = new List<int>();
+            foreach (var Room in RoomInfo)
+            {
+                if (this.RoomInfo[Room.Key].GetRoomStatus() == RoomManager.RoomHost.STATE.ROOMFREE || this.RoomInfo[Room.Key].GetRoomStatus() == RoomManager.RoomHost.STATE.ROOMFREE)
+                {
+                    AvailableRoomNumber.Add(Room.Key);
+                }
+            }
+            return AvailableRoomNumber;
         }
     }
 }

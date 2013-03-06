@@ -7,3 +7,5 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocket.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\obj\x86\Release\WebSocketServerTestDLL.exe
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\obj\x86\Release\WebSocketServerTestDLL.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocketServerTestDLL.exe.CodeAnalysisLog.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocketServerTestDLL\bin\Release\WebSocketServerTestDLL.exe.lastcodeanalysissucceeded

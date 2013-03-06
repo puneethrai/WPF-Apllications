@@ -5,10 +5,16 @@ using System.Text;
 using System.IO;
 namespace Debug
 {
-    public class Log
+    public abstract class Debug
     {
         public enum eproductLevel { PRODUCTION = 0, DEVELOPMENT = 1 };
         public enum elogLevel { ERROR = 0, WARNING = 1, INFO = 2, ALL = 3, NONE = 4 };
+        public abstract void Print(string debugMessage, elogLevel logLevel);
+        public abstract void ChangeLogLevel(elogLevel toChange);
+        public abstract void Close();
+    }
+    public class Log:Debug
+    {
         private Int16 glogLevel = 0;
         private Int16 gproductLevel = 0;
         private string gloggerName = null;
@@ -26,7 +32,7 @@ namespace Debug
             this.gloggerName = loggerName;
 
         }
-        public void Print(string debugMessage,elogLevel logLevel)
+        public override void Print(string debugMessage,elogLevel logLevel)
         {
             
             if (this.glogLevel == (Int16)logLevel || this.glogLevel == (Int16)elogLevel.ALL)
@@ -57,11 +63,11 @@ namespace Debug
                 }
             }
         }
-        public void ChangeLogLevel(elogLevel toChange)
+        public override void ChangeLogLevel(elogLevel toChange)
         {
             this.glogLevel = (Int16)toChange;
         }
-        public void Close()
+        public override void Close()
         {
             this.Print("Logger Existing", elogLevel.INFO);
 
