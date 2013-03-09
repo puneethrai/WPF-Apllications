@@ -36,7 +36,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Rooms = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.RefreshBtn = new System.Windows.Forms.Button();
             this.Room_1 = new System.Windows.Forms.CheckedListBox();
             this.ConnectedUser.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -66,13 +66,13 @@
             // Status
             // 
             this.Status.Name = "Status";
-            this.Status.Size = new System.Drawing.Size(102, 17);
+            this.Status.Size = new System.Drawing.Size(112, 17);
             this.Status.Text = "No. of connection:0";
             // 
             // ServerTime
             // 
             this.ServerTime.Name = "ServerTime";
-            this.ServerTime.Size = new System.Drawing.Size(240, 17);
+            this.ServerTime.Size = new System.Drawing.Size(230, 17);
             this.ServerTime.Spring = true;
             this.ServerTime.Text = "Server UPtime:00:00:00";
             // 
@@ -107,7 +107,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.RefreshBtn);
             this.groupBox2.Controls.Add(this.Room_1);
             this.groupBox2.Location = new System.Drawing.Point(11, 29);
             this.groupBox2.Name = "groupBox2";
@@ -116,15 +116,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Room No";
             // 
-            // button1
+            // Refresh
             // 
-            this.button1.Location = new System.Drawing.Point(29, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.RefreshBtn.Location = new System.Drawing.Point(29, 150);
+            this.RefreshBtn.Name = "Refresh";
+            this.RefreshBtn.Size = new System.Drawing.Size(77, 23);
+            this.RefreshBtn.TabIndex = 2;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.UseVisualStyleBackColor = true;
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // Room_1
             // 
@@ -135,7 +135,7 @@
             this.Room_1.TabIndex = 1;
             this.Room_1.SelectedIndexChanged += new System.EventHandler(this.Room_1_SelectedIndexChanged);
             // 
-            // WebSocketApp
+            // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -143,7 +143,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ConnectedUser);
             this.Controls.Add(this.ServerMessage);
-            this.Name = "ChokaBharaServer";
+            this.Name = "Server";
             this.Text = "Choka Bhara Server";
             this.ConnectedUser.ResumeLayout(false);
             this.ConnectedUser.PerformLayout();
@@ -166,7 +166,7 @@
         private System.Windows.Forms.CheckedListBox Room_1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RefreshBtn;
         
     }
 }

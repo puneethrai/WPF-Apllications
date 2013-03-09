@@ -54,4 +54,12 @@ namespace WebSocketServer
         }
         public string Reason;
     }
+    public class NewUser : EventArgs
+    {
+        public NewUser(Socket newUserSocket)
+        {
+            this.newUserSocket = newUserSocket;
+        }
+        public Socket newUserSocket;
+    }
 }

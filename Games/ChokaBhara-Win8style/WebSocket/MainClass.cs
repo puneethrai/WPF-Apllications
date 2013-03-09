@@ -24,6 +24,7 @@ namespace WebSocketServer
         private EventHandler<ErrorEventArgs> m_Error;
         private EventHandler<DebugMessages> m_Debug;
         private EventHandler<WebSocketClose> m_Closed;
+        private EventHandler<NewUser> m_NewUser;
         private void OnError(ErrorEventArgs e)
         {
             if (m_Error == null)
@@ -52,12 +53,24 @@ namespace WebSocketServer
                 return;
             m_Debug(this, new DebugMessages(Message));
         }
+        private void onNewUser(Socket userSocket)
+        {
+            if (m_NewUser == null)
+                return;
+            m_NewUser(this, new NewUser(userSocket));
+        }
         private void onClose(string Reason)
         {
             if (m_Closed == null)
                 return;
             m_Closed(this, new WebSocketClose(Reason));
 
+        }
+        private void onMessage(string message,eWebSocketOpcode OpCode, Socket messageFrom)
+        {
+            if (m_MessageReceived == null)
+                return;
+            m_MessageReceived(this,new MessageReceivedEventArgs(message,OpCode,messageFrom));
         }
         #endregion
 
@@ -91,6 +104,11 @@ namespace WebSocketServer
         {
             add { m_Closed += value; }
             remove { m_Closed -= value; }
+        }
+        public event EventHandler<NewUser> onNewUser
+        {
+            add { m_NewUser += value; }
+            remove { m_NewUser += value; }
         }
         #endregion
 
@@ -261,7 +279,7 @@ namespace WebSocketServer
         /// <summary>
         /// Generates a Sec-WebSocket-Accept server key
         /// </summary>
-        public static String ComputeWebSocketHandshakeSecurityHash09(String secWebSocketKey)
+        private static String ComputeWebSocketHandshakeSecurityHash09(String secWebSocketKey)
         {
             const String GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
             String secWebSocketAccept = String.Empty;

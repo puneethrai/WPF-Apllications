@@ -51,6 +51,10 @@
       <Project>{BB3CA95E-778B-4B48-BA32-9B074441E4C0}</Project>
       <Name>Debug</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RoomManager\RoomManager.csproj">
+      <Project>{645BF4D8-3191-4E50-A026-A67E44827FAE}</Project>
+      <Name>RoomManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSocket\WebSocket.csproj">
       <Project>{3301D590-3714-4CA1-B955-D4C76C004CEA}</Project>
       <Name>WebSocket</Name>

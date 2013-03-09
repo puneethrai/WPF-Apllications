@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="debug.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Log.cd" />

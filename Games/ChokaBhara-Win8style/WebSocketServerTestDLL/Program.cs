@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using WebSocketServer;
 using Debug;
+using RoomManager;
+using System.Net.Sockets;
 //describe:
 //test result:
 namespace WebSocketServerTestDLL
@@ -24,6 +26,7 @@ namespace WebSocketServerTestDLL
             //Describe:Testing debug class
             //test result:passed 
             Log l = new Log("Test Suit1", Log.elogLevel.ALL, Log.eproductLevel.DEVELOPMENT);
+            TestScript TS = new TestScript(l);
             l.Print("Hey wats up buddy", Log.elogLevel.INFO);
             //Describe:Testing debug class for another instance with log level changed dynamically 
             //test result:passed 
@@ -57,6 +60,33 @@ namespace WebSocketServerTestDLL
             fe.onOpen += new EventHandler(ws_onOpen);
             fe.BeginInitialize();
             testLog.Print("Server State:" + fe.GetServerStatus(), Log.elogLevel.INFO);
+            //Decribe:testing Room Management
+            //test result:passed not all state checked yet
+            Room room = new Room(5, 4, 2, testLog);
+            int roomno =  room.CreateRoom();
+            roomno = room.CreateRoom();
+            roomno = room.CreateRoom();
+            Socket S = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            room.AddUser(roomno,S);
+            room.AddUser(roomno, S);
+            room.AddUser(roomno, S);
+            room.LockRoom(roomno);
+            room.AddUser(roomno, S);
+            room.AddUser(roomno, S);
+            
+            TS.Test(room.GetPeerID(roomno, S), 0, "Testing PeerID");
+            TS.Test(room.GetPeerInfo(roomno, room.GetPeerID(roomno, S)).Item2, "Dummy", "Testing PeerInfo Name");
+            TS.Test(room.GetPeerInfo(roomno, room.GetPeerID(roomno, S)).Item1, S, "Testing PeerInfo Socket");
+            List<int> H = null;
+            room.GetAvailableRoomNumber(ref H);
+            room.BroadcastTo(roomno).Broadcast(Encoding.ASCII.GetBytes("Hey buddy"), null, room.GetPeerID(roomno, S));
+            TS.Test(H.Count, 2, "Testing Available Room");
+            foreach (var i in H)
+            {
+                testLog.Print("Available rooms:" + i, Log.elogLevel.INFO);
+            }
+            TS.FinalReport();
+            TS = null;
             Console.ReadLine();
             
         }

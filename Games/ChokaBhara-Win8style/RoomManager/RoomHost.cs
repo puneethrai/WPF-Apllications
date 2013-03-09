@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using Debug;
 namespace RoomManager
 {
-    class RoomHost
+    public class RoomHost
     {
         #region private
         /// <summary>
@@ -31,6 +31,7 @@ namespace RoomManager
         private int peerID = 0;
         private int peerSize = 0;
         private STATE RoomState = STATE.ROOMEMPTY;
+        private const byte INVALIDPEER = 1;
         public int GetPeerCount()
         {
             return this.peerCount;
@@ -107,22 +108,37 @@ namespace RoomManager
         /// <returns></returns>
         public int AddPeer(Socket peerSocket,string peerName)
         {
-            if(!RoomFull() && !locked)
+            StringBuilder debugMessage = new StringBuilder();
+            if (!RoomFull() && !locked)
             {
                 int currentPeerID = GetUID();
                 this.PeerInfo[currentPeerID] = new Tuple<Socket, string>(peerSocket, peerName);
                 peerCount++;
-                Trace("Added new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName, Debug.Debug.elogLevel.INFO);
+                debugMessage.Append("Added new user ");
+                if (peerSocket.RemoteEndPoint != null)
+                    debugMessage.Append("IP:" + peerSocket.RemoteEndPoint.ToString());
+                debugMessage.Append("with Name:" + peerName);
+                Trace(debugMessage.ToString(), Debug.Debug.elogLevel.INFO);
                 RoomState = STATE.ROOMFREE;
                 return currentPeerID;
             }
-            if (RoomState != STATE.LOCKED)
-            {
-                Trace("Unable to add new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName +" RoomFull", Debug.Debug.elogLevel.ERROR);
-                RoomState = STATE.ROOMFULL;
-            }
             else
-                Trace("Unable to add new user IP:" + peerSocket.RemoteEndPoint.ToString() + " with Name:" + peerName + " RoomLocked", Debug.Debug.elogLevel.ERROR);
+            {
+                debugMessage.Append("Unable to add new user ");
+                if (peerSocket.RemoteEndPoint != null)
+                    debugMessage.Append("IP:" + peerSocket.RemoteEndPoint.ToString());
+                debugMessage.Append("with Name:" + peerName);
+                
+                if (RoomState != STATE.LOCKED)
+                {
+                    debugMessage.Append(" ROOMFULL");
+                    RoomState = STATE.ROOMFULL;
+                }
+                else
+                    debugMessage.Append(" ROOMLocked");
+                Trace(debugMessage.ToString(), Debug.Debug.elogLevel.INFO);
+            }
+            debugMessage.Clear();
             return (int)RoomState;
         }
         /// <summary>
@@ -132,18 +148,24 @@ namespace RoomManager
         /// <returns></returns>
         public bool RemovePeer(int peerID)
         {
-            foreach (var peerid in this.PeerInfo)
+            StringBuilder debugMessage = new StringBuilder();
+            bool flag = false;
+            if(this.PeerInfo.ContainsKey(peerID))
             {
-                if (peerid.Key == peerID)
-                {
-                    Trace("Removed user IP:" + peerid.Value.Item1.RemoteEndPoint.ToString() + " with Name:" + peerid.Value.Item2 + " RoomLocked", Debug.Debug.elogLevel.INFO);
-                    this.PeerInfo[peerID] = null;
-                    peerCount--;
-                    return true;
-                }
+                debugMessage.Append("Removed user ");
+                if (this.PeerInfo[peerID].Item1.RemoteEndPoint != null)
+                    debugMessage.Append("IP:" + this.PeerInfo[peerID].Item1.RemoteEndPoint.ToString());
+                debugMessage.Append(" with Name:" + this.PeerInfo[peerID].Item2);
+                Trace(debugMessage.ToString(), Debug.Debug.elogLevel.INFO);
+                this.PeerInfo[peerID] = null;
+                this.PeerInfo.Remove(peerID);
+                peerCount--;   
             }
-            Trace("Unable to find user with peer ID:"+peerID,Debug.Debug.elogLevel.ERROR);
-            return false;
+            else
+                Trace("Unable to find user with peer ID:"+peerID,Debug.Debug.elogLevel.ERROR);
+            debugMessage.Clear();
+            debugMessage = null;
+            return flag;
         }
         /// <summary>
         /// Lock the current room futher peer addition
@@ -162,23 +184,73 @@ namespace RoomManager
         {
             return this.roomNumber;
         }
+        /// <summary>
+        /// Returns current room Status 
+        /// </summary>
+        /// <returns>Room State</returns>
         public STATE GetRoomStatus()
         {
             return RoomState;
         }
         /// <summary>
+        /// Broadcasts to all user
+        /// </summary>
+        /// <param name="message">WebSocket message or Normal Message</param>
+        /// <param name="ExceptSocket">Broadcast Message Sholud not sent to this SocketFD</param>
+        /// <param name="PeerID">Broadcast Message Sholud not sent to this PeerID</param>
+        public void Broadcast(byte[] message,Socket ExceptSocket = null,int PeerID = INVALIDPEER)
+        {
+            foreach (var peerID in this.PeerInfo)
+            {
+                if (ExceptSocket == peerID.Value.Item1 || PeerID == peerID.Key)
+                    continue;
+                peerID.Value.Item1.Send(message);
+            }
+        }
+        /// <summary>
+        /// Returns PeerID by passing SocketFD
+        /// </summary>
+        /// <param name="verifySocket">Socket FD to verify</param>
+        /// <returns>PeerID or INVALIDPEER</returns>
+        public int GetPeerID(Socket verifySocket)
+        {
+            foreach (var peerInfo in this.PeerInfo)
+            {
+                if (peerInfo.Value.Item1 == verifySocket)
+                {
+                    return peerInfo.Key;
+                }
+
+            }
+            return (int)INVALIDPEER;
+        }
+        /// <summary>
+        /// Returns Peers Info
+        /// </summary>
+        /// <param name="PeerID">Peer ID to query for</param>
+        /// <returns>Tuple of Socket FD & name of the peer</returns>
+        public Tuple<Socket, string> GetPeerInfo(int PeerID)
+        {
+            if (this.PeerInfo.ContainsKey(PeerID))
+            {
+                return this.PeerInfo[PeerID];
+            }
+            return null;
+        }
+        /// <summary>
         /// Destructor 
         /// </summary>
         /// <returns>Dispose success status</returns>
-        public bool Dispose()
+        public void Dispose()
         {
             foreach (var peerid in this.PeerInfo)
             {
                 this.PeerInfo[peerid.Key] = null;
             }
+            this.PeerInfo.Clear();
             this.PeerInfo = null;
             Trace("Room " + this.roomNumber +" deleted", Debug.Debug.elogLevel.INFO);
-            return true;
+            return;
         }
         
         #endregion

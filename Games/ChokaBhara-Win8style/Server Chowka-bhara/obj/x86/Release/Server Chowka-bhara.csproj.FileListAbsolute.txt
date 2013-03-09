@@ -1,0 +1,7 @@
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server_Chowka_bhara.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server Chowka-bhara.csproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Release\Server Chowka-bhara.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Release\Server Chowka-bhara.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server_Chowka_bhara.Server.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server Chowka-bhara.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server Chowka-bhara.pdb

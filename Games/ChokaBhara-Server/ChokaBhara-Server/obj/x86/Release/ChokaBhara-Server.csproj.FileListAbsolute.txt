@@ -1,0 +1,11 @@
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Release\ChokaBhara-Server.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Release\ChokaBhara-Server.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Release\Newtonsoft.Json.dll
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Release\Newtonsoft.Json.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Release\Newtonsoft.Json.xml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara-Server.csprojResolveAssemblyReference.cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara_Server.Properties.Resources.resources
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara-Server.csproj.GenerateResource.Cache
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara-Server.exe
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara-Server.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Release\ChokaBhara_Server.Server.resources

@@ -35,7 +35,7 @@ namespace ChokaBhara_Server
         {
             InitializeComponent();
             Form Active = Form.ActiveForm;
-            Active.FormClosed += AppExit;
+            
             // Create the thread object. This does not start the thread.
             workerThread = new Thread(DoWork);
             // Start the worker thread.
@@ -49,6 +49,7 @@ namespace ChokaBhara_Server
             ServerMessage.AppendText("Server Listing on 8080");
             Console.WriteLine("main thread: Starting worker thread...");
             item = Room_1.Items;
+            Active.FormClosed += AppExit;
 
 
         }
@@ -154,7 +155,7 @@ namespace ChokaBhara_Server
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void RefreshBtn_Click(object sender, EventArgs e)
         {
             bool Flag = false;
             Room_1.Items.Clear();
