@@ -1,6 +1,6 @@
 ﻿namespace Server_Chowka_bhara
 {
-    partial class Server
+    partial class ServerUI
     {
         /// <summary>
         /// Required designer variable.
@@ -152,11 +152,9 @@
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
-
         private System.Windows.Forms.TextBox ServerMessage;
         private System.Windows.Forms.StatusStrip ConnectedUser;
         private System.Windows.Forms.ToolStripStatusLabel Status;
@@ -167,7 +165,5 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button RefreshBtn;
-        
     }
 }
-

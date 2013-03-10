@@ -13,7 +13,7 @@ namespace WebSocketServer
     {
         private const Int16 defaultPort = 8080;
         private const Int16 defaultPingDuration = 5;
-
+        private IPAddress serverIPAddress = null;
         private Socket serverSocket = null;
         private Int16 serverPort = defaultPort;
         private Int16 gpingDuration = defaultPingDuration;//in seconds
@@ -53,11 +53,11 @@ namespace WebSocketServer
                 return;
             m_Debug(this, new DebugMessages(Message));
         }
-        private void onNewUser(Socket userSocket)
+        private void onNewConection(Socket userSocket,string ExtraField)
         {
             if (m_NewUser == null)
                 return;
-            m_NewUser(this, new NewUser(userSocket));
+            m_NewUser(this, new NewUser(userSocket,ExtraField));
         }
         private void onClose(string Reason)
         {
@@ -122,8 +122,23 @@ namespace WebSocketServer
         {
             this.gpingDuration = pingDuration;
             this.serverPort = port;
+            this.serverIPAddress = IPAddress.Any;
             this.State = eWebSocketServerState.STARTING;
 
+        }
+        /// <summary>
+        /// WebSocket Server constructor
+        /// </summary>
+        /// <param name="serverAddress">IP Address the server should listen</param>
+        /// <param name="port">Port number on which server should listen</param>
+        /// <param name="pingDuration">ping duration in sec (0 means no ping)</param>
+        public WebSocket(string serverAddress,Int16 port, Int16 pingDuration)
+        {
+            this.serverIPAddress = IPAddress.Parse(serverAddress);
+            this.gpingDuration = pingDuration;
+            this.serverPort = port;
+            this.State = eWebSocketServerState.STARTING;
+            
         }
         /// <summary>
         /// WebSocket Server constructor
@@ -144,7 +159,7 @@ namespace WebSocketServer
                 try
                 {
                     serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-                    serverSocket.Bind(new IPEndPoint(IPAddress.Any, this.serverPort));
+                    serverSocket.Bind(new IPEndPoint(this.serverIPAddress, this.serverPort));
                     serverSocket.Listen(128);
                     ListenForClients();
                     this.State = eWebSocketServerState.STARTED;
@@ -225,7 +240,7 @@ namespace WebSocketServer
             }
             catch (SocketException exception)
             {
-                Console.WriteLine("Exception Occured:" + exception.Message);
+                DebugMessage("Exception Occured:" + exception.Message);
             }
             finally
             {
@@ -242,13 +257,14 @@ namespace WebSocketServer
         /// <param name="clientSocket">Socket with which to shake hands</param>
         private void HandShake(Socket clientSocket)
         {
+            string ExtraField = "";
             using (var stream = new NetworkStream(clientSocket))
             using (var reader = new StreamReader(stream))
             using (var writer = new StreamWriter(stream))
             {
                 string r = null;
                 string clienthandshake = null;
-                string[] ar1 = new string[2];
+                string[] ar1 = new string[3];
                 string clientKey = null;
                 while (r != "")
                 {
@@ -261,6 +277,12 @@ namespace WebSocketServer
                         ar1 = r.Split(':');
                         ar1[1] = ar1[1].Trim();
                         clientKey = ar1[1];
+                    }
+                    if (String.Compare(r, 0, "GET", 0, "GET".Length) == 0)
+                    {
+                        ar1 = r.Split(' ');
+                        ar1 = ar1[1].Split('?');
+                        ExtraField = ar1[1];
                     }
                 }
                 if (clientKey != null)
@@ -275,11 +297,20 @@ namespace WebSocketServer
                 }
 
             }
+            if (authenticatedClient[clientSocket])
+            {
+                onNewConection(clientSocket, ExtraField);
+                Thread ClientThread = new Thread(new ParameterizedThreadStart(ReadThead));
+                Tuple<Thread, Socket> clientInfo = new Tuple<Thread, Socket>(ClientThread, clientSocket);
+                ClientThread.Start(clientInfo);
+                
+            }
+
         }
         /// <summary>
         /// Generates a Sec-WebSocket-Accept server key
         /// </summary>
-        private static String ComputeWebSocketHandshakeSecurityHash09(String secWebSocketKey)
+        private String ComputeWebSocketHandshakeSecurityHash09(String secWebSocketKey)
         {
             const String GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
             String secWebSocketAccept = String.Empty;
@@ -293,7 +324,7 @@ namespace WebSocketServer
 
             // 3. Base64 encode the hash
             secWebSocketAccept = Convert.ToBase64String(sha1Hash);
-            Console.WriteLine("Generated Sec-WebSocket-Accept: " + secWebSocketAccept);
+            DebugMessage("Generated Sec-WebSocket-Accept: " + secWebSocketAccept);
             return secWebSocketAccept;
         }
         /// <summary>
@@ -301,23 +332,124 @@ namespace WebSocketServer
         /// </summary>
         private void Read(string incomingMessage)
         {
-
+            onMessage(incomingMessage,eWebSocketOpcode.TEXT,new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP));
         }
-        private void ReadThead()
+        private void ReadThead(object Clientobj)
         {
-            
+            Tuple<Thread,Socket> Client = (Tuple<Thread,Socket>) Clientobj;
+            DebugMessage("Client Detail:" + Client.Item2.RemoteEndPoint.ToString());
+            byte[] firstByte = new byte[1];
+            Client.Item2.Receive(firstByte);
+            DebugMessage("Got first byte:"+ASCIIEncoding.ASCII.GetString(firstByte));
+                       
         }
         /// <summary>
         /// Sends a given string using websocket protocol
         /// </summary>
         /// <param name="WriteBuffer"></param>
+        /// <param name="SendSocket">Socket to be sent</param>
         /// <returns>Boolean of send status</returns>
-        public bool Send(string WriteBuffer)
+        public bool Send(string WriteBuffer,Socket SendSocket)
         {
             if (EnsureWebSocketOpen())
             {
+                SendSocket.Send(WebSocketEncoder(WriteBuffer));
             }
             return false;
+        }
+        public byte[] WebSocketEncoder(string rawMessage)
+        {
+            try
+            {
+                byte[] binary = Encoding.ASCII.GetBytes(rawMessage);
+                ulong headerLength = 2;
+                byte[] data = binary;
+
+                bool mask = false;
+                byte[] maskKeys = null;
+
+                if (mask)
+                {
+                    headerLength += 4;
+                    data = (byte[])data.Clone();
+
+                    Random random = new Random(Environment.TickCount);
+                    maskKeys = new byte[4];
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        maskKeys[i] = (byte)random.Next(byte.MinValue, byte.MaxValue);
+                    }
+                    for (int i = 0; i < data.Length; ++i)
+                    {
+                        data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                    }
+                }
+
+                byte payload;
+                if (data.Length >= 65536)
+                {
+                    headerLength += 8;
+                    payload = 127;
+                }
+                else if (data.Length >= 126)
+                {
+                    headerLength += 2;
+                    payload = 126;
+                }
+                else
+                {
+                    payload = (byte)data.Length;
+                }
+
+                byte[] header = new byte[headerLength];
+
+                header[0] = 0x80 | 0x1;
+                if (mask)
+                {
+                    header[1] = 0x80;
+                }
+                header[1] = (byte)(header[1] | payload & 0x40 | payload & 0x20 | payload & 0x10 | payload & 0x8 | payload & 0x4 | payload & 0x2 | payload & 0x1);
+
+                if (payload == 126)
+                {
+                    byte[] lengthBytes = BitConverter.GetBytes((ushort)data.Length).Reverse().ToArray();
+                    header[2] = lengthBytes[0];
+                    header[3] = lengthBytes[1];
+
+                    if (mask)
+                    {
+                        for (int i = 0; i < 4; ++i)
+                        {
+                            header[i + 4] = maskKeys[i];
+                        }
+                    }
+                }
+                else if (payload == 127)
+                {
+                    byte[] lengthBytes = BitConverter.GetBytes((ulong)data.Length).Reverse().ToArray();
+                    for (int i = 0; i < 8; ++i)
+                    {
+                        header[i + 2] = lengthBytes[i];
+                    }
+                    if (mask)
+                    {
+                        for (int i = 0; i < 4; ++i)
+                        {
+                            header[i + 10] = maskKeys[i];
+                        }
+                    }
+                }
+
+                return header.Concat(data).ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("websocket transport protocol Send exception: " + ex.ToString());
+
+            }
+
+            return null;
         }
         /// <summary>
         /// Sends a ping frame

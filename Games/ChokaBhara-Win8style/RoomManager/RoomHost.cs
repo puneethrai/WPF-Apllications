@@ -127,7 +127,7 @@ namespace RoomManager
                 debugMessage.Append("Unable to add new user ");
                 if (peerSocket.RemoteEndPoint != null)
                     debugMessage.Append("IP:" + peerSocket.RemoteEndPoint.ToString());
-                debugMessage.Append("with Name:" + peerName);
+                debugMessage.Append(" with Name:" + peerName);
                 
                 if (RoomState != STATE.LOCKED)
                 {

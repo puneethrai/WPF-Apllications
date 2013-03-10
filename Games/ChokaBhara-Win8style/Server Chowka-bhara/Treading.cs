@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 namespace Server_Chowka_bhara
 {
-    public partial class Server
+    public partial class ServerUI
     {
         DateTime Time = DateTime.Now;
         // This method will be called when the thread is started.
@@ -42,6 +42,7 @@ namespace Server_Chowka_bhara
         }
         public void clientOperation()
         {
+            /*
             Socket AcceptSoc = AcceptSocket;
             string DisEndPointAddress = "User Disconnected:" + AcceptSoc.RemoteEndPoint;
             PingKey.Add(AcceptSoc, false);
@@ -68,10 +69,11 @@ namespace Server_Chowka_bhara
                 else
                     break;
             }
-
+            */
         }
         public void CreateThread(Socket AcceptSocket)
         {
+            /*
             Thread clientThreads;
             if (ShakeHands(AcceptSocket, ServerMessage))
             {
@@ -111,7 +113,7 @@ namespace Server_Chowka_bhara
                 //AcceptSocket.Send(Send("Invaild Room"));
                 AcceptSocket.Close();
             }
-
+            */
         }
     }
 }

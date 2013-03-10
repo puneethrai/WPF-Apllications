@@ -56,10 +56,12 @@ namespace WebSocketServer
     }
     public class NewUser : EventArgs
     {
-        public NewUser(Socket newUserSocket)
+        public NewUser(Socket newUserSocket,string ExtraField)
         {
             this.newUserSocket = newUserSocket;
+            this.ExtraField = ExtraField;
         }
-        public Socket newUserSocket;
+        public Socket newUserSocket{get;private set;}
+        public string ExtraField{get;private set;}
     }
 }
