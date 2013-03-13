@@ -5,3 +5,10 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.dll
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.csprojResolveAssemblyReference.cache
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\bin\Release\RoomManager.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\bin\Release\RoomManager.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\bin\Release\Debug.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\bin\Release\Debug.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.csprojResolveAssemblyReference.cache
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\RoomManager\obj\Release\RoomManager.pdb

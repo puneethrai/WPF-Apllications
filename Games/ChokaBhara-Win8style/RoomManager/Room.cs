@@ -99,6 +99,20 @@ namespace RoomManager
             }
             return false;
         }
+        public bool RemoveUser(Socket userSocket)
+        {
+            int tempPeerID = 0;
+            foreach(var roomID in RoomInfo)
+            {
+                tempPeerID = RoomInfo[roomID.Key].GetPeerID(userSocket);
+                if (tempPeerID != RoomHost.INVALIDPEER)
+                {
+                    RoomInfo[roomID.Key].RemovePeer(tempPeerID);
+                    return true;
+                }
+            }
+            return false;
+        }
         /// <summary>
         /// Let Available Room ID
         /// <param name="AvailableRoomNumber">Input List</param>

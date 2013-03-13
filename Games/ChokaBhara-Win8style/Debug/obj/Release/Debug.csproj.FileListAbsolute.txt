@@ -2,3 +2,7 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\bin\Release\Debug.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Release\Debug.dll
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Release\Debug.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\bin\Release\Debug.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\bin\Release\Debug.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Release\Debug.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Release\Debug.pdb

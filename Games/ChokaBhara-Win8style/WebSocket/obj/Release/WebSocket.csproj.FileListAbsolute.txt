@@ -2,3 +2,7 @@ C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8s
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\bin\Release\WebSocket.pdb
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\obj\Release\WebSocket.dll
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\obj\Release\WebSocket.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\obj\Release\WebSocket.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\obj\Release\WebSocket.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\bin\Release\WebSocket.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\WebSocket\bin\Release\WebSocket.pdb

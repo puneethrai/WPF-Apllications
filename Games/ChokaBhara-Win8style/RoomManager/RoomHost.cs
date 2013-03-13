@@ -31,7 +31,7 @@ namespace RoomManager
         private int peerID = 0;
         private int peerSize = 0;
         private STATE RoomState = STATE.ROOMEMPTY;
-        private const byte INVALIDPEER = 1;
+        public const Int16 INVALIDPEER = -1;
         public int GetPeerCount()
         {
             return this.peerCount;
@@ -222,7 +222,7 @@ namespace RoomManager
                 }
 
             }
-            return (int)INVALIDPEER;
+            return INVALIDPEER;
         }
         /// <summary>
         /// Returns Peers Info

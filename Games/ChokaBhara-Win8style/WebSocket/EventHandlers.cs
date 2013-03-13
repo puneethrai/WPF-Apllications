@@ -16,8 +16,8 @@ namespace WebSocketServer
         }
 
         public string Message { get; private set; }
-        public WebSocket.eWebSocketOpcode Opcode;
-        public Socket clientSocket;
+        public WebSocket.eWebSocketOpcode Opcode{ get; private set; }
+        public Socket clientSocket{ get; private set; }
     }
     public class ErrorEventArgs : EventArgs
     {
@@ -43,7 +43,7 @@ namespace WebSocketServer
         {
             Message = message;
         }
-        public string Message;
+        public string Message{ get; private set; }
         
     }
     public class WebSocketClose : EventArgs
@@ -52,7 +52,7 @@ namespace WebSocketServer
         {
             Reason = reason;
         }
-        public string Reason;
+        public string Reason{ get; private set; }
     }
     public class NewUser : EventArgs
     {
@@ -63,5 +63,14 @@ namespace WebSocketServer
         }
         public Socket newUserSocket{get;private set;}
         public string ExtraField{get;private set;}
+    }
+    public class UserLeft : EventArgs
+    {
+        public UserLeft(Socket UserSocket)
+        {
+            this.UserSocket = UserSocket;
+            
+        }
+        public Socket UserSocket { get; private set; }
     }
 }

@@ -18,6 +18,12 @@ namespace WebSocketServer
         private Int16 serverPort = defaultPort;
         private Int16 gpingDuration = defaultPingDuration;//in seconds
         private eWebSocketServerState State = eWebSocketServerState.DISCONNECTED;
+        private struct ThreadHandler
+        {
+            public Thread ThreadHandle;
+            public Socket ClientSocket;
+            public byte[] FirstByte;
+        };
         #region PrivateEventHandlers
         private EventHandler<MessageReceivedEventArgs> m_MessageReceived;
         private EventHandler m_Opened;
@@ -25,6 +31,8 @@ namespace WebSocketServer
         private EventHandler<DebugMessages> m_Debug;
         private EventHandler<WebSocketClose> m_Closed;
         private EventHandler<NewUser> m_NewUser;
+        private EventHandler<UserLeft> m_UserLeft;
+        
         private void OnError(ErrorEventArgs e)
         {
             if (m_Error == null)
@@ -58,6 +66,12 @@ namespace WebSocketServer
             if (m_NewUser == null)
                 return;
             m_NewUser(this, new NewUser(userSocket,ExtraField));
+        }
+        private void onConnectionRemove(Socket userSocket)
+        {
+            if (m_UserLeft == null)
+                return;
+            m_UserLeft(this, new UserLeft(userSocket));
         }
         private void onClose(string Reason)
         {
@@ -109,6 +123,11 @@ namespace WebSocketServer
         {
             add { m_NewUser += value; }
             remove { m_NewUser += value; }
+        }
+        public event EventHandler<UserLeft> onUserLeft
+        {
+            add { m_UserLeft += value; }
+            remove { m_UserLeft -= value; }
         }
         #endregion
 
@@ -300,12 +319,21 @@ namespace WebSocketServer
             if (authenticatedClient[clientSocket])
             {
                 onNewConection(clientSocket, ExtraField);
-                Thread ClientThread = new Thread(new ParameterizedThreadStart(ReadThead));
-                Tuple<Thread, Socket> clientInfo = new Tuple<Thread, Socket>(ClientThread, clientSocket);
-                ClientThread.Start(clientInfo);
+                CreateClientThread(clientSocket);
                 
             }
 
+        }
+        private void CreateClientThread(Socket clientSocket)
+        {
+            //Thread ClientThread = new Thread(new ParameterizedThreadStart(ReadThead));
+            //Tuple<Thread, Socket> clientInfo = new Tuple<Thread, Socket>(ClientThread, clientSocket);
+            ThreadHandler clientInfo = new ThreadHandler();
+            clientInfo.ClientSocket = clientSocket;
+            clientInfo.FirstByte = new byte[1];
+            //clientInfo.ThreadHandle = ClientThread;
+            clientSocket.BeginReceive(clientInfo.FirstByte, 0,1,0,ReadThead, clientInfo);
+            //ClientThread.Start(clientInfo);
         }
         /// <summary>
         /// Generates a Sec-WebSocket-Accept server key
@@ -330,18 +358,82 @@ namespace WebSocketServer
         /// <summary>
         /// Reads the incoming websocket message
         /// </summary>
-        private void Read(string incomingMessage)
+        private void Read(string incomingMessage,eWebSocketOpcode opCode,Socket clientSocket)
         {
-            onMessage(incomingMessage,eWebSocketOpcode.TEXT,new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP));
+            onMessage(incomingMessage,opCode,clientSocket);
         }
-        private void ReadThead(object Clientobj)
+        private void ReadThead(IAsyncResult Clientobj)
         {
-            Tuple<Thread,Socket> Client = (Tuple<Thread,Socket>) Clientobj;
+            ThreadHandler TH = (ThreadHandler)Clientobj.AsyncState;
+            Tuple<Thread, Socket> Client = new Tuple<Thread, Socket>(TH.ThreadHandle, TH.ClientSocket);
             DebugMessage("Client Detail:" + Client.Item2.RemoteEndPoint.ToString());
-            byte[] firstByte = new byte[1];
-            Client.Item2.Receive(firstByte);
-            DebugMessage("Got first byte:"+ASCIIEncoding.ASCII.GetString(firstByte));
-                       
+            byte[] firstByte = TH.FirstByte,payload = new byte[1];
+            byte opCode = (byte)(firstByte[0] & 0x0F);
+            byte SocStatus = (byte)(firstByte[0] & 0xF0);
+            SocStatus = (byte)(SocStatus >> 4);
+            Client.Item2.Receive(payload);
+            byte payloadLength = (byte)((payload[0] & 0x40) | (payload[0] & 0x20) | (payload[0] & 0x10)
+                | (payload[0] & 0x8) | (payload[0] & 0x4) | (payload[0] & 0x2) | (payload[0] & 0x1));
+            bool isMask = (payload[0] & 0x80) == 0x80;
+            DebugMessage("SocStatus:" + SocStatus);
+            DebugMessage("opCode:" + opCode);
+            DebugMessage("Payloadlength:"+payloadLength+" IsMask:"+isMask);
+            ulong datalength = 0;
+            if ((eWebSocketOpcode)opCode == eWebSocketOpcode.CLOSE)
+            {
+                onConnectionRemove(Client.Item2);
+                SendCloseFrame(Client.Item2);
+                Client.Item2.Close(5);
+            }
+            else
+            {
+                byte[] data = null;
+                switch (payloadLength)
+                {
+                    case 126:
+                        byte[] bytesUShort = new byte[2];
+                        Client.Item2.Receive(bytesUShort);
+                        if (bytesUShort != null)
+                        {
+                            datalength = BitConverter.ToUInt16(bytesUShort.Reverse().ToArray(), 0);
+                        }
+                        data = new byte[datalength + 1];
+                        break;
+                    case 127:
+                        byte[] bytesULong = new byte[8];
+                        Client.Item2.Receive(bytesULong);
+                        if (bytesULong != null)
+                        {
+                            datalength = BitConverter.ToUInt16(bytesULong.Reverse().ToArray(), 0);
+                        }
+                        data = new byte[datalength + 1];
+                        break;
+
+                    default:
+                        datalength = payloadLength;
+                        data = new byte[payloadLength + 1];
+                        break;
+                }
+                byte[] maskKeys = null;
+                if (isMask)
+                {
+                    maskKeys = new byte[4];
+                    DebugMessage("Mask bit is set");
+                    Client.Item2.Receive(maskKeys);
+                    DebugMessage("Masking Keys are:" + Encoding.UTF8.GetString(maskKeys));
+                }
+                Client.Item2.Receive(data);
+                if (isMask)
+                {
+                    for (int i = 0; i < (int)datalength; i++)
+                    {
+
+                        data[i] = (byte)(data[i] ^ maskKeys[i % 4]);
+                    }
+                }
+                Read(Encoding.UTF8.GetString(data), (eWebSocketOpcode)opCode, Client.Item2);
+                CreateClientThread(Client.Item2);
+            }
         }
         /// <summary>
         /// Sends a given string using websocket protocol
@@ -464,6 +556,16 @@ namespace WebSocketServer
                 PingEndPoint.Send(sendclient);
             }
         }
+        private void SendCloseFrame(Socket CloseEndPoint)
+        {
+            byte[] sendclient = new byte[2];
+            sendclient[0] = 0x88;
+            sendclient[1] = 0x00;
+            CloseEndPoint.Send(sendclient);
+        }
+        /// <summary>
+        /// Close the web socket server
+        /// </summary>
         public void Close()
         {
             this.serverSocket.Close(5);
