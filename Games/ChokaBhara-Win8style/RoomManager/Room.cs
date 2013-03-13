@@ -79,8 +79,7 @@ namespace RoomManager
         {
             if(RoomInfo.ContainsKey(RoomID))
             {
-                    this.RoomInfo[RoomID].AddPeer(userSocket, userName);
-                return 0;
+                return this.RoomInfo[RoomID].AddPeer(userSocket, userName);    
             }
             return INVALIDROOM;
         }
@@ -99,6 +98,11 @@ namespace RoomManager
             }
             return false;
         }
+        /// <summary>
+        /// Removes Peer from a Room using only SOcket FD
+        /// </summary>
+        ///<param name="userSocket">UserSocket to search</param>
+        /// <returns></returns>
         public bool RemoveUser(Socket userSocket)
         {
             int tempPeerID = 0;
@@ -161,6 +165,30 @@ namespace RoomManager
             return INVALIDROOM;
         }
         /// <summary>
+        /// Removes Peer from a Room using only SOcket FD
+        /// </summary>
+        ///<param name="userSocket">UserSocket to search</param>
+        ///<param name="completeInfo">Null refrence Tuple </param>
+        /// <returns>Tuple with  RoomID,PeerID,PeerName</returns>
+        public Tuple<int,int,string> GetPeerInfo(Socket userSocket,ref Tuple<int,int,string> completeInfo)
+        {
+            int tempPeerID = 0;
+            foreach (var roomID in RoomInfo)
+            {
+                tempPeerID = RoomInfo[roomID.Key].GetPeerID(userSocket);
+                if (tempPeerID != RoomHost.INVALIDPEER)
+                {
+                    if (completeInfo != null)
+                    {
+                        completeInfo = null;
+                    }
+                    completeInfo = new Tuple<int, int, string>(roomID.Key, tempPeerID, this.RoomInfo[roomID.Key].GetPeerInfo(tempPeerID).Item2);
+                    return completeInfo;
+                }
+            }
+            return null;
+        }
+        /// <summary>
         /// Returns Peer Info
         /// </summary>
         /// <param name="RoomID">Room ID of peer</param>
@@ -175,6 +203,27 @@ namespace RoomManager
             return null;
 
         }
+        public void GetAllRoomNo(ref List<int> ListRoomNo)
+        {
+            if (ListRoomNo != null)
+                ListRoomNo = null;
+            ListRoomNo = new List<int>(MaxRoom);
+            foreach (var roomID in this.RoomInfo)
+                ListRoomNo.Add(roomID.Key);
+        }
+        public Dictionary<int,Tuple<Socket,string>> GetAllPeer(int RoomID)
+        {
+            if (this.RoomInfo.ContainsKey(RoomID))
+            {
+                return this.RoomInfo[RoomID].GetAllPeer();
+            }
+            return null;
+        }
+        /// <summary>
+        /// Get Room to broadcast to other
+        /// </summary>
+        /// <param name="RoomID"></param>
+        /// <returns></returns>
         public RoomHost BroadcastTo(int RoomID)
         {
             if (this.RoomInfo.ContainsKey(RoomID))

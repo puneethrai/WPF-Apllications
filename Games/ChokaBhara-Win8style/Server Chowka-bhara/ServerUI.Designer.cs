@@ -116,10 +116,10 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Room No";
             // 
-            // Refresh
+            // RefreshBtn
             // 
             this.RefreshBtn.Location = new System.Drawing.Point(29, 150);
-            this.RefreshBtn.Name = "Refresh";
+            this.RefreshBtn.Name = "RefreshBtn";
             this.RefreshBtn.Size = new System.Drawing.Size(77, 23);
             this.RefreshBtn.TabIndex = 2;
             this.RefreshBtn.Text = "Refresh";
@@ -135,7 +135,7 @@
             this.Room_1.TabIndex = 1;
             this.Room_1.SelectedIndexChanged += new System.EventHandler(this.Room_1_SelectedIndexChanged);
             // 
-            // Server
+            // ServerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -143,15 +143,17 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ConnectedUser);
             this.Controls.Add(this.ServerMessage);
-            this.Name = "Server";
+            this.Name = "ServerUI";
             this.Text = "Choka Bhara Server";
             this.ConnectedUser.ResumeLayout(false);
             this.ConnectedUser.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ResumeLayout(false);
             this.PerformLayout();
+            
         }
 
         #endregion

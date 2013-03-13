@@ -21,7 +21,12 @@ namespace Server_Chowka_bhara
         private Room RoomManager = null;
         private WebSocket WS = null;
         private Log log = null;
-        public static Thread workerThread; 
+        public static Thread workerThread;
+        private short serverPort = 8080;
+        private short pingDuration = 25;
+        private int MaxRoom = 100;
+        private int MaxPeer = 4;
+        private int MinPeer = 2;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -33,8 +38,8 @@ namespace Server_Chowka_bhara
             // Start the worker thread.
             workerThread.Start();
             log = new Log("Server UI", Debug.Debug.elogLevel.ALL, Debug.Debug.eproductLevel.DEVELOPMENT);
-            RoomManager = new Room(100, 4, 2,log);
-            WS = new WebSocket(8080, 25);
+            RoomManager = new Room(MaxRoom, MaxPeer, MinPeer,log);
+            WS = new WebSocket(serverPort, pingDuration);
             WS.onOpen += new EventHandler(WS_onOpen);
             WS.onNewUser += new EventHandler<NewUser>(WS_onNewUser);
             WS.onError += new EventHandler<WebSocketServer.ErrorEventArgs>(WS_onError);
@@ -81,8 +86,10 @@ namespace Server_Chowka_bhara
         private void WS_onMessageReceived(object sender, MessageReceivedEventArgs e)
         {
             List<int> h = null;
+            Tuple<int,int,string> k = null;
             DebugMessage(Environment.NewLine + "Server :" + "Message: " + e.Message + " Opcode:" + e.Opcode.ToString() + "Socket:" + e.clientSocket.RemoteEndPoint
                 +" Room Count:" + RoomManager.GetAvailableRoomNumber(ref h).Count,Debug.Debug.elogLevel.INFO);
+            RoomManager.BroadcastTo(RoomManager.GetPeerInfo(e.clientSocket,ref k).Item1).Broadcast(WS.WebSocketEncoder("Hey buddy"),e.clientSocket);
         }
         /// <summary>
         ///  Event triggered callback function when WebServer closed
@@ -128,7 +135,10 @@ namespace Server_Chowka_bhara
             int RoomNo = 0;
             RoomManager.GetAvailableRoomNumber(ref AvailableRoom);
             if (AvailableRoom.Count == 0)
+            {
                 RoomNo = RoomManager.CreateRoom();
+                DisplayRoomNo();
+            }
             else
                 RoomNo = AvailableRoom[0];
             int peerID = RoomManager.AddUser(RoomNo, e.newUserSocket,value);
@@ -144,12 +154,47 @@ namespace Server_Chowka_bhara
         private void WS_onOpen(object sender, EventArgs e)
         {
             DebugMessage("Server Open", Debug.Debug.elogLevel.INFO);
+            ServerMessage.Text = "Server listening at port:"+serverPort;
         }
         private void Room_1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int CheckedIndex = Room_1.SelectedIndex;
+            if (Room_1.GetItemChecked(CheckedIndex))
+            {
+                List<string> _items = new List<string>();
+                string Roomname = Room_1.Items[CheckedIndex].ToString().Split(' ')[1];
+                _items.Add("Room ID:" + Roomname);
+                int RoomID = (Convert.ToInt32(Roomname));
+                Dictionary<int, Tuple<Socket, string>> PeerInfo = RoomManager.GetAllPeer(RoomID);
+                foreach (var peerInfo in PeerInfo)
+                {
+                    _items.Add("Peer ID:" + peerInfo.Key +" Name:"+peerInfo.Value.Item2+Environment.NewLine +" From:"+peerInfo.Value.Item1);
+                }
+                Rooms.DataSource = _items;
+                
+            }
         }
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
+            DisplayRoomNo();
+        }
+        private void DisplayRoomNo()
+        {
+            
+            List<int> RoomNoList = null;
+            RoomManager.GetAllRoomNo(ref RoomNoList);
+            if (this.Room_1.InvokeRequired)
+                this.Invoke((MethodInvoker)delegate
+                {
+                    DisplayRoomNo();
+                });
+            else
+            {
+                Room_1.Items.Clear();
+                foreach (int roomNo in RoomNoList)
+                    Room_1.Items.Add("Room " + (roomNo));
+            }
+            RoomNoList = null;
         }
     }
 }

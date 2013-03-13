@@ -50,7 +50,7 @@ namespace RoomManager
         /// <returns></returns>
         private bool RoomFull()
         {
-            return this.roomSize <= GetPeerCount();
+            return this.roomSize < (GetPeerCount()+1);
         }
         private void Trace(string message,Debug.Debug.elogLevel logLevel)
         {
@@ -120,6 +120,11 @@ namespace RoomManager
                 debugMessage.Append("with Name:" + peerName);
                 Trace(debugMessage.ToString(), Debug.Debug.elogLevel.INFO);
                 RoomState = STATE.ROOMFREE;
+                if (RoomFull())
+                {
+                    Trace("No more user allowed ,Room Full", Debug.Debug.elogLevel.INFO);
+                    RoomState = STATE.ROOMFULL;
+                } 
                 return currentPeerID;
             }
             else
@@ -138,6 +143,7 @@ namespace RoomManager
                     debugMessage.Append(" ROOMLocked");
                 Trace(debugMessage.ToString(), Debug.Debug.elogLevel.INFO);
             }
+            
             debugMessage.Clear();
             return (int)RoomState;
         }
@@ -236,6 +242,10 @@ namespace RoomManager
                 return this.PeerInfo[PeerID];
             }
             return null;
+        }
+        public Dictionary<int, Tuple<Socket, string>> GetAllPeer()
+        {
+            return this.PeerInfo;
         }
         /// <summary>
         /// Destructor 
