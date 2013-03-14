@@ -27,3 +27,7 @@ C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8styl
 C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server_Chowka_bhara.Properties.Resources.resources
 C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server Chowka-bhara.csproj.GenerateResource.Cache
 C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server_Chowka_bhara.ServerUI.resources
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Release\Newtonsoft.Json.dll
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Release\Newtonsoft.Json.pdb
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Release\Newtonsoft.Json.xml
+C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Release\Server_Chowka_bhara.ServerUI.resources

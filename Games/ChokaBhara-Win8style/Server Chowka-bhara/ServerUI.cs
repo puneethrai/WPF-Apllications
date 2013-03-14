@@ -24,9 +24,10 @@ namespace Server_Chowka_bhara
         public static Thread workerThread;
         private short serverPort = 8080;
         private short pingDuration = 25;
-        private int MaxRoom = 100;
-        private int MaxPeer = 4;
-        private int MinPeer = 2;
+        private uint MaxRoom = 100;
+        private uint MaxPeer = 4;
+        private uint MinPeer = 2;
+        private uint TotalUsers = 0;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -57,6 +58,8 @@ namespace Server_Chowka_bhara
                 DebugMessage("User Removed:" + e.UserSocket.RemoteEndPoint.ToString(), Debug.Debug.elogLevel.INFO);
             else
                 DebugMessage("Unable to remove User:" + e.UserSocket.RemoteEndPoint.ToString(), Debug.Debug.elogLevel.INFO);
+            this.TotalUsers--;
+            this.Status.Text = "No of connection:" + this.TotalUsers;
         }
         /// <summary>
         /// Logs the message 
@@ -143,8 +146,14 @@ namespace Server_Chowka_bhara
                 RoomNo = AvailableRoom[0];
             int peerID = RoomManager.AddUser(RoomNo, e.newUserSocket,value);
             AvailableRoom.Clear();
-            WS.Send("New User Room NO:" + RoomNo + " PeerID:" + peerID, e.newUserSocket);
+            //WS.Send("New User Room NO:" + RoomNo + " PeerID:" + peerID, e.newUserSocket);
+            JSONObjects JS = new JSONObjects();
+            JS.HandShake = false; JS.RoomID = RoomNo; JS.WhoIAm = peerID;
+            WS.Send(JS.ToJsonString(), e.newUserSocket);
+            JS = null;
             AvailableRoom = null;
+            this.TotalUsers++;
+            this.Status.Text = "No of connection:" + this.TotalUsers;
         }
         /// <summary>
         ///  Event triggered callback function for WebSocket Server opened

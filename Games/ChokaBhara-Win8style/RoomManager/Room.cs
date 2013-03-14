@@ -19,21 +19,21 @@ namespace RoomManager
         /// <summary>
         /// Max Room allowed,Max Room Size and Min Room Size
         /// </summary>
-        private int MaxRoom = 0,MaxRoomSize = 0,MinRoomSize;
+        private uint MaxRoom = 0,MaxRoomSize = 0,MinRoomSize;
         public const Int16 INVALIDROOM = -1;
-        public Room(int maxRoom,int maxRoomSize,int minRoomSize)
+        public Room(uint maxRoom,uint maxRoomSize,uint minRoomSize)
         {
             this.MaxRoom = maxRoom;
             this.MaxRoomSize = maxRoomSize;
             this.MinRoomSize = minRoomSize;
-            this.RoomInfo = new Dictionary<int, RoomHost>(maxRoom);
+            this.RoomInfo = new Dictionary<int, RoomHost>((int)maxRoom);
         }
-        public Room(int maxRoom, int maxRoomSize, int minRoomSize,Debug.Debug log)
+        public Room(uint maxRoom, uint maxRoomSize, uint minRoomSize,Debug.Debug log)
         {
             this.MaxRoom = maxRoom;
             this.MaxRoomSize = maxRoomSize;
             this.MinRoomSize = minRoomSize;
-            this.RoomInfo = new Dictionary<int, RoomHost>(maxRoom);
+            this.RoomInfo = new Dictionary<int, RoomHost>((int)maxRoom);
             _log = log;
             this.canLog = true;
         }
@@ -47,7 +47,7 @@ namespace RoomManager
             int newRoomNo = 0;
             while (true)
             {
-                newRoomNo = getUID.Next(this.MaxRoom);
+                newRoomNo = getUID.Next((int)this.MaxRoom);
                 if (!RoomInfo.ContainsKey(newRoomNo))
                 {
                     break;
@@ -63,9 +63,9 @@ namespace RoomManager
         {
             int RoomID = GetUID();
             if(canLog)
-                this.RoomInfo[RoomID] = new RoomHost(RoomID, this.MaxRoomSize,_log);
+                this.RoomInfo[RoomID] = new RoomHost((int)RoomID, (int)this.MaxRoomSize,_log);
             else
-                this.RoomInfo[RoomID] = new RoomHost(RoomID,this.MaxRoomSize);
+                this.RoomInfo[RoomID] = new RoomHost(RoomID, (int)this.MaxRoomSize);
             return RoomID;
         }
         /// <summary>
@@ -207,7 +207,7 @@ namespace RoomManager
         {
             if (ListRoomNo != null)
                 ListRoomNo = null;
-            ListRoomNo = new List<int>(MaxRoom);
+            ListRoomNo = new List<int>((int)MaxRoom);
             foreach (var roomID in this.RoomInfo)
                 ListRoomNo.Add(roomID.Key);
         }
