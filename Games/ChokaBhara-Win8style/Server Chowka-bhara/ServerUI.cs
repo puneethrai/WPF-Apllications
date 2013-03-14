@@ -60,6 +60,7 @@ namespace Server_Chowka_bhara
                 DebugMessage("Unable to remove User:" + e.UserSocket.RemoteEndPoint.ToString(), Debug.Debug.elogLevel.INFO);
             this.TotalUsers--;
             this.Status.Text = "No of connection:" + this.TotalUsers;
+            DisplayRoomNo();
         }
         /// <summary>
         /// Logs the message 
@@ -92,7 +93,20 @@ namespace Server_Chowka_bhara
             Tuple<int,int,string> k = null;
             DebugMessage(Environment.NewLine + "Server :" + "Message: " + e.Message + " Opcode:" + e.Opcode.ToString() + "Socket:" + e.clientSocket.RemoteEndPoint
                 +" Room Count:" + RoomManager.GetAvailableRoomNumber(ref h).Count,Debug.Debug.elogLevel.INFO);
-            RoomManager.BroadcastTo(RoomManager.GetPeerInfo(e.clientSocket,ref k).Item1).Broadcast(WS.WebSocketEncoder("Hey buddy"),e.clientSocket);
+            try
+            {
+                JSONObjects Message = JSONObjects.Deserialize(e.Message);
+                if (Message.ClientMessage == "ACK" && !Message.HandShake)
+                {
+                    Message.ServerMessage = "ACK";
+                    WS.Send(Message.ToJsonString(), e.clientSocket);
+                }
+                RoomManager.BroadcastTo(RoomManager.GetPeerInfo(e.clientSocket, ref k).Item1).Broadcast(WS.WebSocketEncoder(e.Message), e.clientSocket);
+            }
+            catch (Exception ex)
+            {
+                DebugMessage("Unformatted/Invalid JSON object recevied:" + e.Message+" Error Message:"+ex, Debug.Debug.elogLevel.ERROR);
+            }
         }
         /// <summary>
         ///  Event triggered callback function when WebServer closed
@@ -144,7 +158,7 @@ namespace Server_Chowka_bhara
             }
             else
                 RoomNo = AvailableRoom[0];
-            int peerID = RoomManager.AddUser(RoomNo, e.newUserSocket,value);
+            byte peerID = (byte)RoomManager.AddUser(RoomNo, e.newUserSocket,value);
             AvailableRoom.Clear();
             //WS.Send("New User Room NO:" + RoomNo + " PeerID:" + peerID, e.newUserSocket);
             JSONObjects JS = new JSONObjects();
@@ -185,6 +199,8 @@ namespace Server_Chowka_bhara
         }
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
+            Rooms.DataSource = null;
+            Rooms.Items.Clear();
             DisplayRoomNo();
         }
         private void DisplayRoomNo()

@@ -13,22 +13,22 @@ namespace RoomManager
         /// <summary>
         /// Contains List of socket FD & Name of perticular room
         /// </summary>
-        private Dictionary<int,RoomHost> RoomInfo;
+        private Dictionary<int, RoomHost> RoomInfo;
         private bool canLog = false;
         private Debug.Debug _log = null;
         /// <summary>
         /// Max Room allowed,Max Room Size and Min Room Size
         /// </summary>
-        private uint MaxRoom = 0,MaxRoomSize = 0,MinRoomSize;
+        private uint MaxRoom = 0, MaxRoomSize = 0, MinRoomSize;
         public const Int16 INVALIDROOM = -1;
-        public Room(uint maxRoom,uint maxRoomSize,uint minRoomSize)
+        public Room(uint maxRoom, uint maxRoomSize, uint minRoomSize)
         {
             this.MaxRoom = maxRoom;
             this.MaxRoomSize = maxRoomSize;
             this.MinRoomSize = minRoomSize;
             this.RoomInfo = new Dictionary<int, RoomHost>((int)maxRoom);
         }
-        public Room(uint maxRoom, uint maxRoomSize, uint minRoomSize,Debug.Debug log)
+        public Room(uint maxRoom, uint maxRoomSize, uint minRoomSize, Debug.Debug log)
         {
             this.MaxRoom = maxRoom;
             this.MaxRoomSize = maxRoomSize;
@@ -62,8 +62,8 @@ namespace RoomManager
         public int CreateRoom()
         {
             int RoomID = GetUID();
-            if(canLog)
-                this.RoomInfo[RoomID] = new RoomHost((int)RoomID, (int)this.MaxRoomSize,_log);
+            if (canLog)
+                this.RoomInfo[RoomID] = new RoomHost((int)RoomID, (int)this.MaxRoomSize, _log);
             else
                 this.RoomInfo[RoomID] = new RoomHost(RoomID, (int)this.MaxRoomSize);
             return RoomID;
@@ -75,11 +75,11 @@ namespace RoomManager
         /// <param name="userSocket">Socket FD</param>
         /// <param name="userName">User Name</param>
         /// <returns></returns>
-        public int AddUser(int RoomID,Socket userSocket, string userName = "Dummy")
+        public int AddUser(int RoomID, Socket userSocket, string userName = "Dummy")
         {
-            if(RoomInfo.ContainsKey(RoomID))
+            if (RoomInfo.ContainsKey(RoomID))
             {
-                return this.RoomInfo[RoomID].AddPeer(userSocket, userName);    
+                return this.RoomInfo[RoomID].AddPeer(userSocket, userName);
             }
             return INVALIDROOM;
         }
@@ -93,25 +93,35 @@ namespace RoomManager
         {
             if (RoomInfo.ContainsKey(RoomID))
             {
-                    this.RoomInfo[RoomID].RemovePeer(PeerID);
+                this.RoomInfo[RoomID].RemovePeer(PeerID);
+                if (RoomInfo[RoomID].GetPeerCount() == 0)
+                {
+                    RoomInfo[RoomID].Dispose();
+                    RoomInfo.Remove(RoomID);
+                }
                 return true;
             }
             return false;
         }
         /// <summary>
-        /// Removes Peer from a Room using only SOcket FD
+        /// Removes Peer from a Room using only Socket FD
         /// </summary>
         ///<param name="userSocket">UserSocket to search</param>
         /// <returns></returns>
         public bool RemoveUser(Socket userSocket)
         {
             int tempPeerID = 0;
-            foreach(var roomID in RoomInfo)
+            foreach (var roomID in RoomInfo)
             {
                 tempPeerID = RoomInfo[roomID.Key].GetPeerID(userSocket);
                 if (tempPeerID != RoomHost.INVALIDPEER)
                 {
                     RoomInfo[roomID.Key].RemovePeer(tempPeerID);
+                    if (RoomInfo[roomID.Key].GetPeerCount() == 0)
+                    {
+                        RoomInfo[roomID.Key].Dispose();
+                        RoomInfo.Remove(roomID.Key);
+                    }
                     return true;
                 }
             }
@@ -124,7 +134,7 @@ namespace RoomManager
         /// <returns>List of int containg available rooms</returns>
         public List<int> GetAvailableRoomNumber(ref List<int> AvailableRoomNumber)
         {
-            if(AvailableRoomNumber == null)
+            if (AvailableRoomNumber == null)
                 AvailableRoomNumber = new List<int>();
             foreach (var Room in RoomInfo)
             {
@@ -133,7 +143,7 @@ namespace RoomManager
                     AvailableRoomNumber.Add(Room.Key);
                 }
             }
-            
+
             return AvailableRoomNumber;
         }
         /// <summary>
@@ -156,7 +166,7 @@ namespace RoomManager
         /// <param name="verifySocket">Socket FD to verify</param>
         /// <param name="RoomID">RoomID to search for</param>
         /// <returns>PeerID or INVALIDPEER</returns>
-        public int GetPeerID(int RoomID,Socket verifySocket)
+        public int GetPeerID(int RoomID, Socket verifySocket)
         {
             if (RoomInfo.ContainsKey(RoomID))
             {
@@ -170,7 +180,7 @@ namespace RoomManager
         ///<param name="userSocket">UserSocket to search</param>
         ///<param name="completeInfo">Null refrence Tuple </param>
         /// <returns>Tuple with  RoomID,PeerID,PeerName</returns>
-        public Tuple<int,int,string> GetPeerInfo(Socket userSocket,ref Tuple<int,int,string> completeInfo)
+        public Tuple<int, int, string> GetPeerInfo(Socket userSocket, ref Tuple<int, int, string> completeInfo)
         {
             int tempPeerID = 0;
             foreach (var roomID in RoomInfo)
@@ -194,7 +204,7 @@ namespace RoomManager
         /// <param name="RoomID">Room ID of peer</param>
         /// <param name="PeerID">Peer ID to query for info</param>
         /// <returns>Tuple containg Socket FD & name of the Peer</returns>
-        public Tuple<Socket,string> GetPeerInfo(int RoomID, int PeerID)
+        public Tuple<Socket, string> GetPeerInfo(int RoomID, int PeerID)
         {
             if (this.RoomInfo.ContainsKey(RoomID))
             {
@@ -211,7 +221,7 @@ namespace RoomManager
             foreach (var roomID in this.RoomInfo)
                 ListRoomNo.Add(roomID.Key);
         }
-        public Dictionary<int,Tuple<Socket,string>> GetAllPeer(int RoomID)
+        public Dictionary<int, Tuple<Socket, string>> GetAllPeer(int RoomID)
         {
             if (this.RoomInfo.ContainsKey(RoomID))
             {

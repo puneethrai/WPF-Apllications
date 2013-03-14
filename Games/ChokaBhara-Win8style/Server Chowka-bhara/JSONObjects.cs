@@ -12,28 +12,40 @@ namespace Server_Chowka_bhara
         public bool HandShake { get; set; }
 
         [JsonProperty]
-        public int KayiNo { get; set; }
+        public uint KayiNo { get; set; }
 
         [JsonProperty]
-        public int KayiMove { get; set; }
+        public uint KayiMove { get; set; }
 
         [JsonProperty]
-        public int WhoIAm { get; set; }
+        public byte WhoIAm { get; set; }
 
         [JsonProperty]
         public string ClientVersion { get; set; }
 
+        [JsonProperty]
+        public string ServerMessage { get; set; }
+
+        [JsonProperty]
+        public string ClientMessage { get; set; }
+
+        [JsonProperty]
+        public byte TurnState { get; set; }
+
+        [JsonProperty]
+        public bool ChatMessage { get; set; }
+
         public JSONObjects()
-		{
-		}
-        
-		public string ToJsonString()
-		{
-			return JsonConvert.SerializeObject(this);
-		}
+        {
+        }
+
+        public string ToJsonString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
         public static JSONObjects Deserialize(string jsonString)
-		{
+        {
             return JsonConvert.DeserializeObject<JSONObjects>(jsonString);
-		}
+        }
     }
 }

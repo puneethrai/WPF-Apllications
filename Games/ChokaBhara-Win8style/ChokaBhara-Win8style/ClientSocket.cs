@@ -27,6 +27,7 @@ namespace ChowkaBaraWin8Style
         public enum eServerConnectionStatus { STARTING, ESTABLISHING, ESTABLISHED, CONNECTED, DISCONNECTED, STOPPED, ERROR };
         public enum ePlayStatus {IDLE,PLAYING };
         public ePlayStatus PlayStatus;
+        public string UserName = "Puneeth";
         private bool ConnectToServer()
         {
             bool Connected = false;
@@ -39,7 +40,7 @@ namespace ChowkaBaraWin8Style
             if (ClientSocket == null) 
             {
                 
-                ws = new WebSocket(new Uri("ws://localhost:8080/"));
+                ws = new WebSocket(new Uri("ws://localhost:8080/?username="+UserName));
                 ws.Error += new EventHandler<WebSocketClient.ErrorEventArgs>(ws_Error);
                 ws.Opened += new EventHandler(ws_Opened);
                 ws.MessageReceived += new EventHandler<MessageReceivedEventArgs>(ws_MessageReceived);
@@ -72,7 +73,7 @@ namespace ChowkaBaraWin8Style
             {
                 RoomID = Message.RoomID;
                 WhoIAm = Message.WhoIAm;
-                Console.WriteLine(RoomID + ":" + WhoIAm);
+                Console.WriteLine("Client Info:"+RoomID + ":" + WhoIAm);
                 ServerConnectionStatus = (ushort)eServerConnectionStatus.ESTABLISHED;
                 JSONObjects ACKMesssage = new JSONObjects() { RoomID = RoomID, HandShake = false, KayiNo = 0, KayiMove = 0, WhoIAm = WhoIAm, ClientVersion = ClientVersion, ClientMessage = "ACK" };
                 ws.Send(ACKMesssage.ToJsonString());
@@ -166,13 +167,14 @@ namespace ChowkaBaraWin8Style
         {
             ServerConnectionStatus = (ushort)eServerConnectionStatus.ESTABLISHING;
             Console.WriteLine("Socket opened");
-            if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
+            //Unnesccary
+            /*if (ServerConnectionStatus == (ushort)eServerConnectionStatus.ESTABLISHING)
             {
                 JSONObjects HandShakeMessage = HandShake();
                 ws.Send(HandShakeMessage.ToJsonString());
                 Console.WriteLine(ws.State);
                 
-            }
+            }*/
         }
 
         void ws_Error(object sender, WebSocketClient.ErrorEventArgs e)

@@ -301,7 +301,8 @@ namespace WebSocketServer
                     {
                         ar1 = r.Split(' ');
                         ar1 = ar1[1].Split('?');
-                        ExtraField = ar1[1];
+                        if(ar1.Length > 1)
+                            ExtraField = ar1[1];
                     }
                 }
                 if (clientKey != null)
@@ -371,6 +372,13 @@ namespace WebSocketServer
             byte opCode = (byte)(firstByte[0] & 0x0F);
             byte SocStatus = (byte)(firstByte[0] & 0xF0);
             SocStatus = (byte)(SocStatus >> 4);
+            //Client closed forcebly 
+            if (firstByte[0] == 0)
+            {
+                onConnectionRemove(Client.Item2);
+                Client.Item2.Close(5);
+                return;
+            }
             Client.Item2.Receive(payload);
             byte payloadLength = (byte)((payload[0] & 0x40) | (payload[0] & 0x20) | (payload[0] & 0x10)
                 | (payload[0] & 0x8) | (payload[0] & 0x4) | (payload[0] & 0x2) | (payload[0] & 0x1));

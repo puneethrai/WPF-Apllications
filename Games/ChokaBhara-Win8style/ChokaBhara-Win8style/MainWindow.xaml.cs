@@ -585,6 +585,11 @@ namespace ChowkaBaraWin8Style
             ToggleModeGUI();
             GoOnLine.IsEnabled = true;
             GoOffLine.IsEnabled = true;
+            if (ServerConnectionStatus == (ushort)eServerConnectionStatus.CONNECTED)
+            {
+                ws.Close();
+                ServerConnectionStatus = (ushort)eServerConnectionStatus.STOPPED;
+            }
             StartPlay = false;
         }
         /// <summary>
