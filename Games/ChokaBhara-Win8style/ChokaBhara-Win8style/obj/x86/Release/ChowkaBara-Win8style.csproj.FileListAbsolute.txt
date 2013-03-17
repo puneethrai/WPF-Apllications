@@ -44,3 +44,5 @@ C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8styl
 C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Release\ChowkaBharaWin8Style.application
 C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Release\ChowkaBharaWin8Style.exe
 C:\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Release\ChowkaBharaWin8Style.pdb
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Release\DialogBox.baml
+C:\Users\gangathara rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\ChokaBhara-Win8style\obj\x86\Release\DialogBox.g.cs

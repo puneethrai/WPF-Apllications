@@ -124,8 +124,19 @@ namespace ChowkaBaraWin8Style
                 CloseRect.Fill = Brushes.White;
                 CloseLine1.Stroke = Brushes.Red;
                 CloseLine2.Stroke = Brushes.Red;
+                DialogBox DB = new DialogBox("Confirm Closing Application"+Environment.NewLine+"Unsaved progress will not be recovered","Close Application ?");
+                DB.Show();
+                DB.onConfirm += new EventHandler((object obj, EventArgs ev) => 
+                {
+                    Console.WriteLine("Confirm clicked");
+                    App.Current.Shutdown(); 
+                });
+                DB.onCancel += new EventHandler((object obj, EventArgs ev) =>
+                {
+                    Console.WriteLine("Cancel clicked");
+                    DB = null;
+                });
                 
-                App.Current.Shutdown();
             } 
         }
 

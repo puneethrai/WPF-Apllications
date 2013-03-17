@@ -317,7 +317,7 @@ namespace WebSocketServer
                 }
 
             }
-            if (authenticatedClient[clientSocket])
+            if (authenticatedClient.ContainsKey(clientSocket) && authenticatedClient[clientSocket])
             {
                 onNewConection(clientSocket, ExtraField);
                 CreateClientThread(clientSocket);

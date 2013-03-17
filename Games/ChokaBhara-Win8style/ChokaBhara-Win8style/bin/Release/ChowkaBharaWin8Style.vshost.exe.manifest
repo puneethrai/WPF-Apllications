@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChowkaBharaWin8Style.exe" size="250880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChowkaBharaWin8Style.exe" size="254976">
       <assemblyIdentity name="ChowkaBharaWin8Style" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>kpu6+IbFHQ4n5XspzdaYFeJTMRk=</dsig:DigestValue>
+        <dsig:DigestValue>o22K5/geOuWpVvX/laljfqITsjk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

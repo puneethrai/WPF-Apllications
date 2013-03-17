@@ -109,12 +109,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DialogBox.xaml.cs">
+      <DependentUpon>DialogBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JSONObjects.cs" />
     <Compile Include="KayiMovement.cs" />
     <Compile Include="MessageDisplayer.cs" />
     <Compile Include="ReadConfig.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ThreadFunctions.cs" />
+    <Page Include="DialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
