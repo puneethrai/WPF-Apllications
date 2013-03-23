@@ -175,7 +175,7 @@ namespace RoomManager
             return INVALIDROOM;
         }
         /// <summary>
-        /// Removes Peer from a Room using only SOcket FD
+        /// Retreives Peer Info from a Room using only Socket FD
         /// </summary>
         ///<param name="userSocket">UserSocket to search</param>
         ///<param name="completeInfo">Null refrence Tuple </param>
@@ -213,6 +213,10 @@ namespace RoomManager
             return null;
 
         }
+        /// <summary>
+        /// Returns integer list of all the room created
+        /// </summary>
+        /// <param name="ListRoomNo">Reference List</param>
         public void GetAllRoomNo(ref List<int> ListRoomNo)
         {
             if (ListRoomNo != null)
@@ -241,6 +245,31 @@ namespace RoomManager
                 return this.RoomInfo[RoomID];
             }
             return null;
+        }
+        public bool RoomFull(int RoomID)
+        {
+            if (this.RoomInfo.ContainsKey(RoomID))
+            {
+                return this.RoomInfo[RoomID].isRoomFull;
+
+            }
+            return false;
+        }
+        public bool RoomLocked(int RoomID)
+        {
+            if (this.RoomInfo.ContainsKey(RoomID))
+            {
+                return this.RoomInfo[RoomID].isRoomLocked;
+            }
+            return false;
+        }
+        public bool ValidPeer(int RoomID,Socket clientSocket)
+        {
+            if (this.RoomInfo.ContainsKey(RoomID))
+            {
+                return this.RoomInfo[RoomID].GetPeerID(clientSocket) != RoomHost.INVALIDPEER ? true : false;
+            }
+            return false;
         }
         /// <summary>
         /// Destructor

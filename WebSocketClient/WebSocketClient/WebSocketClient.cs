@@ -90,6 +90,20 @@ namespace WebSocketClient
             }
             return Client;
         }
+        private struct ThreadHandler
+        {
+            //public Thread ThreadHandle;
+            public Socket ClientSocket;
+            public byte[] FirstByte;
+        };
+        private void CreateReadThread(Socket clientSocket)
+        {
+            ThreadHandler clientInfo = new ThreadHandler();
+            clientInfo.ClientSocket = clientSocket;
+            clientInfo.FirstByte = new byte[1];
+            clientSocket.BeginReceive(clientInfo.FirstByte, 0, 1, 0, RecvData, clientInfo);
+
+        }
         /// <summary>
         /// Asynchronous callback for BeginReader
         /// </summary>

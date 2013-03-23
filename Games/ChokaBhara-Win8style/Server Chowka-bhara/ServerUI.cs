@@ -98,8 +98,22 @@ namespace Server_Chowka_bhara
                 JSONObjects Message = JSONObjects.Deserialize(e.Message);
                 if (Message.ClientMessage == "ACK" && !Message.HandShake)
                 {
-                    Message.ServerMessage = "ACK";
+                    if (RoomManager.ValidPeer(Message.RoomID, e.clientSocket))
+                        Message.ServerMessage = "ACK";
+                    else
+                        Message.ServerMessage = "FIN";
                     WS.Send(Message.ToJsonString(), e.clientSocket);
+                    if (Message.ServerMessage == "FIN")
+                    {
+                        e.clientSocket.Close(5);
+                        RoomManager.RemoveUser(e.clientSocket);
+                    }
+                }
+                if (RoomManager.RoomFull(Message.RoomID) && !RoomManager.RoomLocked(Message.RoomID))
+                {
+                    Message.ServerMessage = "START";
+                    RoomManager.BroadcastTo(Message.RoomID).Broadcast(WS.WebSocketEncoder(Message.ToJsonString()));
+                    RoomManager.LockRoom(Message.RoomID);
                 }
                 RoomManager.BroadcastTo(RoomManager.GetPeerInfo(e.clientSocket, ref k).Item1).Broadcast(WS.WebSocketEncoder(e.Message), e.clientSocket);
             }

@@ -72,6 +72,14 @@ namespace RoomManager
             }
             set{}
         }
+        public bool isRoomLocked
+        {
+            get
+            {
+                return locked;
+            }
+            set { }
+        }
         /// <summary>
         /// Constructor
         /// </summary>

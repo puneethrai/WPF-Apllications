@@ -20,7 +20,7 @@ namespace WebSocketServer
         private eWebSocketServerState State = eWebSocketServerState.DISCONNECTED;
         private struct ThreadHandler
         {
-            public Thread ThreadHandle;
+            //public Thread ThreadHandle;
             public Socket ClientSocket;
             public byte[] FirstByte;
         };
@@ -327,14 +327,11 @@ namespace WebSocketServer
         }
         private void CreateClientThread(Socket clientSocket)
         {
-            //Thread ClientThread = new Thread(new ParameterizedThreadStart(ReadThead));
-            //Tuple<Thread, Socket> clientInfo = new Tuple<Thread, Socket>(ClientThread, clientSocket);
             ThreadHandler clientInfo = new ThreadHandler();
             clientInfo.ClientSocket = clientSocket;
             clientInfo.FirstByte = new byte[1];
-            //clientInfo.ThreadHandle = ClientThread;
             clientSocket.BeginReceive(clientInfo.FirstByte, 0,1,0,ReadThead, clientInfo);
-            //ClientThread.Start(clientInfo);
+
         }
         /// <summary>
         /// Generates a Sec-WebSocket-Accept server key
@@ -366,7 +363,7 @@ namespace WebSocketServer
         private void ReadThead(IAsyncResult Clientobj)
         {
             ThreadHandler TH = (ThreadHandler)Clientobj.AsyncState;
-            Tuple<Thread, Socket> Client = new Tuple<Thread, Socket>(TH.ThreadHandle, TH.ClientSocket);
+            Tuple<byte[], Socket> Client = new Tuple<byte[], Socket>(TH.FirstByte, TH.ClientSocket);
             DebugMessage("Client Detail:" + Client.Item2.RemoteEndPoint.ToString());
             byte[] firstByte = TH.FirstByte,payload = new byte[1];
             byte opCode = (byte)(firstByte[0] & 0x0F);
