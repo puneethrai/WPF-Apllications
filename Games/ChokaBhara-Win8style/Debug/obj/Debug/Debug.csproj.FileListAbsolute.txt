@@ -1,0 +1,4 @@
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\bin\Debug\Debug.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\bin\Debug\Debug.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Debug\Debug.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Debug\obj\Debug\Debug.pdb

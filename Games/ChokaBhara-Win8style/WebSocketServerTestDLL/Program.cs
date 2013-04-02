@@ -38,9 +38,15 @@ namespace WebSocketServerTestDLL
             //test result:passed 
             Log l2 = new Log("Test Suit2", Log.elogLevel.ALL, Log.eproductLevel.PRODUCTION);
             l2.Print("Hey wats up buddy", Log.elogLevel.INFO);
-            
 
-            //Decribe:testing event handlers
+            List<dynamic> F = new List<dynamic>();
+            F.Add(8);
+            F.Add("Hey Buddy");
+            F.Add(5.6);
+            int[] a = new int[3];
+            a[1] = 9;
+            F.Add(a);
+            //Describe:testing event handlers
             //test result:passed not all state checked yet
             testLog.Print("Server State:"+ws.GetServerStatus(),Log.elogLevel.INFO);
             ws.onClosed += new EventHandler<WebSocketClose>(ws_onClosed);
@@ -49,7 +55,7 @@ namespace WebSocketServerTestDLL
             ws.onMessageReceived += new EventHandler<MessageReceivedEventArgs>(ws_onMessageReceived);
             ws.onOpen += new EventHandler(ws_onOpen);
             ws.BeginInitialize();
-            //Decribe:testing error handling
+            //Describe:testing error handling
             //test result:passed not all state checked yet
             testLog.Print("Server State:" + ws.GetServerStatus(), Log.elogLevel.INFO);
             testLog.Print("Server State:" + fe.GetServerStatus(), Log.elogLevel.INFO);
@@ -60,7 +66,7 @@ namespace WebSocketServerTestDLL
             fe.onOpen += new EventHandler(ws_onOpen);
             fe.BeginInitialize();
             testLog.Print("Server State:" + fe.GetServerStatus(), Log.elogLevel.INFO);
-            //Decribe:testing Room Management
+            //Describe:testing Room Management
             //test result:passed not all state checked yet
             Room room = new Room(5, 4, 2, testLog);
             int roomno =  room.CreateRoom();
@@ -87,6 +93,9 @@ namespace WebSocketServerTestDLL
             }
             TS.FinalReport();
             TS = null;
+            
+
+
             Console.ReadLine();
             
         }

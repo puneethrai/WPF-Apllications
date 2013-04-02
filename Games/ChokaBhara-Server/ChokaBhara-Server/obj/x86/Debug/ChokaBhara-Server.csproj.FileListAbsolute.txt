@@ -24,3 +24,14 @@ C:\Users\user\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBha
 \\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csprojResolveAssemblyReference.cache
 \\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Properties.Resources.resources
 \\10.75.15.120\Users\Puneeth Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csproj.GenerateResource.Cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\ChokaBhara-Server.exe
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\ChokaBhara-Server.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csprojResolveAssemblyReference.cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Properties.Resources.resources
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara_Server.Server.resources
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.csproj.GenerateResource.Cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.exe
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Server\ChokaBhara-Server\obj\x86\Debug\ChokaBhara-Server.pdb

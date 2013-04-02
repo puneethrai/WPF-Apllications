@@ -1,0 +1,5 @@
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Authentication\bin\Debug\Authentication.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Authentication\bin\Debug\Authentication.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Authentication\obj\Debug\Authentication.csprojResolveAssemblyReference.cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Authentication\obj\Debug\Authentication.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Authentication\obj\Debug\Authentication.pdb

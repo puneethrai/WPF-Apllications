@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-
+using System.Collections.Generic;
 namespace Server_Chowka_bhara
 {
     [JsonObject(MemberSerialization.OptIn)]
@@ -38,7 +38,12 @@ namespace Server_Chowka_bhara
         public JSONObjects()
         {
         }
-
+        [JsonProperty]
+        public string GetMethod { get; set; }
+        [JsonProperty]
+        public string SetMethod { get; set; }
+        [JsonProperty]
+        public List<dynamic> Params { get; set; }
         public string ToJsonString()
         {
             return JsonConvert.SerializeObject(this);

@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JSONObjects.cs" />
+    <Compile Include="readconfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ServerUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +64,9 @@
     <Compile Include="Treading.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="HandShake.sequencediagram.layout">
+      <DependentUpon>HandShake.sequencediagram</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +80,7 @@
       <DependentUpon>ServerUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="HandShake.sequencediagram" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -85,6 +92,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Authentication\Authentication.csproj">
+      <Project>{e22f5ad9-8f2c-4a0f-96f4-2412f1c4b7b0}</Project>
+      <Name>Authentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Debug\Debug.csproj">
       <Project>{BB3CA95E-778B-4B48-BA32-9B074441E4C0}</Project>
       <Name>Debug</Name>

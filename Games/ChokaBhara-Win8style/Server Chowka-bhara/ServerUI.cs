@@ -13,6 +13,7 @@ using System.IO;
 using WebSocketServer;
 using Debug;
 using RoomManager;
+using Authentication;
 
 namespace Server_Chowka_bhara
 {
@@ -22,12 +23,9 @@ namespace Server_Chowka_bhara
         private WebSocket WS = null;
         private Log log = null;
         public static Thread workerThread;
-        private short serverPort = 8080;
-        private short pingDuration = 25;
-        private uint MaxRoom = 100;
-        private uint MaxPeer = 4;
-        private uint MinPeer = 2;
+
         private uint TotalUsers = 0;
+        private Authentication.Authentication Auth = null;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -49,6 +47,7 @@ namespace Server_Chowka_bhara
             WS.onMessageReceived += new EventHandler<MessageReceivedEventArgs>(WS_onMessageReceived);
             WS.onUserLeft += new EventHandler<UserLeft>(WS_onUserLeft);
             WS.BeginInitialize();
+            Auth = new Authentication.Authentication(MaxUser);
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
         }
 
@@ -60,6 +59,7 @@ namespace Server_Chowka_bhara
                 DebugMessage("Unable to remove User:" + e.UserSocket.RemoteEndPoint.ToString(), Debug.Debug.elogLevel.INFO);
             this.TotalUsers--;
             this.Status.Text = "No of connection:" + this.TotalUsers;
+            Auth.DeRegisterUser(e.UserSocket);
             DisplayRoomNo();
         }
         /// <summary>
@@ -73,7 +73,7 @@ namespace Server_Chowka_bhara
                 log.Print(message, level);
         }
         /// <summary>
-        ///  Event triggered callback function when application about to exit
+        ///  Event triggered call-back function when application about to exit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,7 +83,7 @@ namespace Server_Chowka_bhara
             RequestStop();
         }
         /// <summary>
-        ///  Event triggered callback function when new message is received
+        ///  Event triggered call-back function when new message is received
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,11 +119,11 @@ namespace Server_Chowka_bhara
             }
             catch (Exception ex)
             {
-                DebugMessage("Unformatted/Invalid JSON object recevied:" + e.Message+" Error Message:"+ex, Debug.Debug.elogLevel.ERROR);
+                DebugMessage("Unformatted/Invalid JSON object received:" + e.Message+" Error Message:"+ex, Debug.Debug.elogLevel.ERROR);
             }
         }
         /// <summary>
-        ///  Event triggered callback function when WebServer closed
+        ///  Event triggered call-back function when WebServer closed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -132,7 +132,7 @@ namespace Server_Chowka_bhara
             DebugMessage("Server Closed Reason:"+e.Reason,Debug.Debug.elogLevel.ALL);
         }
         /// <summary>
-        ///  Event triggered callback function for Debug messages received
+        ///  Event triggered call-back function for Debug messages received
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,7 +147,7 @@ namespace Server_Chowka_bhara
             throw new NotImplementedException();
         }
         /// <summary>
-        /// Event triggered callback function for New User 
+        /// Event triggered call-back function for New User 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">NewUser type contains socket & Extra field</param>
@@ -184,7 +184,7 @@ namespace Server_Chowka_bhara
             this.Status.Text = "No of connection:" + this.TotalUsers;
         }
         /// <summary>
-        ///  Event triggered callback function for WebSocket Server opened
+        ///  Event triggered call-back function for WebSocket Server opened
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -196,7 +196,7 @@ namespace Server_Chowka_bhara
         private void Room_1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int CheckedIndex = Room_1.SelectedIndex;
-            if (Room_1.GetItemChecked(CheckedIndex))
+            if (CheckedIndex > -1 && Room_1.GetItemChecked(CheckedIndex))
             {
                 List<string> _items = new List<string>();
                 string Roomname = Room_1.Items[CheckedIndex].ToString().Split(' ')[1];

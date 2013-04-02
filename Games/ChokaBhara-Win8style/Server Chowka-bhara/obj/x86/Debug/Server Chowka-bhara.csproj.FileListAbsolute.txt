@@ -1,0 +1,18 @@
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Server Chowka-bhara.exe.config
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server Chowka-bhara.csprojResolveAssemblyReference.cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server_Chowka_bhara.Properties.Resources.resources
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server_Chowka_bhara.ServerUI.resources
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server Chowka-bhara.csproj.GenerateResource.Cache
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Server Chowka-bhara.exe
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Server Chowka-bhara.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Debug.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\RoomManager.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\WebSocket.dll
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Debug.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\RoomManager.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\WebSocket.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server Chowka-bhara.exe
+C:\Users\Gangadhara Rai\Documents\GitHub\WPF-Apllications\Games\ChokaBhara-Win8style\Server Chowka-bhara\obj\x86\Debug\Server Chowka-bhara.pdb

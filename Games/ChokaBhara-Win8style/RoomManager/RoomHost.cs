@@ -210,8 +210,8 @@ namespace RoomManager
         /// Broadcasts to all user
         /// </summary>
         /// <param name="message">WebSocket message or Normal Message</param>
-        /// <param name="ExceptSocket">Broadcast Message Sholud not sent to this SocketFD</param>
-        /// <param name="PeerID">Broadcast Message Sholud not sent to this PeerID</param>
+        /// <param name="ExceptSocket">Broadcast Message Should not sent to this SocketFD</param>
+        /// <param name="PeerID">Broadcast Message Should not sent to this PeerID</param>
         public void Broadcast(byte[] message,Socket ExceptSocket = null,int PeerID = INVALIDPEER)
         {
             foreach (var peerID in this.PeerInfo)
